@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project default="designer" name="SalesLeads" xmlns:bwunit="org.windyroad.bwunit">
 
-	<property name="bwunit.importer.version" value="16.12" />
+	<property name="bwunit.importer.version" value="16.13" />
 	<property name="bwunit.importer.url"
 	          value="http://windyroad.com.au/bwunit-importer/${bwunit.importer.version}/importer.xml" />
 
