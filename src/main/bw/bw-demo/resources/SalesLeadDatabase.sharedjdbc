@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BWSharedResource>
+    <name>SalesLeadDatabase</name>
+    <resourceType>ae.shared.JDBCSharedResource</resourceType>
+    <config>
+        <driver>%%Resources/SalesLeadDatabase/Driver%%</driver>
+        <maxConnections>%%Resources/SalesLeadDatabase/Connections%%</maxConnections>
+        <loginTimeout>%%Resources/SalesLeadDatabase/Timeout%%</loginTimeout>
+        <connectionType>JDBC</connectionType>
+        <UseSharedJndiConfig>false</UseSharedJndiConfig>
+        <location>%%Resources/SalesLeadDatabase/URL%%</location>
+        <user>%%Resources/SalesLeadDatabase/Username%%</user>
+        <password>%%Resources/SalesLeadDatabase/Password%%</password>
+    </config>
+</BWSharedResource>

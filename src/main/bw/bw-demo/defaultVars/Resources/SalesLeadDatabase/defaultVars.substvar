@@ -1,0 +1,53 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<repository xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance" xmlns = "http://www.tibco.com/xmlns/repo/types/2002">
+	<globalVariables>
+		<globalVariable>
+			<name>Connections</name>
+			<value>1</value>
+			<deploymentSettable>true</deploymentSettable>
+			<serviceSettable>false</serviceSettable>
+			<type>Integer</type>
+			<modTime>1413194005413</modTime>
+		</globalVariable>
+		<globalVariable>
+			<name>Driver</name>
+			<value>org.h2.Driver</value>
+			<deploymentSettable>true</deploymentSettable>
+			<serviceSettable>false</serviceSettable>
+			<type>String</type>
+			<modTime>1413193365987</modTime>
+		</globalVariable>
+		<globalVariable>
+			<name>Password</name>
+			<value>#!+0dMpnjxNcMI40y2kXNSwQ==</value>
+			<deploymentSettable>true</deploymentSettable>
+			<serviceSettable>false</serviceSettable>
+			<type>Password</type>
+			<modTime>1413194071894</modTime>
+		</globalVariable>
+		<globalVariable>
+			<name>Timeout</name>
+			<value>0</value>
+			<deploymentSettable>true</deploymentSettable>
+			<serviceSettable>false</serviceSettable>
+			<type>Integer</type>
+			<modTime>1413194071862</modTime>
+		</globalVariable>
+		<globalVariable>
+			<name>URL</name>
+			<value>jdbc:h2:mem:test;TRACE_LEVEL_FILE=3;DB_CLOSE_DELAY=0;INIT=RUNSCRIPT FROM '../../../src/test/sql/SalesLeadsDatabase/create.sql'</value>
+			<deploymentSettable>true</deploymentSettable>
+			<serviceSettable>false</serviceSettable>
+			<type>String</type>
+			<modTime>1413193959943</modTime>
+		</globalVariable>
+		<globalVariable>
+			<name>Username</name>
+			<value>sa</value>
+			<deploymentSettable>true</deploymentSettable>
+			<serviceSettable>false</serviceSettable>
+			<type>String</type>
+			<modTime>1413194038684</modTime>
+		</globalVariable>
+	</globalVariables>
+</repository>

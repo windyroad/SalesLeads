@@ -124,10 +124,10 @@
 		<globalVariable>
 			<name>TIBHawkService</name>
 			<value>7474</value>
-			<deploymentSettable>true</deploymentSettable>
+			<deploymentSettable>false</deploymentSettable>
 			<serviceSettable>false</serviceSettable>
 			<type>String</type>
-			<modTime>1413191539604</modTime>
+			<modTime>1413193293315</modTime>
 		</globalVariable>
 	</globalVariables>
 </repository>

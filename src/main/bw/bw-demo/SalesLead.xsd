@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	 xmlns:sl="http://windyroad.com.au/schemas/SalesLead.xsd"
+	 targetNamespace="http://windyroad.com.au/schemas/SalesLead.xsd"
+	 elementFormDefault="qualified"
+	 attributeFormDefault="unqualified">
+	<xs:complexType name="SalesLead">
+		<xs:sequence>
+			<xs:element name="FirstName" type="xs:string"/>
+			<xs:element name="LastName" type="xs:string"/>
+			<xs:element name="Email" type="xs:string"/>
+			<xs:element name="PhoneNumber" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="SalesLead" type="sl:SalesLead"/>
+	<xs:complexType name="SalesLeads">
+		<xs:sequence>
+			<xs:element ref="sl:SalesLead" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="SalesLeads" type="sl:SalesLeads"/>
+</xs:schema>

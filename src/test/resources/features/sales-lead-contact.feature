@@ -5,15 +5,16 @@ Feature: Store Sales Lead Contact Information
     
 
 Scenario: New Contact
+    Given there are no contacts in the sales lead database
     When the following contact is added to the sales lead database:
         | First Name | Last Name | Email            | Phone Number |
         | John       | Doe       | john@doe.com.au  | +61255556789 |
-    Then the following records will exist in the sales lead database
+    Then the following records will exist in the sales lead database:
         | First Name | Last Name | Email            | Phone Number | Date Added                 |
         | John       | Doe       | john@doe.com.au  | +61255556789 | {{scenario.start}}-{{now}} |
 
 Scenario: Multiple Contacts
-    Given the following contact is in the sales lead database:
+    Given the following contacts in the sales lead database:
         | First Name | Last Name | Email            | Phone Number |
         | Jane       | Doe       | jane@doe.com.au  | +61255551234 |
     When the following contact is added to the sales lead database:
@@ -25,7 +26,7 @@ Scenario: Multiple Contacts
         | John       | Doe       | john@doe.com.au  | +61255556789 | {{scenario.start}} till {{now}} |
 
 Scenario: New Contact - No email
-    Given the following contact is in the sales lead database:
+    Given the following contacts in the sales lead database:
         | First Name | Last Name | Email            | Phone Number |
         | Jane       | Doe       | jane@doe.com.au  | +61255551234 |
     When the following contact is added to the sales lead database:
@@ -37,7 +38,7 @@ Scenario: New Contact - No email
         | Jane       | Doe       | jane@doe.com.au  | +61255556789 | {{scenario.start}} till {{now}} |
 
 Scenario: New Contact - Invalid email
-    Given the following contact is in the sales lead database:
+    Given the following contacts in the sales lead database:
         | First Name | Last Name | Email            | Phone Number |
         | Jane       | Doe       | jane@doe.com.au  | +61255551234 |
     When the following contact is added to the sales lead database:

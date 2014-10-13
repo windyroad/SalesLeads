@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns="http://windyroad.org/bwunit-asserts-0.0.0.xsd" xmlns:pfx="http://windyroad.com.au/schemas/SalesLead.xsd">
+    <xs:import xmlns:xs="http://www.w3.org/2001/XMLSchema" namespace="http://windyroad.com.au/schemas/SalesLead.xsd" schemaLocation="/SalesLead.xsd"/>
+    <pd:name>test/IntegrationTestSuite/steps/The following records will exist in the sales lead database.process</pd:name>
+    <pd:startName>Start</pd:startName>
+    <pd:startType ref="pfx:SalesLeads"/>
+    <pd:startX>151</pd:startX>
+    <pd:startY>65</pd:startY>
+    <pd:returnBindings/>
+    <pd:endName>End</pd:endName>
+    <pd:endX>629</pd:endX>
+    <pd:endY>68</pd:endY>
+    <pd:errorSchemas/>
+    <pd:processVariables/>
+    <pd:targetNamespace>http://xmlns.example.com/1413193119895</pd:targetNamespace>
+    <pd:activity name="GetSalesLeads">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>302</pd:x>
+        <pd:y>66</pd:y>
+        <config>
+            <processName>/GetSalesLeads.process</processName>
+        </config>
+        <pd:inputBindings>
+            <Input/>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="AssertEqual">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>475</pd:x>
+        <pd:y>66</pd:y>
+        <config>
+            <processName>/BWUnit/Public/Asserts/AssertEqual.process</processName>
+        </config>
+        <pd:inputBindings>
+            <ns:equal-input>
+                <ns:expected>
+                    <xsl:copy-of select="$Start/pfx:SalesLeads"/>
+                </ns:expected>
+                <ns:actual>
+                    <xsl:copy-of select="$GetSalesLeads/pfx:SalesLeads"/>
+                </ns:actual>
+            </ns:equal-input>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>GetSalesLeads</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>GetSalesLeads</pd:from>
+        <pd:to>AssertEqual</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>AssertEqual</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+</pd:ProcessDefinition>
