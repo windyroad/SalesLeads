@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="designer" name="bw-demo">
+
+	<property name="bwunit.importer.version" value="16.12"/>
+    <property name="bwunit.importer.url" value="http://windyroad.com.au/bwunit-importer/${bwunit.importer.version}/importer.xml" />
+
+    <import>
+        <url url="${bwunit.importer.url}" />
+    </import>
+
+</project>
