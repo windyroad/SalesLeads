@@ -1,11 +1,103 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project default="designer" name="bw-demo">
+<project default="designer" name="bw-demo" xmlns:bwunit="org.windyroad.bwunit">
 
-	<property name="bwunit.importer.version" value="16.12"/>
-    <property name="bwunit.importer.url" value="http://windyroad.com.au/bwunit-importer/${bwunit.importer.version}/importer.xml" />
+	<property name="bwunit.importer.version" value="16.12" />
+	<property name="bwunit.importer.url"
+	          value="http://windyroad.com.au/bwunit-importer/${bwunit.importer.version}/importer.xml" />
 
-    <import>
-        <url url="${bwunit.importer.url}" />
-    </import>
+	<import>
+		<url url="${bwunit.importer.url}" />
+	</import>
+
+	<target name="-init-unit-tests">
+		<pathconvert property="engine.properties.Config.Primary.Partitions" dirsep="/" pathsep=",">
+			<map from="${basedir}/${bwda.bw.project.path}" to="" />
+			<path>
+				<pathelement location="${bwda.bw.project.path}/BWUnit.process" />
+				<fileset dir="${bwda.bw.project.path}/test/UnitTestSuite" includes="**/*.process" />
+			</path>
+		</pathconvert>
+	</target>
+
+	<target name="run-unit-tests"
+	        description="Runs the BWUnit Unit tests. Failed tests *will* fail the build."
+	        depends="-init-unit-tests,run-functional-tests" />
+
+	<target name="report-unit-tests"
+	        description="Runs the BWUnit Unit tests and generates reports indicating for each test if it passed or failed. Failed tests will *not* fail the build."
+	        depends="-init-unit-tests,report-functional-tests" />
+
+	<target name="-init-integration-tests">
+		<pathconvert property="engine.properties.Config.Primary.Partitions" dirsep="/" pathsep=",">
+			<map from="${basedir}/${bwda.bw.project.path}" to="" />
+			<path>
+				<pathelement location="${bwda.bw.project.path}/BWUnit.process" />
+				<fileset dir="${bwda.bw.project.path}/test/IntegrationTestSuite" includes="**/*.process" />
+				<fileset dir="${bwda.bw.project.path}" includes="**/*.serviceagent" />
+			</path>
+		</pathconvert>
+	</target>
+
+
+	<target name="run-integration-tests"
+	        description="Runs the BWUnit Integration tests. Failed tests *will* fail the build."
+	        depends="-init-integration-tests,run-functional-tests" />
+
+	<target name="report-integration-tests"
+	        description="Runs the BWUnit Integration tests and generates reports indicating for each test if it passed or failed. Failed tests will *not* fail the build."
+	        depends="-init-integration-tests,report-functional-tests" />
+
+
+	<target name="-sit" depends="-load-ant-contrib,-get-gvar-config-dir,-get-sdk-config-dir">
+
+		<bwunit:loadproperties srcfile="${bwda.config.sdk.dir}/SIT-sdk.properties" prefix="bwda.sdk.SIT." />
+		<bwunit:loadproperties srcfile="${bwda.config.sdk.dir}/sdk.properties" prefix="bwda.sdk.SIT." />
+
+		<bwunit:loadproperties srcfile="${bwda.config.gvar.dir}/SIT-gvar.properties" prefix="bwda.gvar.SIT." />
+		<bwunit:loadproperties srcfile="${bwda.config.gvar.dir}/gvar.properties" prefix="bwda.gvar.SIT." />
+
+		<propertyset id="bwda.config.SIT.gvar">
+			<propertyref prefix="bwda.gvar.SIT." />
+			<globmapper from='bwda.gvar.SIT.*' to='*' />
+		</propertyset>
+
+		<propertyset id="bwda.config.SIT.sdk">
+			<propertyref prefix="bwda.sdk.SIT." />
+			<globmapper from='bwda.sdk.SIT.*' to='*' />
+		</propertyset>
+
+		<property name="bw.platform.services.retreiveresources.Httpport" value="8010" />
+
+		<propertyset id="bwengine.properties" dynamic="true">
+			<propertyref name="bw.platform.services.retreiveresources.Httpport" />
+			<propertyset>
+				<propertyref prefix="engine.properties." />
+				<mapper type="glob" from="engine.properties.*" to="*" />
+			</propertyset>
+			<propertyset refid="bwda.config.SIT.sdk" />
+		</propertyset>
+		<property name="BWUnit/HTTP-service-port" value="5454" />
+
+		<propertyset id="bwengine.gvars" dynamic="true">
+			<propertyref name="BWUnit/HTTP-service-port" />
+			<propertyset>
+				<propertyref prefix="engine.gvars." />
+				<mapper type="glob" from="engine.gvars.*" to="*" />
+				<propertyset refid="bwda.config.SIT.gvar" />
+			</propertyset>
+		</propertyset>
+	</target>
+
+	<target name="-init-system-integration-tests" depends="-sit,-init-integration-tests" />
+
+
+	<target name="run-system-integration-tests"
+	        description="Runs the BWUnit Integration tests. Failed tests *will* fail the build."
+	        depends="-init-system-integration-tests,run-functional-tests" />
+
+	<target name="report-system-integration-tests"
+	        description="Runs the BWUnit Integration tests and generates reports indicating for each test if it passed or failed. Failed tests will *not* fail the build."
+	        depends="-init-system-integration-tests,report-functional-tests" />
+
 
 </project>
