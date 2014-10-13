@@ -48,22 +48,22 @@
 	        depends="-init-integration-tests,report-functional-tests" />
 
 
-	<target name="-sit" depends="-load-ant-contrib,-get-gvar-config-dir,-get-sdk-config-dir">
+	<target name="-st" depends="-load-ant-contrib,-get-gvar-config-dir,-get-sdk-config-dir">
 
-		<bwunit:loadproperties srcfile="${bwda.config.sdk.dir}/SIT-sdk.properties" prefix="bwda.sdk.SIT." />
-		<bwunit:loadproperties srcfile="${bwda.config.sdk.dir}/sdk.properties" prefix="bwda.sdk.SIT." />
+		<bwunit:loadproperties srcfile="${bwda.config.sdk.dir}/ST-sdk.properties" prefix="bwda.sdk.ST." />
+		<bwunit:loadproperties srcfile="${bwda.config.sdk.dir}/sdk.properties" prefix="bwda.sdk.ST." />
 
-		<bwunit:loadproperties srcfile="${bwda.config.gvar.dir}/SIT-gvar.properties" prefix="bwda.gvar.SIT." />
-		<bwunit:loadproperties srcfile="${bwda.config.gvar.dir}/gvar.properties" prefix="bwda.gvar.SIT." />
+		<bwunit:loadproperties srcfile="${bwda.config.gvar.dir}/ST-gvar.properties" prefix="bwda.gvar.ST." />
+		<bwunit:loadproperties srcfile="${bwda.config.gvar.dir}/gvar.properties" prefix="bwda.gvar.ST." />
 
-		<propertyset id="bwda.config.SIT.gvar">
-			<propertyref prefix="bwda.gvar.SIT." />
-			<globmapper from='bwda.gvar.SIT.*' to='*' />
+		<propertyset id="bwda.config.ST.gvar">
+			<propertyref prefix="bwda.gvar.ST." />
+			<globmapper from='bwda.gvar.ST.*' to='*' />
 		</propertyset>
 
-		<propertyset id="bwda.config.SIT.sdk">
-			<propertyref prefix="bwda.sdk.SIT." />
-			<globmapper from='bwda.sdk.SIT.*' to='*' />
+		<propertyset id="bwda.config.ST.sdk">
+			<propertyref prefix="bwda.sdk.ST." />
+			<globmapper from='bwda.sdk.ST.*' to='*' />
 		</propertyset>
 
 		<property name="bw.platform.services.retreiveresources.Httpport" value="8010" />
@@ -74,7 +74,7 @@
 				<propertyref prefix="engine.properties." />
 				<mapper type="glob" from="engine.properties.*" to="*" />
 			</propertyset>
-			<propertyset refid="bwda.config.SIT.sdk" />
+			<propertyset refid="bwda.config.ST.sdk" />
 		</propertyset>
 		<property name="BWUnit/HTTP-service-port" value="5454" />
 
@@ -83,21 +83,21 @@
 			<propertyset>
 				<propertyref prefix="engine.gvars." />
 				<mapper type="glob" from="engine.gvars.*" to="*" />
-				<propertyset refid="bwda.config.SIT.gvar" />
+				<propertyset refid="bwda.config.ST.gvar" />
 			</propertyset>
 		</propertyset>
 	</target>
 
-	<target name="-init-system-integration-tests" depends="-sit,-init-integration-tests" />
+	<target name="-init-system-tests" depends="-sit,-init-tests" />
 
 
-	<target name="run-system-integration-tests"
-	        description="Runs the BWUnit Integration tests. Failed tests *will* fail the build."
-	        depends="-init-system-integration-tests,run-functional-tests" />
+	<target name="run-system-tests"
+	        description="Runs the BWUnit System tests. Failed tests *will* fail the build."
+	        depends="-init-system-tests,run-functional-tests" />
 
-	<target name="report-system-integration-tests"
-	        description="Runs the BWUnit Integration tests and generates reports indicating for each test if it passed or failed. Failed tests will *not* fail the build."
-	        depends="-init-system-integration-tests,report-functional-tests" />
+	<target name="report-system-tests"
+	        description="Runs the BWUnit System tests and generates reports indicating for each test if it passed or failed. Failed tests will *not* fail the build."
+	        depends="-init-system-tests,report-functional-tests" />
 
 
 </project>
