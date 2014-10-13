@@ -20,4 +20,12 @@
 		</xs:sequence>
 	</xs:complexType>
 	<xs:element name="SalesLeads" type="sl:SalesLeads"/>
+	<xs:element name="GetSalesLeadsRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Limit" type="xs:integer" minOccurs="0"/>
+				<xs:element name="Offset" type="xs:integer" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
 </xs:schema>

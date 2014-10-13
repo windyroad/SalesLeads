@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Created by TIBCO WSDL-->
+<wsdl:definitions xmlns:tns="http://windyroad.com.au/services/concrete/SalesLead" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns0="http://windyroad.com.au/services/SalesLead" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="SalesLeadConcrete" targetNamespace="http://windyroad.com.au/services/concrete/SalesLead">
+    <wsdl:import location="SalesLead.wsdl" namespace="http://windyroad.com.au/services/SalesLead"/>
+    <wsdl:service name="SalesLead">
+        <wsdl:port binding="tns:SalesLeadBinding" name="SalesLead">
+            <soap:address location="http://localhost:9999/SalesLead"/>
+        </wsdl:port>
+    </wsdl:service>
+    <wsdl:binding name="SalesLeadBinding" type="ns0:SalesLead">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="AddSalesLead">
+            <soap:operation soapAction="/SalesLead/AddSalesLead" style="document"/>
+            <wsdl:input>
+                <soap:body parts="AddSalesLead" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body parts="" use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetSalesLeads">
+            <soap:operation soapAction="/SalesLead/GetSalesLeads" style="document"/>
+            <wsdl:input>
+                <soap:body parts="GetSalesLeadsRequest" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body parts="GetSalesLeadsResponse" use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+</wsdl:definitions>

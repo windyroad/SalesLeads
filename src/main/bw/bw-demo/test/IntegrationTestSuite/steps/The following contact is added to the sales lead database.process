@@ -1,38 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pd:ProcessDefinition xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:pfx="http://windyroad.com.au/schemas/SalesLead.xsd">
+<pd:ProcessDefinition xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:pfx4="http://windyroad.com.au/services/concrete/SalesLead" xmlns:pfx3="http://windyroad.com.au/services/SalesLead" xmlns:pfx2="http://xmlns.example.com/1413197291833" xmlns:pfx="http://windyroad.com.au/schemas/SalesLead.xsd">
+    <wsdl:import namespace="http://xmlns.example.com/1413197291833" location="/SalesLead.serviceagent"/>
+    <wsdl:import namespace="http://windyroad.com.au/services/SalesLead"/>
+    <wsdl:import namespace="http://windyroad.com.au/services/concrete/SalesLead" location="/SalesLeadConcrete.wsdl"/>
     <pd:name>test/IntegrationTestSuite/steps/The following contact is added to the sales lead database.process</pd:name>
     <pd:startName>Start</pd:startName>
     <pd:startType ref="pfx:SalesLead"/>
-    <pd:startX>150</pd:startX>
-    <pd:startY>64</pd:startY>
+    <pd:startX>138</pd:startX>
+    <pd:startY>80</pd:startY>
     <pd:returnBindings/>
     <pd:endName>End</pd:endName>
-    <pd:endX>450</pd:endX>
-    <pd:endY>64</pd:endY>
+    <pd:endX>462</pd:endX>
+    <pd:endY>77</pd:endY>
     <pd:errorSchemas/>
     <pd:processVariables/>
     <pd:targetNamespace>http://xmlns.example.com/1413193119895</pd:targetNamespace>
-    <pd:activity name="AddSalesLead">
-        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
-        <pd:resourceType>ae.process.subprocess</pd:resourceType>
-        <pd:x>294</pd:x>
-        <pd:y>65</pd:y>
+    <pd:activity name="SOAPRequestReply">
+        <pd:type>com.tibco.plugin.soap.SOAPSendReceiveActivity</pd:type>
+        <pd:resourceType>ae.activities.SOAPSendReceiveUI</pd:resourceType>
+        <pd:x>290</pd:x>
+        <pd:y>78</pd:y>
         <config>
-            <processName>/AddSalesLead.process</processName>
+            <timeout>0</timeout>
+            <soapAttachmentStyle>SwA</soapAttachmentStyle>
+            <timeoutType>Seconds</timeoutType>
+            <service>pfx4:SalesLead</service>
+            <servicePort>SalesLead</servicePort>
+            <operation>AddSalesLead</operation>
+            <soapAction>/SalesLead/AddSalesLead</soapAction>
+            <endpointURL>http://localhost:9999/SalesLead</endpointURL>
+            <authScheme>NONE</authScheme>
         </config>
         <pd:inputBindings>
-            <xsl:copy-of select="$Start/pfx:SalesLead"/>
+            <inputMessage>
+                <xsl:copy-of select="$Start/pfx:SalesLead"/>
+            </inputMessage>
         </pd:inputBindings>
     </pd:activity>
     <pd:transition>
         <pd:from>Start</pd:from>
-        <pd:to>AddSalesLead</pd:to>
+        <pd:to>SOAPRequestReply</pd:to>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>always</pd:conditionType>
     </pd:transition>
     <pd:transition>
-        <pd:from>AddSalesLead</pd:from>
+        <pd:from>SOAPRequestReply</pd:from>
         <pd:to>End</pd:to>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>

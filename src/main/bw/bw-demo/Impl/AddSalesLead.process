@@ -1,27 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pd:ProcessDefinition xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:pfx="http://windyroad.com.au/schemas/SalesLead.xsd">
-    <pd:name>test/UnitTestSuite/steps/The following contact is added to the sales lead database.process</pd:name>
+<pd:ProcessDefinition xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns="http://windyroad.com.au/schemas/SalesLead.xsd" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlPfx="http://xmlns.example.com/1413196658183" xmlns:pfx="http://windyroad.com.au/services/SalesLead">
+    <wsdl:import namespace="http://windyroad.com.au/services/SalesLead" location="/SalesLead.wsdl"/>
+    <pd:name>Impl/AddSalesLead.process</pd:name>
     <pd:startName>Start</pd:startName>
-    <pd:startType ref="pfx:SalesLead"/>
+    <pd:startType wsMsgRef="pfx:AddSalesLeadRequest"/>
     <pd:startX>150</pd:startX>
-    <pd:startY>64</pd:startY>
-    <pd:returnBindings/>
+    <pd:startY>65</pd:startY>
+    <pd:returnBindings>
+        <pfx:AddSalesLeadResponse/>
+    </pd:returnBindings>
     <pd:endName>End</pd:endName>
+    <pd:endType wsMsgRef="pfx:AddSalesLeadResponse"/>
     <pd:endX>450</pd:endX>
-    <pd:endY>64</pd:endY>
+    <pd:endY>65</pd:endY>
     <pd:errorSchemas/>
     <pd:processVariables/>
-    <pd:targetNamespace>http://xmlns.example.com/1413193119895</pd:targetNamespace>
+    <pd:targetNamespace>http://xmlns.example.com/1413197291911</pd:targetNamespace>
     <pd:activity name="AddSalesLead">
         <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
         <pd:resourceType>ae.process.subprocess</pd:resourceType>
-        <pd:x>294</pd:x>
-        <pd:y>65</pd:y>
+        <pd:x>296</pd:x>
+        <pd:y>70</pd:y>
         <config>
             <processName>/private/AddSalesLead.process</processName>
         </config>
         <pd:inputBindings>
-            <xsl:copy-of select="$Start/pfx:SalesLead"/>
+            <xsl:copy-of select="$Start/pfx:AddSalesLeadRequest/AddSalesLead/ns:SalesLead"/>
         </pd:inputBindings>
     </pd:activity>
     <pd:transition>

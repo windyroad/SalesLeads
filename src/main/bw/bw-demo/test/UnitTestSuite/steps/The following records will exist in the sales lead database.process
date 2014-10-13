@@ -19,7 +19,7 @@
         <pd:x>302</pd:x>
         <pd:y>66</pd:y>
         <config>
-            <processName>/GetSalesLeads.process</processName>
+            <processName>/private/GetSalesLeads.process</processName>
         </config>
         <pd:inputBindings>
             <Input/>

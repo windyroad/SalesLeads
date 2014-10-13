@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns="http://windyroad.com.au/schemas/SalesLead.xsd" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlPfx="http://xmlns.example.com/1413196658183" xmlns:pfx="http://windyroad.com.au/services/SalesLead">
+    <wsdl:import namespace="http://windyroad.com.au/services/SalesLead" location="/SalesLead.wsdl"/>
+    <pd:name>Impl/GetSalesLeads.process</pd:name>
+    <pd:startName>Start</pd:startName>
+    <pd:startType wsMsgRef="pfx:GetSalesLeadsRequest"/>
+    <pd:startX>150</pd:startX>
+    <pd:startY>65</pd:startY>
+    <pd:returnBindings>
+        <pfx:GetSalesLeadsResponse>
+            <GetSalesLeadsResponse>
+                <xsl:copy-of select="$GetSalesLeads/ns:SalesLeads"/>
+            </GetSalesLeadsResponse>
+        </pfx:GetSalesLeadsResponse>
+    </pd:returnBindings>
+    <pd:endName>End</pd:endName>
+    <pd:endType wsMsgRef="pfx:GetSalesLeadsResponse"/>
+    <pd:endX>450</pd:endX>
+    <pd:endY>65</pd:endY>
+    <pd:errorSchemas/>
+    <pd:processVariables/>
+    <pd:targetNamespace>http://xmlns.example.com/1413197291974</pd:targetNamespace>
+    <pd:activity name="GetSalesLeads">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>299</pd:x>
+        <pd:y>64</pd:y>
+        <config>
+            <processName>/private/GetSalesLeads.process</processName>
+        </config>
+        <pd:inputBindings>
+            <Input>
+                <xsl:if test="$Start/pfx:GetSalesLeadsRequest/GetSalesLeadsRequest/ns:GetSalesLeadsRequest/ns:Limit">
+                    <Limit>
+                        <xsl:value-of select="$Start/pfx:GetSalesLeadsRequest/GetSalesLeadsRequest/ns:GetSalesLeadsRequest/ns:Limit"/>
+                    </Limit>
+                </xsl:if>
+                <xsl:if test="$Start/pfx:GetSalesLeadsRequest/GetSalesLeadsRequest/ns:GetSalesLeadsRequest/ns:Offset">
+                    <Offset>
+                        <xsl:value-of select="$Start/pfx:GetSalesLeadsRequest/GetSalesLeadsRequest/ns:GetSalesLeadsRequest/ns:Offset"/>
+                    </Offset>
+                </xsl:if>
+            </Input>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>GetSalesLeads</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>GetSalesLeads</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+</pd:ProcessDefinition>

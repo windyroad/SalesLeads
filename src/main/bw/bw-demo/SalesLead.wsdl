@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:ns="http://windyroad.com.au/schemas/SalesLead.xsd" xmlns:tns="http://windyroad.com.au/services/SalesLead" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://windyroad.com.au/services/SalesLead">
+    <import namespace="http://windyroad.com.au/schemas/SalesLead.xsd" location="SalesLead.xsd"/>
+    <message name="AddSalesLeadRequest">
+        <part name="AddSalesLead" element="ns:SalesLead"/>
+    </message>
+    <message name="AddSalesLeadResponse"/>
+    <message name="GetSalesLeadsRequest">
+        <part name="GetSalesLeadsRequest" element="ns:GetSalesLeadsRequest"/>
+    </message>
+    <message name="GetSalesLeadsResponse">
+        <part name="GetSalesLeadsResponse" element="ns:SalesLeads"/>
+    </message>
+    <portType name="SalesLead">
+        <operation name="AddSalesLead">
+            <input name="input" message="tns:AddSalesLeadRequest"/>
+            <output name="output" message="tns:AddSalesLeadResponse"/>
+        </operation>
+        <operation name="GetSalesLeads">
+            <input message="tns:GetSalesLeadsRequest"/>
+            <output message="tns:GetSalesLeadsResponse"/>
+        </operation>
+    </portType>
+</definitions>
