@@ -88,7 +88,7 @@
 		</propertyset>
 	</target>
 
-	<target name="-init-system-tests" depends="-sit,-init-tests" />
+	<target name="-init-system-tests" depends="-st,-init-integration-tests" />
 
 
 	<target name="run-system-tests"
