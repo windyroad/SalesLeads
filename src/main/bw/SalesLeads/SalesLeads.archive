@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Repository:repository xmlns:Repository="http://www.tibco.com/xmlns/repo/types/2002">
+    <enterpriseArchive>
+        <sharedArchive name="Shared Archive">
+            <resourceType>shared.archive.resource</resourceType>
+            <authorProperty>Tom Howard</authorProperty>
+        </sharedArchive>
+        <processArchive name="SalesLeads">
+            <resourceType>process.archive.resource</resourceType>
+            <authorProperty>Tom Howard</authorProperty>
+            <processProperty>/SalesLead.serviceagent</processProperty>
+        </processArchive>
+        <versionProperty>1</versionProperty>
+        <authorProperty>Tom Howard</authorProperty>
+        <addServiceSettableGvars>true</addServiceSettableGvars>
+        <name>SalesLeads</name>
+        <designer/>
+        <fileLocationProperty>P:/Projects/SalesLeads/build/working/SalesLeads\SalesLeads.ear</fileLocationProperty>
+    </enterpriseArchive>
+</Repository:repository>
