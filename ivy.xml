@@ -2,10 +2,27 @@
 <ivy-module version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd">
     <info
-        organisation="${ivy.organisation}"
-        module="${ant.project.name}"
-        status="release">
+    organisation="au.com.windyroad"
+    module="SalesLeads"
+    status="release">
+        <license name="Apache Software License 2.0"
+        url="http://www.apache.org/licenses/LICENSE-2.0"/>
+        <description homepage="https://github.com/windyroad/SalesLeads">This is a demonstration project for BWUnit</description>
     </info>
+    <configurations defaultconf="default" defaultconfmapping="default->default;dist->default;test->default">
+        <conf name="default" visibility="public"/>
+        <conf name="dist" visibility="public"/>
+        <conf name="test" visibility="private"/>
+        <conf name="license" visibility="private"/>
+    </configurations>
+    <publications>
+        <artifact name="SalesLeads" type="ear" conf="dist" />
+    </publications>
     <dependencies>
+        <dependency org="org.windyroad" name="bwunit" rev="${bwunit.version}" transitive="false" conf="default->default;test->default"/>
+        <dependency org="com.h2database" name="h2" rev="1.3.168" transitive="false" conf="default,test" />
+        <dependency org="org.windyroad" name="bwunit" rev="${bwunit.license.version}" transitive="false" conf="license->license" changing="true"/>
+        <conflict org="org.windyroad" module="bwunit" manager="all"/>
     </dependencies>
 </ivy-module>
+
