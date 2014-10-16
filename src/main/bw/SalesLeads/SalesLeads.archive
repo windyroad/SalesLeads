@@ -8,13 +8,17 @@
         <processArchive name="SalesLeads">
             <resourceType>process.archive.resource</resourceType>
             <authorProperty>Tom Howard</authorProperty>
-            <processProperty>/SalesLead.serviceagent</processProperty>
+            <processProperty>/SalesLead.serviceagent,/InitSalesLeadsDB.process</processProperty>
         </processArchive>
         <versionProperty>1</versionProperty>
         <authorProperty>Tom Howard</authorProperty>
         <addServiceSettableGvars>true</addServiceSettableGvars>
         <name>SalesLeads</name>
-        <designer/>
+        <designer>
+            <lockedProperties/>
+            <fixedChildren/>
+            <resourceDescriptions/>
+        </designer>
         <fileLocationProperty>P:/Projects/SalesLeads/build/working/SalesLeads\SalesLeads.ear</fileLocationProperty>
     </enterpriseArchive>
 </Repository:repository>

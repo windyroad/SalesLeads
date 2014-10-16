@@ -1,24 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pd:ProcessDefinition xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns="http://windyroad.org/bwunit-asserts-0.0.0.xsd" xmlns:pfx="http://windyroad.com.au/schemas/SalesLead.xsd">
-    <pd:name>test/UnitTestSuite/SalesLeadTestCase/NewContactTest.process</pd:name>
+    <pd:name>test/UnitTestSuite/OpsTestCase/NewDBTest.process</pd:name>
     <pd:description>@Timeout(60000)</pd:description>
     <pd:startName>Start</pd:startName>
     <pd:startX>79</pd:startX>
-    <pd:startY>55</pd:startY>
+    <pd:startY>48</pd:startY>
     <pd:returnBindings/>
     <pd:endName>End</pd:endName>
     <pd:endX>863</pd:endX>
-    <pd:endY>56</pd:endY>
+    <pd:endY>48</pd:endY>
     <pd:errorSchemas/>
     <pd:processVariables/>
     <pd:targetNamespace>http://xmlns.example.com/1352340691435</pd:targetNamespace>
-    <pd:activity name="When the following contact is added to the sales lead database">
+    <pd:activity name="Given the sales leads DB has no tables">
         <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
         <pd:resourceType>ae.process.subprocess</pd:resourceType>
-        <pd:x>462</pd:x>
+        <pd:x>258</pd:x>
+        <pd:y>63</pd:y>
+        <config>
+            <processName>/test/UnitTestSuite/steps/The sales leads DB has no tables.process</processName>
+        </config>
+        <pd:inputBindings/>
+    </pd:activity>
+    <pd:activity name="Then the sales leads DB will have a SalesLeads table with the following columns">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>671</pd:x>
         <pd:y>78</pd:y>
         <config>
-            <processName>/test/UnitTestSuite/steps/The following contact is added to the sales lead database.process</processName>
+            <processName>/test/UnitTestSuite/steps/The sales leads DB will have a SalesLeads table with the following columns.process</processName>
+        </config>
+        <pd:inputBindings>
+            <input>
+                <column>
+                    <name>FIRSTNAME</name>
+                    <type>VARCHAR(255)</type>
+                </column>
+                <column>
+                    <name>LASTNAME</name>
+                    <type>VARCHAR(255)</type>
+                </column>
+                <column>
+                    <name>EMAIL</name>
+                    <type>VARCHAR(255)</type>
+                </column>
+                <column>
+                    <name>PHONENUMBER</name>
+                    <type>VARCHAR(255)</type>
+                </column>
+            </input>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="When the sales leads DB is initialised">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>460</pd:x>
+        <pd:y>63</pd:y>
+        <config>
+            <processName>/test/UnitTestSuite/steps/The sales leads DB is initialised.process</processName>
         </config>
         <pd:inputBindings>
             <pfx:SalesLead>
@@ -29,54 +68,30 @@
             </pfx:SalesLead>
         </pd:inputBindings>
     </pd:activity>
-    <pd:activity name="Then the following records will exist in the sales lead database">
-        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
-        <pd:resourceType>ae.process.subprocess</pd:resourceType>
-        <pd:x>655</pd:x>
-        <pd:y>78</pd:y>
-        <config>
-            <processName>/test/UnitTestSuite/steps/The following records will exist in the sales lead database.process</processName>
-        </config>
-        <pd:inputBindings>
-            <pfx:SalesLeads>
-                <xsl:copy-of select="$When-the-following-contact-is-added-to-the-sales-lead-database/pfx:SalesLead"/>
-            </pfx:SalesLeads>
-        </pd:inputBindings>
-    </pd:activity>
-    <pd:activity name="Given there are no contacts in the sales lead database">
-        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
-        <pd:resourceType>ae.process.subprocess</pd:resourceType>
-        <pd:x>248</pd:x>
-        <pd:y>78</pd:y>
-        <config>
-            <processName>/test/UnitTestSuite/steps/There are no contacts in the sales lead database.process</processName>
-        </config>
-        <pd:inputBindings/>
-    </pd:activity>
     <pd:transition>
         <pd:from>Start</pd:from>
-        <pd:to>Given there are no contacts in the sales lead database</pd:to>
+        <pd:to>Given the sales leads DB has no tables</pd:to>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>always</pd:conditionType>
     </pd:transition>
     <pd:transition>
-        <pd:from>When the following contact is added to the sales lead database</pd:from>
-        <pd:to>Then the following records will exist in the sales lead database</pd:to>
+        <pd:from>When the sales leads DB is initialised</pd:from>
+        <pd:to>Then the sales leads DB will have a SalesLeads table with the following columns</pd:to>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>always</pd:conditionType>
     </pd:transition>
     <pd:transition>
-        <pd:from>Then the following records will exist in the sales lead database</pd:from>
+        <pd:from>Then the sales leads DB will have a SalesLeads table with the following columns</pd:from>
         <pd:to>End</pd:to>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>always</pd:conditionType>
     </pd:transition>
     <pd:transition>
-        <pd:from>Given there are no contacts in the sales lead database</pd:from>
-        <pd:to>When the following contact is added to the sales lead database</pd:to>
+        <pd:from>Given the sales leads DB has no tables</pd:from>
+        <pd:to>When the sales leads DB is initialised</pd:to>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>always</pd:conditionType>
