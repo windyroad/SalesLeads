@@ -28,7 +28,7 @@
             <servicePort>SalesLead</servicePort>
             <operation>AddSalesLead</operation>
             <soapAction>/SalesLead/AddSalesLead</soapAction>
-            <endpointURL>http://localhost:9999/SalesLead</endpointURL>
+            <endpointURL>http://localhost:%%Resources/SalesLeadService/Port%%/SalesLead</endpointURL>
             <authScheme>NONE</authScheme>
         </config>
         <pd:inputBindings>
