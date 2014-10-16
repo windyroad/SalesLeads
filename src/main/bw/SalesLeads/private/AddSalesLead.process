@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pd:ProcessDefinition xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:pfx="http://windyroad.com.au/schemas/SalesLead.xsd">
     <xsd:import namespace="http://windyroad.com.au/schemas/SalesLead.xsd" schemaLocation="/SalesLead.xsd"/>
-    <pd:name>AddSalesLead.process</pd:name>
+    <pd:name>private/AddSalesLead.process</pd:name>
     <pd:startName>Start</pd:startName>
     <pd:startType ref="pfx:SalesLead"/>
     <pd:startX>150</pd:startX>
@@ -23,40 +23,40 @@
             <commit>false</commit>
             <emptyStrAsNil>true</emptyStrAsNil>
             <jdbcSharedConfig>/resources/SalesLeadDatabase.sharedjdbc</jdbcSharedConfig>
-            <statement>INSERT INTO SalesLeads (FirstName, LastName, Email, PhoneNumber) VALUES (?, ?, ?, ?)</statement>
+            <statement>INSERT INTO SALESLEADS (FIRSTNAME, LASTNAME, EMAIL, PHONENUMBER) VALUES (?, ?, ?, ?)</statement>
             <Prepared_Param_DataType>
                 <parameter>
-                    <parameterName>FirstName</parameterName>
+                    <parameterName>FIRSTNAME</parameterName>
                     <dataType>VARCHAR</dataType>
                 </parameter>
                 <parameter>
-                    <parameterName>LastName</parameterName>
+                    <parameterName>LASTNAME</parameterName>
                     <dataType>VARCHAR</dataType>
                 </parameter>
                 <parameter>
-                    <parameterName>Email</parameterName>
+                    <parameterName>EMAIL</parameterName>
                     <dataType>VARCHAR</dataType>
                 </parameter>
                 <parameter>
-                    <parameterName>PhoneNumber</parameterName>
+                    <parameterName>PHONENUMBER</parameterName>
                     <dataType>VARCHAR</dataType>
                 </parameter>
             </Prepared_Param_DataType>
         </config>
         <pd:inputBindings>
             <jdbcUpdateActivityInput>
-                <FirstName>
+                <FIRSTNAME>
                     <xsl:value-of select="$Start/pfx:SalesLead/pfx:FirstName"/>
-                </FirstName>
-                <LastName>
+                </FIRSTNAME>
+                <LASTNAME>
                     <xsl:value-of select="$Start/pfx:SalesLead/pfx:LastName"/>
-                </LastName>
-                <Email>
+                </LASTNAME>
+                <EMAIL>
                     <xsl:value-of select="$Start/pfx:SalesLead/pfx:Email"/>
-                </Email>
-                <PhoneNumber>
+                </EMAIL>
+                <PHONENUMBER>
                     <xsl:value-of select="$Start/pfx:SalesLead/pfx:PhoneNumber"/>
-                </PhoneNumber>
+                </PHONENUMBER>
             </jdbcUpdateActivityInput>
         </pd:inputBindings>
     </pd:activity>

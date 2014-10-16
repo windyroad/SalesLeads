@@ -27,14 +27,5 @@
                 <soap:body parts="GetSalesLeadsResponse" use="literal"/>
             </wsdl:output>
         </wsdl:operation>
-        <wsdl:operation name="InitDB">
-            <soap:operation soapAction="/SalesLead.serviceagent//InitDB" style="document"/>
-            <wsdl:input>
-                <soap:body parts="" use="literal"/>
-            </wsdl:input>
-            <wsdl:output>
-                <soap:body parts="" use="literal"/>
-            </wsdl:output>
-        </wsdl:operation>
     </wsdl:binding>
 </wsdl:definitions>

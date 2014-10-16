@@ -11,7 +11,7 @@
         <processArchive name="SalesLeads">
             <resourceType>process.archive.resource</resourceType>
             <authorProperty>Tom Howard</authorProperty>
-            <processProperty>/SalesLead.serviceagent,/InitSalesLeadsDB.process</processProperty>
+            <processProperty>/SalesLead.serviceagent</processProperty>
         </processArchive>
         <versionProperty>1</versionProperty>
         <authorProperty>Tom Howard</authorProperty>
