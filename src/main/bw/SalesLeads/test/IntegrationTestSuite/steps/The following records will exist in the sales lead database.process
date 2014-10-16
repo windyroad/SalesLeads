@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pd:ProcessDefinition xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns="http://windyroad.org/bwunit-asserts-0.0.0.xsd" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:pfx2="http://windyroad.com.au/services/concrete/SalesLead" xmlns:pfx="http://windyroad.com.au/schemas/SalesLead.xsd">
+<pd:ProcessDefinition xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns="http://windyroad.org/bwunit-asserts-0.0.0.xsd" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:pfx3="http://windyroad.com.au/services/concreate/SalesLead" xmlns:pfx2="http://windyroad.com.au/services/concrete/SalesLead" xmlns:pfx="http://windyroad.com.au/schemas/SalesLead.xsd">
     <xs:import xmlns:xs="http://www.w3.org/2001/XMLSchema" namespace="http://windyroad.com.au/schemas/SalesLead.xsd" schemaLocation="/SalesLead.xsd"/>
-    <wsdl:import namespace="http://windyroad.com.au/services/concrete/SalesLead" location="/SalesLeadConcrete.wsdl"/>
+    <wsdl:import namespace="http://windyroad.com.au/services/concreate/SalesLead" location="/SalesLeadConcrete.wsdl"/>
     <pd:name>test/IntegrationTestSuite/steps/The following records will exist in the sales lead database.process</pd:name>
     <pd:startName>Start</pd:startName>
     <pd:startType ref="pfx:SalesLeads"/>
@@ -42,11 +42,11 @@
             <timeout>0</timeout>
             <soapAttachmentStyle>SwA</soapAttachmentStyle>
             <timeoutType>Seconds</timeoutType>
-            <service>pfx2:SalesLead</service>
+            <service>pfx3:SalesLead</service>
             <servicePort>SalesLead</servicePort>
             <operation>GetSalesLeads</operation>
             <soapAction>/SalesLead/GetSalesLeads</soapAction>
-            <endpointURL>http://localhost:9999/SalesLead</endpointURL>
+            <endpointURL>http://localhost:%%Resources/SalesLeadService/Port%%/SalesLead</endpointURL>
             <authScheme>NONE</authScheme>
         </config>
         <pd:inputBindings>

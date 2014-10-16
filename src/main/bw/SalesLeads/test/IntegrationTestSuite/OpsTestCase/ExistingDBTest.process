@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pd:ProcessDefinition xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns="http://windyroad.org/bwunit-asserts-0.0.0.xsd" xmlns:pfx="http://windyroad.com.au/schemas/SalesLead.xsd">
-    <pd:name>test/UnitTestSuite/OpsTestCase/ExistingDBTest.process</pd:name>
+    <pd:name>test/IntegrationTestSuite/OpsTestCase/ExistingDBTest.process</pd:name>
     <pd:description>@Timeout(60000)</pd:description>
     <pd:startName>Start</pd:startName>
     <pd:startX>79</pd:startX>
@@ -64,7 +64,7 @@
         <pd:x>460</pd:x>
         <pd:y>63</pd:y>
         <config>
-            <processName>/test/UnitTestSuite/steps/The sales leads DB is initialised.process</processName>
+            <processName>/test/IntegrationTestSuite/steps/The sales leads DB is initialised.process</processName>
         </config>
         <pd:inputBindings>
             <pfx:SalesLead>

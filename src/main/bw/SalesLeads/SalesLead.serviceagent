@@ -9,7 +9,8 @@
         <groups>
             <row isDefault="true" groupName="Default"/>
         </groups>
-        <serviceChange>Mon Oct 13 21:55:42 EST 2014</serviceChange>
+        <serviceChange>Thu Oct 16 15:55:02 EST 2014</serviceChange>
+        <wsdl namespace="http://windyroad.com.au/services/concreate/SalesLead" embedWsdlComponents="false" embedSchemaComponents="false" embedJndiProperties="false"/>
         <interfaceImpl>
             <tab>
                 <tabName>SalesLead</tabName>
@@ -24,6 +25,7 @@
                                 <operations>
                                     <row opName="AddSalesLead" opImpl="/Impl/AddSalesLead.process"/>
                                     <row opName="GetSalesLeads" opImpl="/Impl/GetSalesLeads.process"/>
+                                    <row opName="InitDB" opImpl="/Impl/InitDB.process"/>
                                 </operations>
                             </config>
                         </tab>
@@ -81,6 +83,15 @@
                                                                     </config>
                                                                 </general>
                                                             </operation>
+                                                            <operation name="InitDB">
+                                                                <general>
+                                                                    <config>
+                                                                        <soapAction>/SalesLead.serviceagent//InitDB</soapAction>
+                                                                        <operationStyle/>
+                                                                        <soapUse>literal</soapUse>
+                                                                    </config>
+                                                                </general>
+                                                            </operation>
                                                         </soap>
                                                     </config>
                                                 </tab>
@@ -94,6 +105,5 @@
                 </config>
             </tab>
         </interfaceImpl>
-        <wsdl namespace="http://windyroad.com.au/services/concreate/SalesLead" embedWsdlComponents="false" embedSchemaComponents="false" embedJndiProperties="false"/>
     </config>
 </serviceResource>

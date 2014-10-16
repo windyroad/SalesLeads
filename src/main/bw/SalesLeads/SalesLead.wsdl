@@ -11,6 +11,8 @@
     <message name="GetSalesLeadsResponse">
         <part name="GetSalesLeadsResponse" element="ns:SalesLeads"/>
     </message>
+    <message name="InitDBRequest"/>
+    <message name="InitDBResponse"/>
     <portType name="SalesLead">
         <operation name="AddSalesLead">
             <input name="input" message="tns:AddSalesLeadRequest"/>
@@ -19,6 +21,10 @@
         <operation name="GetSalesLeads">
             <input message="tns:GetSalesLeadsRequest"/>
             <output message="tns:GetSalesLeadsResponse"/>
+        </operation>
+        <operation name="InitDB">
+            <input message="tns:InitDBRequest"/>
+            <output message="tns:InitDBResponse"/>
         </operation>
     </portType>
 </definitions>
