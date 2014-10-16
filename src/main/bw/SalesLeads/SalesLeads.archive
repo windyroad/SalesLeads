@@ -4,6 +4,9 @@
         <sharedArchive name="Shared Archive">
             <resourceType>shared.archive.resource</resourceType>
             <authorProperty>Tom Howard</authorProperty>
+            <sharedResources>/resources/AliasLibrary.aliaslib</sharedResources>
+            <sharedFiles/>
+            <sharedJarFiles/>
         </sharedArchive>
         <processArchive name="SalesLeads">
             <resourceType>process.archive.resource</resourceType>
