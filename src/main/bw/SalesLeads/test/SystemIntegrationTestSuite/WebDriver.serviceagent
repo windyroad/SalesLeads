@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BWSharedResource>
+    <name>WebDriver</name>
+    <resourceType>ae.shared.JavaGlobalServiceAgent</resourceType>
+    <config>
+        <InvokeCleanupMethod>true</InvokeCleanupMethod>
+        <class>com.tibco.plugin.java.JavaGlobalServiceAgent</class>
+        <CleanupMethod>
+            <className>au.com.windyroad.salesleads.ui.Driver</className>
+            <methodName>destroy</methodName>
+            <methodReturn>void</methodReturn>
+        </CleanupMethod>
+        <ConstructorInfo>
+            <classLocation>p:/projects/salesleads/lib/salesleads-test.jar</classLocation>
+            <className>au.com.windyroad.salesleads.ui.Driver</className>
+            <isConstructor>true</isConstructor>
+            <methodParameter>java.lang.String</methodParameter>
+        </ConstructorInfo>
+        <ConstructorParameters>
+            <row>
+                <ParameterName>Parameter1</ParameterName>
+                <ParameterType>string</ParameterType>
+                <ParameterValue>1234</ParameterValue>
+            </row>
+        </ConstructorParameters>
+    </config>
+</BWSharedResource>

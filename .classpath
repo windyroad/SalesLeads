@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="lib/BWUnit-16.14/Examples/Simple/src/java"/>
+	<classpathentry kind="src" path="lib/BWUnit-16.14/Templates/BWUnitTemplate/src/main/java"/>
+	<classpathentry kind="src" path="lib/BWUnit-16.15/Examples/Simple/src/java"/>
+	<classpathentry kind="src" path="lib/BWUnit-16.15/Templates/BWUnitTemplate/src/main/java"/>
+	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="src" path="src/main/resources"/>
+	<classpathentry kind="src" path="src/test/java"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7">
+		<attributes>
+			<attribute name="owner.project.facets" value="java"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.apache.ivyde.eclipse.cpcontainer.IVYDE_CONTAINER/?project=SalesLeads&amp;ivyXmlPath=ivy.xml&amp;confs=*&amp;ivySettingsPath=%24%7Bworkspace_loc%3Aivysettings.xml%7D&amp;loadSettingsOnDemand=true&amp;propertyFiles=%24%7Bproject_loc%3Aconfig%2Fivysettings.xml%7D%2C%24%7Bworkspace_loc%3ASalesLeads%2Fbuild.properties%7D%2CC%3A%5CUsers%5CTom+Howard%5Cbuild.properties&amp;acceptedTypes=jar%2Cbundle%2Cejb%2Cmaven-plugin&amp;alphaOrder=false&amp;resolveInWorkspace=false&amp;retrievedClasspath=true&amp;retrievedClasspathPattern=lib%2F%5Bartifact%5D-%5Brevision%5D.%5Bext%5D&amp;retrievedClasspathSync=true&amp;retrievedClasspathTypes=*"/>
+	<classpathentry kind="lib" path="lib/sac-1.3.jar"/>
+	<classpathentry kind="lib" path="lib/SalesLeads.jar"/>
+	<classpathentry kind="lib" path="lib/selenium-api-2.43.1.jar"/>
+	<classpathentry kind="lib" path="lib/selenium-chrome-driver-2.43.1.jar"/>
+	<classpathentry kind="lib" path="lib/selenium-firefox-driver-2.43.1.jar"/>
+	<classpathentry kind="lib" path="lib/selenium-htmlunit-driver-2.43.1.jar"/>
+	<classpathentry kind="lib" path="lib/selenium-ie-driver-2.43.1.jar"/>
+	<classpathentry kind="lib" path="lib/selenium-java-2.43.1.jar"/>
+	<classpathentry kind="lib" path="lib/selenium-remote-driver-2.43.1.jar"/>
+	<classpathentry kind="lib" path="lib/selenium-safari-driver-2.43.1.jar"/>
+	<classpathentry kind="lib" path="lib/selenium-support-2.43.1.jar"/>
+	<classpathentry kind="lib" path="lib/serializer-2.7.1.jar"/>
+	<classpathentry kind="lib" path="lib/webbit-0.4.15.jar"/>
+	<classpathentry kind="lib" path="lib/xalan-2.7.1.jar"/>
+	<classpathentry kind="lib" path="lib/xercesImpl-2.11.0.jar"/>
+	<classpathentry kind="lib" path="lib/xml-apis-1.4.01.jar"/>
+	<classpathentry kind="lib" path="lib/cglib-nodep-2.1_3.jar"/>
+	<classpathentry kind="lib" path="lib/commons-codec-1.9.jar"/>
+	<classpathentry kind="lib" path="lib/commons-collections-3.2.1.jar"/>
+	<classpathentry kind="lib" path="lib/commons-exec-1.1.jar"/>
+	<classpathentry kind="lib" path="lib/commons-io-2.4.jar"/>
+	<classpathentry kind="lib" path="lib/commons-lang3-3.3.2.jar"/>
+	<classpathentry kind="lib" path="lib/commons-logging-1.1.3.jar"/>
+	<classpathentry kind="lib" path="lib/cssparser-0.9.14.jar"/>
+	<classpathentry kind="lib" path="lib/guava-15.0.jar"/>
+	<classpathentry kind="lib" path="lib/h2-1.3.168.jar"/>
+	<classpathentry kind="lib" path="lib/htmlunit-2.15.jar"/>
+	<classpathentry kind="lib" path="lib/htmlunit-core-js-2.15.jar"/>
+	<classpathentry kind="lib" path="lib/httpclient-4.3.4.jar"/>
+	<classpathentry kind="lib" path="lib/httpcore-4.3.2.jar"/>
+	<classpathentry kind="lib" path="lib/httpmime-4.3.3.jar"/>
+	<classpathentry kind="lib" path="lib/jetty-http-8.1.15.v20140411.jar"/>
+	<classpathentry kind="lib" path="lib/jetty-io-8.1.15.v20140411.jar"/>
+	<classpathentry kind="lib" path="lib/jetty-util-8.1.15.v20140411.jar"/>
+	<classpathentry kind="lib" path="lib/jetty-websocket-8.1.15.v20140411.jar"/>
+	<classpathentry kind="lib" path="lib/jna-3.4.0.jar"/>
+	<classpathentry kind="lib" path="lib/json-20080701.jar"/>
+	<classpathentry kind="lib" path="lib/mysql-connector-java-5.1.33.jar"/>
+	<classpathentry kind="lib" path="lib/nekohtml-1.9.21.jar"/>
+	<classpathentry kind="lib" path="lib/netty-3.5.5.Final.jar"/>
+	<classpathentry kind="lib" path="lib/platform-3.4.0.jar"/>
+	<classpathentry kind="lib" path="C:/tibco/tpcl/5.8/lib/log4j-1.2.15.jar"/>
+	<classpathentry kind="lib" path="C:/tibco/tpcl/5.8/lib/activation.jar"/>
+	<classpathentry kind="output" path="build/test/bin"/>
+</classpath>

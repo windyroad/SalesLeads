@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:ns2="www.tibco.com/plugin/java/JavaToXmlActivityInput" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns1="www.tibco.com/plugin/java/JavaMethodActivityOutput" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns4="www.tibco.com/plugin/java/JavaToXmlActivityOutput" xmlns:ns="www.tibco.com/plugin/java/JavaMethodActivityInput" xmlns:ns3="www.tibco.com/plugin/java/xmlSchema/au.com.windyroad.Resource" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tib="http://www.tibco.com/bw/xslt/custom-functions" xmlns:ns5="http://xmlns.tibco.com/encodings/mime" xmlns:ns6="http://xmlns.tibco.com/bw/plugin-api/messages/context" xmlns:ns7="http://windyroad.org/wr-http.xsd">
+    <pd:name>SalesLeadsUI.process</pd:name>
+    <pd:startName>HTTP Receiver</pd:startName>
+    <pd:startX>0</pd:startX>
+    <pd:startY>0</pd:startY>
+    <pd:returnBindings/>
+    <pd:starter name="HTTP Receiver">
+        <pd:type>com.tibco.plugin.http.HTTPEventSource</pd:type>
+        <pd:resourceType>httppalette.httpEventSource</pd:resourceType>
+        <pd:x>94</pd:x>
+        <pd:y>77</pd:y>
+        <config>
+            <outputMode>String</outputMode>
+            <defaultEncoding>UTF8</defaultEncoding>
+            <inputOutputVersion>5.3.0</inputOutputVersion>
+            <newMimeSupport>true</newMimeSupport>
+            <sharedChannel>/resources/SalesLeadHTTPService.sharedhttp</sharedChannel>
+            <Headers>
+                <xsd:element name="root">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="Accept" type="xsd:string" minOccurs="0"/>
+                            <xsd:element name="Accept-Charset" type="xsd:string" minOccurs="0"/>
+                            <xsd:element name="Accept-Encoding" type="xsd:string" minOccurs="0"/>
+                            <xsd:element name="Content-Type" type="xsd:string" minOccurs="0"/>
+                            <xsd:element name="Content-Length" type="xsd:string" minOccurs="0"/>
+                            <xsd:element name="Connection" type="xsd:string" minOccurs="0"/>
+                            <xsd:element name="Cookie" type="xsd:string" minOccurs="0"/>
+                            <xsd:element name="Pragma" type="xsd:string" minOccurs="0"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </Headers>
+        </config>
+        <pd:inputBindings/>
+    </pd:starter>
+    <pd:endName>End</pd:endName>
+    <pd:endX>789</pd:endX>
+    <pd:endY>83</pd:endY>
+    <pd:errorSchemas/>
+    <pd:processVariables/>
+    <pd:targetNamespace>http://xmlns.example.com/1413539216090</pd:targetNamespace>
+    <pd:activity name="Send HTTP Response">
+        <pd:type>com.tibco.plugin.http.HTTPResponseActivity</pd:type>
+        <pd:resourceType>httppalette.httpWebResponse</pd:resourceType>
+        <pd:x>525</pd:x>
+        <pd:y>75</pd:y>
+        <config>
+            <closeConnection>true</closeConnection>
+            <eventSource>HTTP Receiver</eventSource>
+            <flushResponse>true</flushResponse>
+            <Headers>
+                <xsd:element name="root">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="StatusLine" type="xsd:string" minOccurs="0"/>
+                            <xsd:element name="Content-Type" type="xsd:string" minOccurs="0"/>
+                            <xsd:element name="Set-Cookie" type="xsd:string" minOccurs="0"/>
+                            <xsd:element name="Pragma" type="xsd:string" minOccurs="0"/>
+                            <xsd:element name="Location" type="xsd:string" minOccurs="0"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </Headers>
+        </config>
+        <pd:inputBindings>
+            <ResponseActivityInput>
+                <binaryContent>
+                    <xsl:value-of select="$REST-Interface/ns7:response/ns7:binaryContent"/>
+                </binaryContent>
+                <asciiContent>
+                    <xsl:value-of select="$REST-Interface/ns7:response/ns7:asciiContent"/>
+                </asciiContent>
+                <Headers>
+                    <xsl:if test="$REST-Interface/ns7:response/ns7:Headers/ns7:StatusLine">
+                        <StatusLine>
+                            <xsl:value-of select="$REST-Interface/ns7:response/ns7:Headers/ns7:StatusLine"/>
+                        </StatusLine>
+                    </xsl:if>
+                    <Content-Type>
+                        <xsl:value-of select="$REST-Interface/ns7:response/ns7:Headers/ns7:Content-Type"/>
+                    </Content-Type>
+                    <xsl:if test="$REST-Interface/ns7:response/ns7:Headers/ns7:Set-Cookie">
+                        <Set-Cookie>
+                            <xsl:value-of select="$REST-Interface/ns7:response/ns7:Headers/ns7:Set-Cookie"/>
+                        </Set-Cookie>
+                    </xsl:if>
+                    <xsl:if test="$REST-Interface/ns7:response/ns7:Headers/ns7:Pragma">
+                        <Pragma>
+                            <xsl:value-of select="$REST-Interface/ns7:response/ns7:Headers/ns7:Pragma"/>
+                        </Pragma>
+                    </xsl:if>
+                    <xsl:if test="$REST-Interface/ns7:response/ns7:Headers/ns7:Location">
+                        <Location>
+                            <xsl:value-of select="$REST-Interface/ns7:response/ns7:Headers/ns7:Location"/>
+                        </Location>
+                    </xsl:if>
+                </Headers>
+            </ResponseActivityInput>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="REST Interface">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>292</pd:x>
+        <pd:y>78</pd:y>
+        <config>
+            <processName>/rest4BW/REST Interface.process</processName>
+        </config>
+        <pd:inputBindings>
+            <root>
+                <ns7:request>
+                    <xsl:if test="$HTTP-Receiver/ProcessStarterOutput/Method">
+                        <ns7:Method>
+                            <xsl:value-of select="$HTTP-Receiver/ProcessStarterOutput/Method"/>
+                        </ns7:Method>
+                    </xsl:if>
+                    <xsl:if test="$HTTP-Receiver/ProcessStarterOutput/RequestURI">
+                        <ns7:RequestURI>
+                            <xsl:value-of select="$HTTP-Receiver/ProcessStarterOutput/RequestURI"/>
+                        </ns7:RequestURI>
+                    </xsl:if>
+                    <xsl:if test="$HTTP-Receiver/ProcessStarterOutput/HTTPVersion">
+                        <ns7:HTTPVersion>
+                            <xsl:value-of select="$HTTP-Receiver/ProcessStarterOutput/HTTPVersion"/>
+                        </ns7:HTTPVersion>
+                    </xsl:if>
+                    <xsl:if test="$HTTP-Receiver/ProcessStarterOutput/PostData">
+                        <ns7:PostData>
+                            <xsl:value-of select="$HTTP-Receiver/ProcessStarterOutput/PostData"/>
+                        </ns7:PostData>
+                    </xsl:if>
+                    <xsl:if test="$HTTP-Receiver/ProcessStarterOutput/Command">
+                        <ns7:Command>
+                            <xsl:value-of select="$HTTP-Receiver/ProcessStarterOutput/Command"/>
+                        </ns7:Command>
+                    </xsl:if>
+                    <xsl:if test="$HTTP-Receiver/ProcessStarterOutput/QueryString">
+                        <ns7:QueryString>
+                            <xsl:value-of select="$HTTP-Receiver/ProcessStarterOutput/QueryString"/>
+                        </ns7:QueryString>
+                    </xsl:if>
+                    <xsl:if test="$HTTP-Receiver/ProcessStarterOutput/Header">
+                        <ns7:Header>
+                            <xsl:value-of select="$HTTP-Receiver/ProcessStarterOutput/Header"/>
+                        </ns7:Header>
+                    </xsl:if>
+                    <xsl:if test="$HTTP-Receiver/ProcessStarterOutput/Protocol">
+                        <ns7:Protocol>
+                            <xsl:value-of select="$HTTP-Receiver/ProcessStarterOutput/Protocol"/>
+                        </ns7:Protocol>
+                    </xsl:if>
+                    <xsl:if test="$HTTP-Receiver/ProcessStarterOutput/Port">
+                        <ns7:Port>
+                            <xsl:value-of select="$HTTP-Receiver/ProcessStarterOutput/Port"/>
+                        </ns7:Port>
+                    </xsl:if>
+                    <xsl:for-each select="$HTTP-Receiver/ProcessStarterOutput/Headers">
+                        <ns7:Headers>
+                            <xsl:if test="Accept">
+                                <ns7:Accept>
+                                    <xsl:value-of select="Accept"/>
+                                </ns7:Accept>
+                            </xsl:if>
+                            <xsl:if test="Accept-Charset">
+                                <ns7:Accept-Charset>
+                                    <xsl:value-of select="Accept-Charset"/>
+                                </ns7:Accept-Charset>
+                            </xsl:if>
+                            <xsl:if test="Accept-Encoding">
+                                <ns7:Accept-Encoding>
+                                    <xsl:value-of select="Accept-Encoding"/>
+                                </ns7:Accept-Encoding>
+                            </xsl:if>
+                            <xsl:if test="Content-Type">
+                                <ns7:Content-Type>
+                                    <xsl:value-of select="Content-Type"/>
+                                </ns7:Content-Type>
+                            </xsl:if>
+                            <xsl:if test="Content-Length">
+                                <ns7:Content-Length>
+                                    <xsl:value-of select="Content-Length"/>
+                                </ns7:Content-Length>
+                            </xsl:if>
+                            <xsl:if test="Connection">
+                                <ns7:Connection>
+                                    <xsl:value-of select="Connection"/>
+                                </ns7:Connection>
+                            </xsl:if>
+                            <xsl:if test="Cookie">
+                                <ns7:Cookie>
+                                    <xsl:value-of select="Cookie"/>
+                                </ns7:Cookie>
+                            </xsl:if>
+                            <xsl:if test="Pragma">
+                                <ns7:Pragma>
+                                    <xsl:value-of select="Pragma"/>
+                                </ns7:Pragma>
+                            </xsl:if>
+                        </ns7:Headers>
+                    </xsl:for-each>
+                    <xsl:for-each select="$HTTP-Receiver/ProcessStarterOutput/ns5:mimeEnvelopeElement">
+                        <ns7:mimeEnvelopeElement>
+                            <xsl:for-each select="mimePart">
+                                <ns7:mimePart>
+                                    <ns7:mimeHeaders>
+                                        <ns7:content-disposition>
+                                            <xsl:value-of select="mimeHeaders/content-disposition"/>
+                                        </ns7:content-disposition>
+                                        <ns7:content-type>
+                                            <xsl:value-of select="mimeHeaders/content-type"/>
+                                        </ns7:content-type>
+                                        <ns7:content-transfer-encoding>
+                                            <xsl:value-of select="mimeHeaders/content-transfer-encoding"/>
+                                        </ns7:content-transfer-encoding>
+                                        <ns7:content-id>
+                                            <xsl:value-of select="mimeHeaders/content-id"/>
+                                        </ns7:content-id>
+                                    </ns7:mimeHeaders>
+                                    <xsl:choose>
+                                        <xsl:when test="binaryContent">
+                                            <ns7:binaryContent>
+                                                <xsl:value-of select="binaryContent"/>
+                                            </ns7:binaryContent>
+                                        </xsl:when>
+                                        <xsl:when test="fileName">
+                                            <ns7:fileName>
+                                                <xsl:value-of select="fileName"/>
+                                            </ns7:fileName>
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                            <ns7:textContent>
+                                                <xsl:value-of select="textContent"/>
+                                            </ns7:textContent>
+                                        </xsl:otherwise>
+                                    </xsl:choose>
+                                </ns7:mimePart>
+                            </xsl:for-each>
+                        </ns7:mimeEnvelopeElement>
+                    </xsl:for-each>
+                    <ns7:Context>
+                        <ns7:RemoteAddress>
+                            <xsl:value-of select="$HTTP-Receiver/ProcessStarterOutput/ns6:Context/RemoteAddress"/>
+                        </ns7:RemoteAddress>
+                    </ns7:Context>
+                </ns7:request>
+                <handlerProcess>UI/REST Delegate.process</handlerProcess>
+            </root>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:transition>
+        <pd:from>Send HTTP Response</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>HTTP Receiver</pd:from>
+        <pd:to>REST Interface</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>REST Interface</pd:from>
+        <pd:to>Send HTTP Response</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+</pd:ProcessDefinition>

@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:ns2="http://windyroad.com.au/schemas/SalesLead.xsd" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns1="http://www.w3.org/1999/xhtml" xmlns:ns="http://windyroad.com.au/services/SalesLead" xmlns:ns3="http://windyroad.org/HTTP1.1-StatusCodeDefinitions" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tib="http://www.tibco.com/bw/xslt/custom-functions" xmlns:pfx2="http://windyroad.org/rest4BW.xsd" xmlns:pfx="http://www.tibco.com/ns/no_namespace_schema_location/schemas/xhtml1-strict.dtd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <xsd:import namespace="http://www.tibco.com/ns/no_namespace_schema_location/schemas/xhtml1-strict.dtd" schemaLocation="/schemas/xhtml1-strict.dtd"/>
+    <xsd:import namespace="http://windyroad.org/rest4BW.xsd" schemaLocation="/rest4BW/Schemas/rest4BW.xsd"/>
+    <pd:name>UI/GetHomePage.process</pd:name>
+    <pd:startName>Start</pd:startName>
+    <pd:startType ref="pfx2:request"/>
+    <pd:startX>70</pd:startX>
+    <pd:startY>62</pd:startY>
+    <pd:returnBindings>
+        <pfx2:response xsi:type="ns3:sc-200_OK">
+            <pfx2:text-content>
+                <xsl:value-of select="$Transform-XML/xmlString"/>
+            </pfx2:text-content>
+            <pfx2:headers>
+                <xsl:attribute name="content-type">application/xhtml+xml</xsl:attribute>
+            </pfx2:headers>
+        </pfx2:response>
+    </pd:returnBindings>
+    <pd:endName>End</pd:endName>
+    <pd:endType ref="pfx2:response"/>
+    <pd:endX>723</pd:endX>
+    <pd:endY>60</pd:endY>
+    <pd:errorSchemas>
+        <Error ref="pfx2:error"/>
+    </pd:errorSchemas>
+    <pd:processVariables/>
+    <pd:targetNamespace>http://www.w3.org/1999/xhtml</pd:targetNamespace>
+    <pd:activity name="Get List">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>277</pd:x>
+        <pd:y>64</pd:y>
+        <config>
+            <processName>/UI/Bridge/GetSalesLeads.process</processName>
+        </config>
+        <pd:inputBindings>
+            <ns:GetSalesLeadsRequest>
+                <GetSalesLeadsRequest>
+                    <ns2:GetSalesLeadsRequest/>
+                </GetSalesLeadsRequest>
+            </ns:GetSalesLeadsRequest>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Map Data">
+        <pd:type>com.tibco.plugin.mapper.MapperActivity</pd:type>
+        <pd:resourceType>ae.activities.MapperActivity</pd:resourceType>
+        <pd:x>480</pd:x>
+        <pd:y>62</pd:y>
+        <config>
+            <element ref="pfx:html"/>
+        </config>
+        <pd:inputBindings>
+            <ns1:html>
+                <ns1:head>
+                    <ns1:title>Sales Leads</ns1:title>
+                </ns1:head>
+                <ns1:body>
+                    <ns1:h1>SalesLeads</ns1:h1>
+                    <ns1:form>
+                        <xsl:attribute name="action">/</xsl:attribute>
+                        <xsl:attribute name="method">post</xsl:attribute>
+                        <xsl:attribute name="enctype">multipart/form-data</xsl:attribute>
+                        <xsl:attribute name="id">SalesLeadsForm</xsl:attribute>
+                        <ns1:table>
+                            <ns1:thead>
+                                <ns1:tr>
+                                    <ns1:th>First Name</ns1:th>
+                                    <ns1:th>Last Name</ns1:th>
+                                    <ns1:th>Email</ns1:th>
+                                    <ns1:th>Phone Number</ns1:th>
+                                    <ns1:th/>
+                                </ns1:tr>
+                            </ns1:thead>
+                            <ns1:tbody>
+                                <xsl:for-each select="$Get-List/ns:GetSalesLeadsResponse/GetSalesLeadsResponse/ns2:SalesLeads/ns2:SalesLead">
+                                    <ns1:tr>
+                                        <ns1:td>
+                                            <xsl:value-of select="ns2:FirstName"/>
+                                        </ns1:td>
+                                        <ns1:td>
+                                            <xsl:value-of select="ns2:LastName"/>
+                                        </ns1:td>
+                                        <ns1:td>
+                                            <xsl:value-of select="ns2:Email"/>
+                                        </ns1:td>
+                                        <ns1:td>
+                                            <xsl:value-of select="ns2:PhoneNumber"/>
+                                        </ns1:td>
+                                    </ns1:tr>
+                                </xsl:for-each>
+                                <ns1:tr>
+                                    <ns1:td>
+                                        <input>
+                                            <xsl:attribute name="id">FirstName</xsl:attribute>
+                                            <xsl:attribute name="type">text</xsl:attribute>
+                                            <xsl:attribute name="name">FirstName</xsl:attribute>
+                                        </input>
+                                    </ns1:td>
+                                    <ns1:td>
+                                        <input>
+                                            <xsl:attribute name="id">LastName</xsl:attribute>
+                                            <xsl:attribute name="type">text</xsl:attribute>
+                                            <xsl:attribute name="name">LastName</xsl:attribute>
+                                        </input>
+                                    </ns1:td>
+                                    <ns1:td>
+                                        <input>
+                                            <xsl:attribute name="id">Email</xsl:attribute>
+                                            <xsl:attribute name="type">text</xsl:attribute>
+                                            <xsl:attribute name="name">Email</xsl:attribute>
+                                        </input>
+                                    </ns1:td>
+                                    <ns1:td>
+                                        <input>
+                                            <xsl:attribute name="id">PhoneNumber</xsl:attribute>
+                                            <xsl:attribute name="type">text</xsl:attribute>
+                                            <xsl:attribute name="name">PhoneNumber</xsl:attribute>
+                                        </input>
+                                    </ns1:td>
+                                    <ns1:td>
+                                        <input>
+                                            <xsl:attribute name="id">AddLead</xsl:attribute>
+                                            <xsl:attribute name="type">submit</xsl:attribute>
+                                            <xsl:attribute name="name">AddLead</xsl:attribute>
+                                            <xsl:attribute name="value">Add Lead</xsl:attribute>
+                                        </input>
+                                    </ns1:td>
+                                </ns1:tr>
+                            </ns1:tbody>
+                        </ns1:table>
+                    </ns1:form>
+                </ns1:body>
+            </ns1:html>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Transform XML">
+        <pd:type>com.tibco.plugin.xml.XMLTransformActivity</pd:type>
+        <pd:resourceType>ae.activities.XMLTransformActivity</pd:resourceType>
+        <pd:x>608</pd:x>
+        <pd:y>61</pd:y>
+        <config>
+            <inputStyle>text</inputStyle>
+            <engine>Saxon</engine>
+            <stylesheet>/UI/RenderXHTML.xslt</stylesheet>
+        </config>
+        <pd:inputBindings>
+            <textInput>
+                <xmlString>
+                    <xsl:value-of select="tib:render-xml($Map-Data/ns1:html)"/>
+                </xmlString>
+            </textInput>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>Get List</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Get List</pd:from>
+        <pd:to>Map Data</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Map Data</pd:from>
+        <pd:to>Transform XML</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Transform XML</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+</pd:ProcessDefinition>
