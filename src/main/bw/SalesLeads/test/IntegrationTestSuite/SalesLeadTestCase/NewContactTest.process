@@ -15,8 +15,8 @@
     <pd:activity name="When the following contact is added to the sales lead database">
         <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
         <pd:resourceType>ae.process.subprocess</pd:resourceType>
-        <pd:x>462</pd:x>
-        <pd:y>78</pd:y>
+        <pd:x>460</pd:x>
+        <pd:y>77</pd:y>
         <config>
             <processName>/test/IntegrationTestSuite/steps/The following contact is added to the sales lead database.process</processName>
         </config>

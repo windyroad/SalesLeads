@@ -19,7 +19,7 @@
 		</globalVariable>
 		<globalVariable>
 			<name>Password</name>
-			<value>#!11tMnxtltSxOOaeSuJ1lTw==</value>
+			<value>#!2axZHye+CKkYkDAh+MnWAA==</value>
 			<deploymentSettable>true</deploymentSettable>
 			<serviceSettable>false</serviceSettable>
 			<type>Password</type>
@@ -35,11 +35,11 @@
 		</globalVariable>
 		<globalVariable>
 			<name>URL</name>
-			<value>jdbc:h2:mem:test;TRACE_LEVEL_FILE=3;DB_CLOSE_DELAY=0;INIT=RUNSCRIPT FROM '../../../src/test/sql/SalesLeadsDatabase/create.sql'</value>
+			<value>jdbc:h2:mem:test;TRACE_LEVEL_FILE=3;DB_CLOSE_DELAY=0;MODE=MYSQL;INIT=RUNSCRIPT FROM '../../../src/test/sql/SalesLeadsDatabase/create.sql'</value>
 			<deploymentSettable>true</deploymentSettable>
 			<serviceSettable>false</serviceSettable>
 			<type>String</type>
-			<modTime>1413193959943</modTime>
+			<modTime>1413503412048</modTime>
 		</globalVariable>
 		<globalVariable>
 			<name>Username</name>
