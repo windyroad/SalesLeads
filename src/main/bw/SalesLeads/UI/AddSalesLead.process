@@ -10,9 +10,7 @@
     <pd:returnBindings>
         <pfx2:response xsi:type="ns3:sc-303_See_Other">
             <pfx2:headers>
-                <xsl:attribute name="content-location">
-                    <xsl:value-of select="concat(&quot;http://localhost:&quot;, $_globalVariables/ns4:GlobalVariables/Resources/SalesLeadService/Port, '/')"/>
-                </xsl:attribute>
+                <xsl:attribute name="content-location">/</xsl:attribute>
             </pfx2:headers>
         </pfx2:response>
     </pd:returnBindings>

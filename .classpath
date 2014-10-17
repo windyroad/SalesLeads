@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="lib/BWUnit-16.14/Examples/Simple/src/java"/>
-	<classpathentry kind="src" path="lib/BWUnit-16.14/Templates/BWUnitTemplate/src/main/java"/>
-	<classpathentry kind="src" path="lib/BWUnit-16.15/Examples/Simple/src/java"/>
-	<classpathentry kind="src" path="lib/BWUnit-16.15/Templates/BWUnitTemplate/src/main/java"/>
 	<classpathentry kind="src" path="src/main/java"/>
 	<classpathentry kind="src" path="src/main/resources"/>
 	<classpathentry kind="src" path="src/test/java"/>

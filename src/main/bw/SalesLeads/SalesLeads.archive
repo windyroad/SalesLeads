@@ -13,6 +13,11 @@
             <authorProperty>Tom Howard</authorProperty>
             <processProperty>/SalesLead.serviceagent</processProperty>
         </processArchive>
+        <processArchive name="UI">
+            <resourceType>process.archive.resource</resourceType>
+            <authorProperty>Tom Howard</authorProperty>
+            <processProperty>/SalesLeadsUI.process,/UI/REST Delegate.process</processProperty>
+        </processArchive>
         <versionProperty>1</versionProperty>
         <authorProperty>Tom Howard</authorProperty>
         <addServiceSettableGvars>true</addServiceSettableGvars>
