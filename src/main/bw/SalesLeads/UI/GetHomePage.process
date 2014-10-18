@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pd:ProcessDefinition xmlns:ns2="http://windyroad.com.au/schemas/SalesLead.xsd" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns1="http://www.w3.org/1999/xhtml" xmlns:ns="http://windyroad.com.au/services/SalesLead" xmlns:ns3="http://windyroad.org/HTTP1.1-StatusCodeDefinitions" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tib="http://www.tibco.com/bw/xslt/custom-functions" xmlns:pfx2="http://windyroad.org/rest4BW.xsd" xmlns:pfx="http://www.tibco.com/ns/no_namespace_schema_location/schemas/xhtml1-strict.dtd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<pd:ProcessDefinition xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns2="http://windyroad.com.au/schemas/SalesLead.xsd" xmlns:ns1="http://www.w3.org/1999/xhtml" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns="http://windyroad.com.au/services/SalesLead" xmlns:ns3="http://windyroad.org/HTTP1.1-StatusCodeDefinitions" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tib="http://www.tibco.com/bw/xslt/custom-functions" xmlns:pfx2="http://windyroad.org/rest4BW.xsd" xmlns:pfx="http://www.tibco.com/ns/no_namespace_schema_location/schemas/xhtml1-strict.dtd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <xsd:import namespace="http://www.tibco.com/ns/no_namespace_schema_location/schemas/xhtml1-strict.dtd" schemaLocation="/schemas/xhtml1-strict.dtd"/>
     <xsd:import namespace="http://windyroad.org/rest4BW.xsd" schemaLocation="/rest4BW/Schemas/rest4BW.xsd"/>
     <pd:name>UI/GetHomePage.process</pd:name>
@@ -63,6 +63,7 @@
                         <xsl:attribute name="enctype">multipart/form-data</xsl:attribute>
                         <xsl:attribute name="id">SalesLeadsForm</xsl:attribute>
                         <ns1:table>
+                            <xsl:attribute name="id">SalesLeads</xsl:attribute>
                             <ns1:thead>
                                 <ns1:tr>
                                     <ns1:th>First Name</ns1:th>
@@ -75,16 +76,21 @@
                             <ns1:tbody>
                                 <xsl:for-each select="$Get-List/ns:GetSalesLeadsResponse/GetSalesLeadsResponse/ns2:SalesLeads/ns2:SalesLead">
                                     <ns1:tr>
+                                        <xsl:attribute name="class">record</xsl:attribute>
                                         <ns1:td>
+                                            <xsl:attribute name="class">firstName</xsl:attribute>
                                             <xsl:value-of select="ns2:FirstName"/>
                                         </ns1:td>
                                         <ns1:td>
+                                            <xsl:attribute name="class">lastName</xsl:attribute>
                                             <xsl:value-of select="ns2:LastName"/>
                                         </ns1:td>
                                         <ns1:td>
+                                            <xsl:attribute name="class">email</xsl:attribute>
                                             <xsl:value-of select="ns2:Email"/>
                                         </ns1:td>
                                         <ns1:td>
+                                            <xsl:attribute name="class">phoneNumber</xsl:attribute>
                                             <xsl:value-of select="ns2:PhoneNumber"/>
                                         </ns1:td>
                                     </ns1:tr>

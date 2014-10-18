@@ -1,14 +1,13 @@
 package au.com.windyroad.salesleads.ui;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxProfile;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 public class Driver implements Serializable {
 
@@ -22,6 +21,13 @@ public class Driver implements Serializable {
 	public Driver(String type) {
 		driver = new HtmlUnitDriver(true);
 	}
+
+	protected String url = "";
+	protected Object driverX = null;
+	protected String[] firstNames = null;
+	protected String[] lastNames = null;
+	protected String[] emails = null;
+	protected String[] phoneNumbers = null;
 
 	public void destroy() {
 		driver.quit();

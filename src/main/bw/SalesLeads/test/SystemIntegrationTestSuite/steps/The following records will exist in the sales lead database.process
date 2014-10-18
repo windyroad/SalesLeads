@@ -1,58 +1,232 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pd:ProcessDefinition xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns="http://windyroad.org/bwunit-asserts-0.0.0.xsd" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:pfx4="http://windyroad.com.au/services/SalesLead" xmlns:pfx3="http://windyroad.com.au/services/concreate/SalesLead" xmlns:pfx2="http://windyroad.com.au/services/concrete/SalesLead" xmlns:pfx="http://windyroad.com.au/schemas/SalesLead.xsd">
+<pd:ProcessDefinition xmlns:ns2="www.tibco.com/plugin/java/JavaMethodActivityInput" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns1="http://www.tibco.com/pe/DeployedVarsType" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns="http://windyroad.org/bwunit-asserts-0.0.0.xsd" xmlns:ns3="www.tibco.com/plugin/java/JavaMethodActivityOutput" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:pfx4="http://windyroad.com.au/services/SalesLead" xmlns:pfx3="http://windyroad.com.au/services/concreate/SalesLead" xmlns:pfx2="http://windyroad.com.au/services/concrete/SalesLead" xmlns:pfx="http://windyroad.com.au/schemas/SalesLead.xsd">
     <xs:import xmlns:xs="http://www.w3.org/2001/XMLSchema" namespace="http://windyroad.com.au/schemas/SalesLead.xsd" schemaLocation="/SalesLead.xsd"/>
     <wsdl:import namespace="http://windyroad.com.au/services/concreate/SalesLead" location="/SalesLeadConcrete.wsdl"/>
     <pd:name>test/SystemIntegrationTestSuite/steps/The following records will exist in the sales lead database.process</pd:name>
     <pd:startName>Start</pd:startName>
     <pd:startType ref="pfx:SalesLeads"/>
-    <pd:startX>151</pd:startX>
-    <pd:startY>65</pd:startY>
+    <pd:startX>145</pd:startX>
+    <pd:startY>72</pd:startY>
     <pd:returnBindings/>
     <pd:endName>End</pd:endName>
-    <pd:endX>629</pd:endX>
-    <pd:endY>68</pd:endY>
+    <pd:endX>862</pd:endX>
+    <pd:endY>73</pd:endY>
     <pd:errorSchemas/>
     <pd:processVariables/>
     <pd:targetNamespace>http://xmlns.example.com/1413193119895</pd:targetNamespace>
     <pd:activity name="AssertEqual">
         <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
         <pd:resourceType>ae.process.subprocess</pd:resourceType>
-        <pd:x>475</pd:x>
-        <pd:y>66</pd:y>
+        <pd:x>708</pd:x>
+        <pd:y>71</pd:y>
         <config>
             <processName>/BWUnit/Public/Asserts/AssertEqual.process</processName>
         </config>
         <pd:inputBindings>
             <ns:equal-input>
                 <ns:expected>
-                    <xsl:copy-of select="$Start/pfx:SalesLeads"/>
+                    <el>
+                        <xsl:for-each select="$Start/pfx:SalesLeads/pfx:SalesLead">
+                            <firstNames>
+                                <xsl:value-of select="pfx:FirstName"/>
+                            </firstNames>
+                        </xsl:for-each>
+                        <xsl:for-each select="$Start/pfx:SalesLeads/pfx:SalesLead">
+                            <lastNames>
+                                <xsl:value-of select="pfx:LastName"/>
+                            </lastNames>
+                        </xsl:for-each>
+                        <xsl:for-each select="$Start/pfx:SalesLeads/pfx:SalesLead">
+                            <emails>
+                                <xsl:value-of select="pfx:Email"/>
+                            </emails>
+                        </xsl:for-each>
+                        <xsl:for-each select="$Start/pfx:SalesLeads/pfx:SalesLead">
+                            <phoneNumbers>
+                                <xsl:value-of select="pfx:PhoneNumber"/>
+                            </phoneNumbers>
+                        </xsl:for-each>
+                    </el>
                 </ns:expected>
                 <ns:actual>
-                    <xsl:copy-of select="$SOAPRequestReply/outputMessage/pfx:SalesLeads"/>
+                    <el>
+                        <xsl:copy-of select="$Get-Sales-Leads/javaCodeActivityOutput/firstNames"/>
+                        <xsl:copy-of select="$Get-Sales-Leads/javaCodeActivityOutput/lastNames"/>
+                        <xsl:copy-of select="$Get-Sales-Leads/javaCodeActivityOutput/emails"/>
+                        <xsl:copy-of select="$Get-Sales-Leads/javaCodeActivityOutput/phoneNumbers"/>
+                    </el>
                 </ns:actual>
             </ns:equal-input>
         </pd:inputBindings>
     </pd:activity>
-    <pd:activity name="SOAPRequestReply">
-        <pd:type>com.tibco.plugin.soap.SOAPSendReceiveActivity</pd:type>
-        <pd:resourceType>ae.activities.SOAPSendReceiveUI</pd:resourceType>
-        <pd:x>304</pd:x>
-        <pd:y>67</pd:y>
+    <pd:activity name="Get Web Driver">
+        <pd:type>com.tibco.plugin.java.JavaMethodActivity</pd:type>
+        <pd:resourceType>ae.activities.JavaMethodActivity</pd:resourceType>
+        <pd:x>303</pd:x>
+        <pd:y>72</pd:y>
         <config>
-            <timeout>0</timeout>
-            <soapAttachmentStyle>SwA</soapAttachmentStyle>
-            <timeoutType>Seconds</timeoutType>
-            <service>pfx3:SalesLead</service>
-            <servicePort>SalesLead</servicePort>
-            <operation>GetSalesLeads</operation>
-            <soapAction>/SalesLead/GetSalesLeads</soapAction>
-            <endpointURL>http://localhost:%%Resources/SalesLeadService/Port%%/SalesLead</endpointURL>
-            <authScheme>NONE</authScheme>
+            <ConstructDeclaredClass>false</ConstructDeclaredClass>
+            <CacheConstructedClass>false</CacheConstructedClass>
+            <InvokeCleanupMethod>false</InvokeCleanupMethod>
+            <JavaGlobalInstance>/test/SystemIntegrationTestSuite/WebDriver.serviceagent</JavaGlobalInstance>
+            <MethodInfo>
+                <className>au.com.windyroad.salesleads.ui.Driver</className>
+                <methodName>getSelf</methodName>
+                <methodReturn>au.com.windyroad.salesleads.ui.Driver</methodReturn>
+            </MethodInfo>
         </config>
         <pd:inputBindings>
-            <inputMessage>
-                <pfx:GetSalesLeadsRequest/>
-            </inputMessage>
+            <ns2:JavaMethodActivityInput/>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Get Sales Leads">
+        <pd:type>com.tibco.plugin.java.JavaActivity</pd:type>
+        <pd:resourceType>ae.javapalette.javaActivity</pd:resourceType>
+        <pd:x>490</pd:x>
+        <pd:y>73</pd:y>
+        <config>
+            <fileName>ThefollowingrecordswillexistinthesalesleaddatabaseGetSalesLeads</fileName>
+            <packageName>test.SystemIntegrationTestSuite.steps.Thefollowingrecordswillexistinthesalesleaddatabase</packageName>
+            <fullsource>package test.SystemIntegrationTestSuite.steps.Thefollowingrecordswillexistinthesalesleaddatabase;
+import java.util.*;
+import java.io.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import  au.com.windyroad.salesleads.ui.Driver;
+
+public class ThefollowingrecordswillexistinthesalesleaddatabaseGetSalesLeads{
+/****** START SET/GET METHOD, DO NOT MODIFY *****/
+	protected String url = "";
+	protected Object driver = null;
+	protected String[] firstNames = null;
+	protected String[] lastNames = null;
+	protected String[] emails = null;
+	protected String[] phoneNumbers = null;
+	public String geturl() {
+		return url;
+	}
+	public void seturl(String val) {
+		url = val;
+	}
+	public Object getdriver() {
+		return driver;
+	}
+	public void setdriver(Object val) {
+		driver = val;
+	}
+	public String[] getfirstNames() {
+		return firstNames;
+	}
+	public void setfirstNames(String[] val) {
+		firstNames = val;
+	}
+	public String[] getlastNames() {
+		return lastNames;
+	}
+	public void setlastNames(String[] val) {
+		lastNames = val;
+	}
+	public String[] getemails() {
+		return emails;
+	}
+	public void setemails(String[] val) {
+		emails = val;
+	}
+	public String[] getphoneNumbers() {
+		return phoneNumbers;
+	}
+	public void setphoneNumbers(String[] val) {
+		phoneNumbers = val;
+	}
+/****** END SET/GET METHOD, DO NOT MODIFY *****/
+	public ThefollowingrecordswillexistinthesalesleaddatabaseGetSalesLeads() {
+	}
+	public void invoke() throws Exception {
+/* Available Variables: DO NOT MODIFY
+	In  : String url
+	In  : Object driver
+	Out : String[] firstNames
+	Out : String[] lastNames
+	Out : String[] emails
+	Out : String[] phoneNumbers
+* Available Variables: DO NOT MODIFY *****/
+
+Driver webDriver = (Driver)driver;
+
+		webDriver.getDriver().get(url);
+		List&lt;WebElement&gt; leadList = webDriver.getDriver().findElement(By.id("SalesLeads")).findElements(By.cssSelector("tr.record"));
+		List&lt;String&gt; firstNamesList = new ArrayList&lt;String&gt;(leadList.size());
+		List&lt;String&gt; lastNamesList = new ArrayList&lt;String&gt;(leadList.size());
+		List&lt;String&gt; emailsList = new ArrayList&lt;String&gt;(leadList.size());
+		List&lt;String&gt; phoneNumbersList = new ArrayList&lt;String&gt;(leadList.size());
+		for (WebElement lead : leadList) {
+			firstNamesList.add(lead.findElement(By.className("firstName")).getText());
+			lastNamesList.add(lead.findElement(By.className("lastName")).getText());
+			emailsList.add(lead.findElement(By.className("email")).getText());
+			phoneNumbersList.add(lead.findElement(By.className("phoneNumber")).getText());
+		}
+		
+		firstNames = firstNamesList.toArray(new String[0]);
+		lastNames = lastNamesList.toArray(new String[0]);
+		emails = emailsList.toArray(new String[0]);
+		phoneNumbers = phoneNumbersList.toArray(new String[0]);
+
+
+}
+}
+</fullsource>
+            <outputData>
+                <row>
+                    <fieldName>firstNames</fieldName>
+                    <fieldType>string</fieldType>
+                    <fieldRequired>repeating</fieldRequired>
+                </row>
+                <row>
+                    <fieldName>lastNames</fieldName>
+                    <fieldType>string</fieldType>
+                    <fieldRequired>repeating</fieldRequired>
+                </row>
+                <row>
+                    <fieldName>emails</fieldName>
+                    <fieldType>string</fieldType>
+                    <fieldRequired>repeating</fieldRequired>
+                </row>
+                <row>
+                    <fieldName>phoneNumbers</fieldName>
+                    <fieldType>string</fieldType>
+                    <fieldRequired>repeating</fieldRequired>
+                </row>
+            </outputData>
+            <inputData>
+                <row>
+                    <fieldName>url</fieldName>
+                    <fieldType>string</fieldType>
+                    <fieldRequired>required</fieldRequired>
+                </row>
+                <row>
+                    <fieldName>driver</fieldName>
+                    <fieldType>ObjectReference</fieldType>
+                    <fieldRequired>required</fieldRequired>
+                </row>
+            </inputData>
+            <byteCode>
+                <class>
+                    <name>ThefollowingrecordswillexistinthesalesleaddatabaseGetSalesLeads</name>
+                    <byteCode>yv66vgAAADMAkwkAJABPCQAkAFAJACQAUQkAJABSCQAkAFMJACQAVAoAJQBVCABWBwBXCgAJAFgLAFkAWggAWwoAXABdCwBZAF4IAF8KAFwAYAsAGABhBwBiCwBjAGQKABIAZQsAYwBmCwBnAGgLAGcAaQcAaggAawoAXABsCwAYAF4LABgAbQsAYwBuCABvCABwCABxBwByCwBjAHMHACsHAHQHAHUBAAN1cmwBABJMamF2YS9sYW5nL1N0cmluZzsBAAZkcml2ZXIBABJMamF2YS9sYW5nL09iamVjdDsBAApmaXJzdE5hbWVzAQATW0xqYXZhL2xhbmcvU3RyaW5nOwEACWxhc3ROYW1lcwEABmVtYWlscwEADHBob25lTnVtYmVycwEABmdldHVybAEAFCgpTGphdmEvbGFuZy9TdHJpbmc7AQAEQ29kZQEAD0xpbmVOdW1iZXJUYWJsZQEABnNldHVybAEAFShMamF2YS9sYW5nL1N0cmluZzspVgEACWdldGRyaXZlcgEAFCgpTGphdmEvbGFuZy9PYmplY3Q7AQAJc2V0ZHJpdmVyAQAVKExqYXZhL2xhbmcvT2JqZWN0OylWAQANZ2V0Zmlyc3ROYW1lcwEAFSgpW0xqYXZhL2xhbmcvU3RyaW5nOwEADXNldGZpcnN0TmFtZXMBABYoW0xqYXZhL2xhbmcvU3RyaW5nOylWAQAMZ2V0bGFzdE5hbWVzAQAMc2V0bGFzdE5hbWVzAQAJZ2V0ZW1haWxzAQAJc2V0ZW1haWxzAQAPZ2V0cGhvbmVOdW1iZXJzAQAPc2V0cGhvbmVOdW1iZXJzAQAGPGluaXQ+AQADKClWAQAGaW52b2tlAQANU3RhY2tNYXBUYWJsZQcAdAcAVwcAdgcAdwEACkV4Y2VwdGlvbnMHAHgBAApTb3VyY2VGaWxlAQBEVGhlZm9sbG93aW5ncmVjb3Jkc3dpbGxleGlzdGludGhlc2FsZXNsZWFkZGF0YWJhc2VHZXRTYWxlc0xlYWRzLmphdmEMACYAJwwAKAApDAAqACsMACwAKwwALQArDAAuACsMAEMARAEAAAEAJWF1L2NvbS93aW5keXJvYWQvc2FsZXNsZWFkcy91aS9Ecml2ZXIMAHkAegcAewwAfAA0AQAKU2FsZXNMZWFkcwcAfQwAfgB/DACAAIEBAAl0ci5yZWNvcmQMAIIAfwwAgwCEAQATamF2YS91dGlsL0FycmF5TGlzdAcAdgwAhQCGDABDAIcMAIgAiQcAdwwAigCLDACMADYBAB5vcmcvb3BlbnFhL3NlbGVuaXVtL1dlYkVsZW1lbnQBAAlmaXJzdE5hbWUMAI0AfwwAjgAwDACPAJABAAhsYXN0TmFtZQEABWVtYWlsAQALcGhvbmVOdW1iZXIBABBqYXZhL2xhbmcvU3RyaW5nDACRAJIBAJh0ZXN0L1N5c3RlbUludGVncmF0aW9uVGVzdFN1aXRlL3N0ZXBzL1RoZWZvbGxvd2luZ3JlY29yZHN3aWxsZXhpc3RpbnRoZXNhbGVzbGVhZGRhdGFiYXNlL1RoZWZvbGxvd2luZ3JlY29yZHN3aWxsZXhpc3RpbnRoZXNhbGVzbGVhZGRhdGFiYXNlR2V0U2FsZXNMZWFkcwEAEGphdmEvbGFuZy9PYmplY3QBAA5qYXZhL3V0aWwvTGlzdAEAEmphdmEvdXRpbC9JdGVyYXRvcgEAE2phdmEvbGFuZy9FeGNlcHRpb24BAAlnZXREcml2ZXIBACEoKUxvcmcvb3BlbnFhL3NlbGVuaXVtL1dlYkRyaXZlcjsBAB1vcmcvb3BlbnFhL3NlbGVuaXVtL1dlYkRyaXZlcgEAA2dldAEAFm9yZy9vcGVucWEvc2VsZW5pdW0vQnkBAAJpZAEALChMamF2YS9sYW5nL1N0cmluZzspTG9yZy9vcGVucWEvc2VsZW5pdW0vQnk7AQALZmluZEVsZW1lbnQBADooTG9yZy9vcGVucWEvc2VsZW5pdW0vQnk7KUxvcmcvb3BlbnFhL3NlbGVuaXVtL1dlYkVsZW1lbnQ7AQALY3NzU2VsZWN0b3IBAAxmaW5kRWxlbWVudHMBACooTG9yZy9vcGVucWEvc2VsZW5pdW0vQnk7KUxqYXZhL3V0aWwvTGlzdDsBAARzaXplAQADKClJAQAEKEkpVgEACGl0ZXJhdG9yAQAWKClMamF2YS91dGlsL0l0ZXJhdG9yOwEAB2hhc05leHQBAAMoKVoBAARuZXh0AQAJY2xhc3NOYW1lAQAHZ2V0VGV4dAEAA2FkZAEAFShMamF2YS9sYW5nL09iamVjdDspWgEAB3RvQXJyYXkBACgoW0xqYXZhL2xhbmcvT2JqZWN0OylbTGphdmEvbGFuZy9PYmplY3Q7ACEAJAAlAAAABgAEACYAJwAAAAQAKAApAAAABAAqACsAAAAEACwAKwAAAAQALQArAAAABAAuACsAAAAOAAEALwAwAAEAMQAAAB0AAQABAAAABSq0AAGwAAAAAQAyAAAABgABAAAAEwABADMANAABADEAAAAiAAIAAgAAAAYqK7UAAbEAAAABADIAAAAKAAIAAAAWAAUAFwABADUANgABADEAAAAdAAEAAQAAAAUqtAACsAAAAAEAMgAAAAYAAQAAABkAAQA3ADgAAQAxAAAAIgACAAIAAAAGKiu1AAKxAAAAAQAyAAAACgACAAAAHAAFAB0AAQA5ADoAAQAxAAAAHQABAAEAAAAFKrQAA7AAAAABADIAAAAGAAEAAAAfAAEAOwA8AAEAMQAAACIAAgACAAAABiortQADsQAAAAEAMgAAAAoAAgAAACIABQAjAAEAPQA6AAEAMQAAAB0AAQABAAAABSq0AASwAAAAAQAyAAAABgABAAAAJQABAD4APAABADEAAAAiAAIAAgAAAAYqK7UABLEAAAABADIAAAAKAAIAAAAoAAUAKQABAD8AOgABADEAAAAdAAEAAQAAAAUqtAAFsAAAAAEAMgAAAAYAAQAAACsAAQBAADwAAQAxAAAAIgACAAIAAAAGKiu1AAWxAAAAAQAyAAAACgACAAAALgAFAC8AAQBBADoAAQAxAAAAHQABAAEAAAAFKrQABrAAAAABADIAAAAGAAEAAAAxAAEAQgA8AAEAMQAAACIAAgACAAAABiortQAGsQAAAAEAMgAAAAoAAgAAADQABQA1AAEAQwBEAAEAMQAAAFgAAgABAAAAJCq3AAcqEgi1AAEqAbUAAioBtQADKgG1AAQqAbUABSoBtQAGsQAAAAEAMgAAACIACAAAADcABAAMAAoADQAPAA4AFAAPABkAEAAeABEAIwA4AAEARQBEAAIAMQAAAbsAAwAJAAABNSq0AALAAAlMK7YACiq0AAG5AAsCACu2AAoSDLgADbkADgIAEg+4ABC5ABECAE27ABJZLLkAEwEAtwAUTrsAElksuQATAQC3ABQ6BLsAElksuQATAQC3ABQ6BbsAElksuQATAQC3ABQ6Biy5ABUBADoHGQe5ABYBAJkAdRkHuQAXAQDAABg6CC0ZCBIZuAAauQAbAgC5ABwBALkAHQIAVxkEGQgSHrgAGrkAGwIAuQAcAQC5AB0CAFcZBRkIEh+4ABq5ABsCALkAHAEAuQAdAgBXGQYZCBIguAAauQAbAgC5ABwBALkAHQIAV6f/hyotA70AIbkAIgIAwAAjtQADKhkEA70AIbkAIgIAwAAjtQAEKhkFA70AIbkAIgIAwAAjtQAFKhkGA70AIbkAIgIAwAAjtQAGsQAAAAIAMgAAAEoAEgAAAEMACABFABUARgAuAEcAPABIAEsASQBaAEoAaQBLAIcATACfAE0AuABOANEATwDqAFAA7QBSAP4AUwEQAFQBIgBVATQAWABGAAAAJAAC/wBxAAgHAEcHAEgHAEkHAEkHAEkHAEkHAEkHAEoAAPoAewBLAAAABAABAEwAAQBNAAAAAgBO</byteCode>
+                </class>
+            </byteCode>
+        </config>
+        <pd:inputBindings>
+            <javaCodeActivityInput>
+                <url>
+                    <xsl:value-of select="concat(&quot;http://localhost:&quot;, $_globalVariables/ns1:GlobalVariables/Resources/SalesLeadService/Port)"/>
+                </url>
+                <driver>
+                    <xsl:value-of select="$Get-Web-Driver/ns3:JavaMethodActivityOutput/MethodReturnValue"/>
+                </driver>
+            </javaCodeActivityInput>
         </pd:inputBindings>
     </pd:activity>
     <pd:transition>
@@ -64,13 +238,20 @@
     </pd:transition>
     <pd:transition>
         <pd:from>Start</pd:from>
-        <pd:to>SOAPRequestReply</pd:to>
+        <pd:to>Get Web Driver</pd:to>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>always</pd:conditionType>
     </pd:transition>
     <pd:transition>
-        <pd:from>SOAPRequestReply</pd:from>
+        <pd:from>Get Web Driver</pd:from>
+        <pd:to>Get Sales Leads</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Get Sales Leads</pd:from>
         <pd:to>AssertEqual</pd:to>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>

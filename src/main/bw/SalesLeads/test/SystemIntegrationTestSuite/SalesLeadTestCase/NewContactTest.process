@@ -35,7 +35,7 @@
         <pd:x>655</pd:x>
         <pd:y>78</pd:y>
         <config>
-            <processName>/test/IntegrationTestSuite/steps/The following records will exist in the sales lead database.process</processName>
+            <processName>/test/SystemIntegrationTestSuite/steps/The following records will exist in the sales lead database.process</processName>
         </config>
         <pd:inputBindings>
             <pfx:SalesLeads>

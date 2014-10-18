@@ -8,7 +8,7 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.apache.ivyde.eclipse.cpcontainer.IVYDE_CONTAINER/?project=SalesLeads&amp;ivyXmlPath=ivy.xml&amp;confs=*&amp;ivySettingsPath=%24%7Bworkspace_loc%3Aivysettings.xml%7D&amp;loadSettingsOnDemand=true&amp;propertyFiles=%24%7Bproject_loc%3Aconfig%2Fivysettings.xml%7D%2C%24%7Bworkspace_loc%3ASalesLeads%2Fbuild.properties%7D%2CC%3A%5CUsers%5CTom+Howard%5Cbuild.properties&amp;acceptedTypes=jar%2Cbundle%2Cejb%2Cmaven-plugin&amp;alphaOrder=false&amp;resolveInWorkspace=false&amp;retrievedClasspath=true&amp;retrievedClasspathPattern=lib%2F%5Bartifact%5D-%5Brevision%5D.%5Bext%5D&amp;retrievedClasspathSync=true&amp;retrievedClasspathTypes=*"/>
+	<classpathentry kind="con" path="org.apache.ivyde.eclipse.cpcontainer.IVYDE_CONTAINER/?project=SalesLeads&amp;ivyXmlPath=ivy.xml&amp;confs=*&amp;ivySettingsPath=%24%7Bworkspace_loc%3Aivysettings.xml%7D&amp;loadSettingsOnDemand=true&amp;propertyFiles=%24%7Bworkspace_loc%3ASalesLeads%2Fbuild.properties%7D%2CC%3A%5CUsers%5CTom+Howard%5Cbuild.properties&amp;acceptedTypes=jar%2Cbundle%2Cejb%2Cmaven-plugin&amp;alphaOrder=false&amp;resolveInWorkspace=false&amp;retrievedClasspath=true&amp;retrievedClasspathPattern=lib%2F%5Bartifact%5D-%5Brevision%5D.%5Bext%5D&amp;retrievedClasspathSync=true&amp;retrievedClasspathTypes=*"/>
 	<classpathentry kind="lib" path="lib/sac-1.3.jar"/>
 	<classpathentry kind="lib" path="lib/SalesLeads.jar"/>
 	<classpathentry kind="lib" path="lib/selenium-api-2.43.1.jar"/>
