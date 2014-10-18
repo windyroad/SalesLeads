@@ -51,91 +51,111 @@
             <element ref="pfx:html"/>
         </config>
         <pd:inputBindings>
-            <ns1:html>
+            <ns1:html lang="en">
                 <ns1:head>
                     <ns1:title>Sales Leads</ns1:title>
+                    <ns1:meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+                    <!-- Loading Bootstrap -->
+                    <ns1:link href="css/vendor/bootstrap.min.css" rel="stylesheet"/>
+                    <!-- Loading Flat UI -->
+                    <ns1:link href="css/flat-ui.css" rel="stylesheet"/>
+                    <ns1:link rel="shortcut icon" href="img/favicon.ico"/>
+                    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+                    <!--[if lt IE 9]>
+      <ns1:script src="js/vendor/html5shiv.js"></ns1:script>
+      <ns1:script src="js/vendor/respond.min.js"></ns1:script>
+    <![endif]-->
                 </ns1:head>
                 <ns1:body>
-                    <ns1:h1>SalesLeads</ns1:h1>
-                    <ns1:form>
-                        <xsl:attribute name="action">/</xsl:attribute>
-                        <xsl:attribute name="method">post</xsl:attribute>
-                        <xsl:attribute name="enctype">multipart/form-data</xsl:attribute>
-                        <xsl:attribute name="id">SalesLeadsForm</xsl:attribute>
-                        <ns1:table>
-                            <xsl:attribute name="id">SalesLeads</xsl:attribute>
-                            <ns1:thead>
-                                <ns1:tr>
-                                    <ns1:th>First Name</ns1:th>
-                                    <ns1:th>Last Name</ns1:th>
-                                    <ns1:th>Email</ns1:th>
-                                    <ns1:th>Phone Number</ns1:th>
-                                    <ns1:th/>
-                                </ns1:tr>
-                            </ns1:thead>
-                            <ns1:tbody>
-                                <xsl:for-each select="$Get-List/ns:GetSalesLeadsResponse/GetSalesLeadsResponse/ns2:SalesLeads/ns2:SalesLead">
+                    <ns1:div>
+                        <xsl:attribute name="class">container</xsl:attribute>
+                        <ns1:h1>Sales Leads</ns1:h1>
+                        <ns1:form>
+                            <xsl:attribute name="action">/</xsl:attribute>
+                            <xsl:attribute name="method">post</xsl:attribute>
+                            <xsl:attribute name="enctype">multipart/form-data</xsl:attribute>
+                            <xsl:attribute name="id">SalesLeadsForm</xsl:attribute>
+                            <ns1:table>
+                                <xsl:attribute name="id">SalesLeads</xsl:attribute>
+                                <xsl:attribute name="class">table</xsl:attribute>
+                                <ns1:thead>
                                     <ns1:tr>
-                                        <xsl:attribute name="class">record</xsl:attribute>
+                                        <ns1:th>First Name</ns1:th>
+                                        <ns1:th>Last Name</ns1:th>
+                                        <ns1:th>Email</ns1:th>
+                                        <ns1:th>Phone Number</ns1:th>
+                                        <ns1:th/>
+                                    </ns1:tr>
+                                </ns1:thead>
+                                <ns1:tbody>
+                                    <xsl:for-each select="$Get-List/ns:GetSalesLeadsResponse/GetSalesLeadsResponse/ns2:SalesLeads/ns2:SalesLead">
+                                        <ns1:tr>
+                                            <xsl:attribute name="class">record</xsl:attribute>
+                                            <ns1:td>
+                                                <xsl:attribute name="class">firstName</xsl:attribute>
+                                                <xsl:value-of select="ns2:FirstName"/>
+                                            </ns1:td>
+                                            <ns1:td>
+                                                <xsl:attribute name="class">lastName</xsl:attribute>
+                                                <xsl:value-of select="ns2:LastName"/>
+                                            </ns1:td>
+                                            <ns1:td>
+                                                <xsl:attribute name="class">email</xsl:attribute>
+                                                <xsl:value-of select="ns2:Email"/>
+                                            </ns1:td>
+                                            <ns1:td>
+                                                <xsl:attribute name="class">phoneNumber</xsl:attribute>
+                                                <xsl:value-of select="ns2:PhoneNumber"/>
+                                            </ns1:td>
+                                        </ns1:tr>
+                                    </xsl:for-each>
+                                    <ns1:tr>
                                         <ns1:td>
-                                            <xsl:attribute name="class">firstName</xsl:attribute>
-                                            <xsl:value-of select="ns2:FirstName"/>
+                                            <input>
+                                                <xsl:attribute name="id">FirstName</xsl:attribute>
+                                                <xsl:attribute name="type">text</xsl:attribute>
+                                                <xsl:attribute name="name">FirstName</xsl:attribute>
+                                                <xsl:attribute name="class">form-control</xsl:attribute>
+                                            </input>
                                         </ns1:td>
                                         <ns1:td>
-                                            <xsl:attribute name="class">lastName</xsl:attribute>
-                                            <xsl:value-of select="ns2:LastName"/>
+                                            <input>
+                                                <xsl:attribute name="id">LastName</xsl:attribute>
+                                                <xsl:attribute name="type">text</xsl:attribute>
+                                                <xsl:attribute name="name">LastName</xsl:attribute>
+                                                <xsl:attribute name="class">form-control</xsl:attribute>
+                                            </input>
                                         </ns1:td>
                                         <ns1:td>
-                                            <xsl:attribute name="class">email</xsl:attribute>
-                                            <xsl:value-of select="ns2:Email"/>
+                                            <input>
+                                                <xsl:attribute name="id">Email</xsl:attribute>
+                                                <xsl:attribute name="type">text</xsl:attribute>
+                                                <xsl:attribute name="name">Email</xsl:attribute>
+                                                <xsl:attribute name="class">form-control</xsl:attribute>
+                                            </input>
                                         </ns1:td>
                                         <ns1:td>
-                                            <xsl:attribute name="class">phoneNumber</xsl:attribute>
-                                            <xsl:value-of select="ns2:PhoneNumber"/>
+                                            <input>
+                                                <xsl:attribute name="id">PhoneNumber</xsl:attribute>
+                                                <xsl:attribute name="type">text</xsl:attribute>
+                                                <xsl:attribute name="name">PhoneNumber</xsl:attribute>
+                                                <xsl:attribute name="class">form-control</xsl:attribute>
+                                            </input>
+                                        </ns1:td>
+                                        <ns1:td>
+                                            <input>
+                                                <xsl:attribute name="id">AddLead</xsl:attribute>
+                                                <xsl:attribute name="type">submit</xsl:attribute>
+                                                <xsl:attribute name="name">AddLead</xsl:attribute>
+                                                <xsl:attribute name="value">Add Lead</xsl:attribute>
+                                                <xsl:attribute name="class">btn btn-primary</xsl:attribute>
+                                            </input>
                                         </ns1:td>
                                     </ns1:tr>
-                                </xsl:for-each>
-                                <ns1:tr>
-                                    <ns1:td>
-                                        <input>
-                                            <xsl:attribute name="id">FirstName</xsl:attribute>
-                                            <xsl:attribute name="type">text</xsl:attribute>
-                                            <xsl:attribute name="name">FirstName</xsl:attribute>
-                                        </input>
-                                    </ns1:td>
-                                    <ns1:td>
-                                        <input>
-                                            <xsl:attribute name="id">LastName</xsl:attribute>
-                                            <xsl:attribute name="type">text</xsl:attribute>
-                                            <xsl:attribute name="name">LastName</xsl:attribute>
-                                        </input>
-                                    </ns1:td>
-                                    <ns1:td>
-                                        <input>
-                                            <xsl:attribute name="id">Email</xsl:attribute>
-                                            <xsl:attribute name="type">text</xsl:attribute>
-                                            <xsl:attribute name="name">Email</xsl:attribute>
-                                        </input>
-                                    </ns1:td>
-                                    <ns1:td>
-                                        <input>
-                                            <xsl:attribute name="id">PhoneNumber</xsl:attribute>
-                                            <xsl:attribute name="type">text</xsl:attribute>
-                                            <xsl:attribute name="name">PhoneNumber</xsl:attribute>
-                                        </input>
-                                    </ns1:td>
-                                    <ns1:td>
-                                        <input>
-                                            <xsl:attribute name="id">AddLead</xsl:attribute>
-                                            <xsl:attribute name="type">submit</xsl:attribute>
-                                            <xsl:attribute name="name">AddLead</xsl:attribute>
-                                            <xsl:attribute name="value">Add Lead</xsl:attribute>
-                                        </input>
-                                    </ns1:td>
-                                </ns1:tr>
-                            </ns1:tbody>
-                        </ns1:table>
-                    </ns1:form>
+                                </ns1:tbody>
+                            </ns1:table>
+                        </ns1:form>
+                    </ns1:div>
                 </ns1:body>
             </ns1:html>
         </pd:inputBindings>

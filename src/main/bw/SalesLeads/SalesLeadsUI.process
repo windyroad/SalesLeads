@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pd:ProcessDefinition xmlns:ns2="www.tibco.com/plugin/java/JavaToXmlActivityInput" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns1="www.tibco.com/plugin/java/JavaMethodActivityOutput" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns4="www.tibco.com/plugin/java/JavaToXmlActivityOutput" xmlns:ns="www.tibco.com/plugin/java/JavaMethodActivityInput" xmlns:ns3="www.tibco.com/plugin/java/xmlSchema/au.com.windyroad.Resource" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tib="http://www.tibco.com/bw/xslt/custom-functions" xmlns:ns5="http://xmlns.tibco.com/encodings/mime" xmlns:ns6="http://xmlns.tibco.com/bw/plugin-api/messages/context" xmlns:ns7="http://windyroad.org/wr-http.xsd">
+<pd:ProcessDefinition xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns2="www.tibco.com/plugin/java/JavaToXmlActivityInput" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns1="www.tibco.com/plugin/java/JavaMethodActivityOutput" xmlns:ns="www.tibco.com/plugin/java/JavaMethodActivityInput" xmlns:ns4="www.tibco.com/plugin/java/JavaToXmlActivityOutput" xmlns:ns3="www.tibco.com/plugin/java/xmlSchema/au.com.windyroad.Resource" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tib="http://www.tibco.com/bw/xslt/custom-functions" xmlns:ns5="http://xmlns.tibco.com/encodings/mime" xmlns:ns6="http://xmlns.tibco.com/bw/plugin-api/messages/context" xmlns:ns7="http://windyroad.org/wr-http.xsd">
+    <xsd:import namespace="http://windyroad.org/wr-http.xsd" schemaLocation="/rest4BW/Private/Schemas/HttpConnection.xsd"/>
     <pd:name>SalesLeadsUI.process</pd:name>
     <pd:startName>HTTP Receiver</pd:startName>
     <pd:startX>0</pd:startX>
@@ -20,6 +21,9 @@
                 <xsd:element name="root">
                     <xsd:complexType>
                         <xsd:sequence>
+                            <xsd:element name="ETag" type="xsd:string" minOccurs="0"/>
+                            <xsd:element name="If-Modified-Since" type="xsd:string" minOccurs="0"/>
+                            <xsd:element name="host" type="xsd:string" minOccurs="0"/>
                             <xsd:element name="Accept" type="xsd:string" minOccurs="0"/>
                             <xsd:element name="Accept-Charset" type="xsd:string" minOccurs="0"/>
                             <xsd:element name="Accept-Encoding" type="xsd:string" minOccurs="0"/>
@@ -36,16 +40,16 @@
         <pd:inputBindings/>
     </pd:starter>
     <pd:endName>End</pd:endName>
-    <pd:endX>789</pd:endX>
-    <pd:endY>83</pd:endY>
+    <pd:endX>740</pd:endX>
+    <pd:endY>76</pd:endY>
     <pd:errorSchemas/>
     <pd:processVariables/>
     <pd:targetNamespace>http://xmlns.example.com/1413539216090</pd:targetNamespace>
     <pd:activity name="Send HTTP Response">
         <pd:type>com.tibco.plugin.http.HTTPResponseActivity</pd:type>
         <pd:resourceType>httppalette.httpWebResponse</pd:resourceType>
-        <pd:x>525</pd:x>
-        <pd:y>75</pd:y>
+        <pd:x>577</pd:x>
+        <pd:y>78</pd:y>
         <config>
             <closeConnection>true</closeConnection>
             <eventSource>HTTP Receiver</eventSource>
@@ -59,6 +63,11 @@
                             <xsd:element name="Set-Cookie" type="xsd:string" minOccurs="0"/>
                             <xsd:element name="Pragma" type="xsd:string" minOccurs="0"/>
                             <xsd:element name="Location" type="xsd:string" minOccurs="0"/>
+                            <xsd:element name="ETag" type="xsd:string" minOccurs="0"/>
+                            <xsd:element name="Expires" type="xsd:string" minOccurs="0"/>
+                            <xsd:element name="Last-Modified" type="xsd:string" minOccurs="0"/>
+                            <xsd:element name="Cache-Control" type="xsd:string" minOccurs="0"/>
+                            <xsd:element name="Allow" type="xsd:string" minOccurs="0"/>
                         </xsd:sequence>
                     </xsd:complexType>
                 </xsd:element>
@@ -96,6 +105,31 @@
                             <xsl:value-of select="$REST-Interface/ns7:response/ns7:Headers/ns7:Location"/>
                         </Location>
                     </xsl:if>
+                    <xsl:if test="$REST-Interface/ns7:response/ns7:Headers/ns7:ETag">
+                        <ETag>
+                            <xsl:value-of select="$REST-Interface/ns7:response/ns7:Headers/ns7:ETag"/>
+                        </ETag>
+                    </xsl:if>
+                    <xsl:if test="$REST-Interface/ns7:response/ns7:Headers/ns7:Expires">
+                        <Expires>
+                            <xsl:value-of select="$REST-Interface/ns7:response/ns7:Headers/ns7:Expires"/>
+                        </Expires>
+                    </xsl:if>
+                    <xsl:if test="$REST-Interface/ns7:response/ns7:Headers/ns7:Last-Modified">
+                        <Last-Modified>
+                            <xsl:value-of select="$REST-Interface/ns7:response/ns7:Headers/ns7:Last-Modified"/>
+                        </Last-Modified>
+                    </xsl:if>
+                    <xsl:if test="$REST-Interface/ns7:response/ns7:Headers/ns7:Cache-Control">
+                        <Cache-Control>
+                            <xsl:value-of select="$REST-Interface/ns7:response/ns7:Headers/ns7:Cache-Control"/>
+                        </Cache-Control>
+                    </xsl:if>
+                    <xsl:if test="$REST-Interface/ns7:response/ns7:Headers/ns7:Allow">
+                        <Allow>
+                            <xsl:value-of select="$REST-Interface/ns7:response/ns7:Headers/ns7:Allow"/>
+                        </Allow>
+                    </xsl:if>
                 </Headers>
             </ResponseActivityInput>
         </pd:inputBindings>
@@ -103,10 +137,23 @@
     <pd:activity name="REST Interface">
         <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
         <pd:resourceType>ae.process.subprocess</pd:resourceType>
-        <pd:x>292</pd:x>
-        <pd:y>78</pd:y>
+        <pd:x>391</pd:x>
+        <pd:y>77</pd:y>
         <config>
             <processName>/rest4BW/REST Interface.process</processName>
+        </config>
+        <pd:inputBindings>
+            <xsl:copy-of select="$Set-Request/root"/>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Set Request">
+        <pd:type>com.tibco.pe.core.SetSharedVariableActivity</pd:type>
+        <pd:resourceType>ae.activities.setSharedVariable</pd:resourceType>
+        <pd:x>237</pd:x>
+        <pd:y>76</pd:y>
+        <config>
+            <variableConfig>/UI/Request.jobsharedvariable</variableConfig>
+            <showResult>true</showResult>
         </config>
         <pd:inputBindings>
             <root>
@@ -198,6 +245,19 @@
                                     <xsl:value-of select="Pragma"/>
                                 </ns7:Pragma>
                             </xsl:if>
+                            <xsl:if test="host">
+                                <ns7:host>
+                                    <xsl:value-of select="host"/>
+                                </ns7:host>
+                            </xsl:if>
+                            <xsl:if test="If-Modified-Since">
+                                <ns7:If-Modified-Since>
+                                    <xsl:value-of select="If-Modified-Since"/>
+                                </ns7:If-Modified-Since>
+                            </xsl:if>
+                            <ns7:ETag>
+                                <xsl:value-of select="ETag"/>
+                            </ns7:ETag>
                         </ns7:Headers>
                     </xsl:for-each>
                     <xsl:for-each select="$HTTP-Receiver/ProcessStarterOutput/ns5:mimeEnvelopeElement">
@@ -258,7 +318,7 @@
     </pd:transition>
     <pd:transition>
         <pd:from>HTTP Receiver</pd:from>
-        <pd:to>REST Interface</pd:to>
+        <pd:to>Set Request</pd:to>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>always</pd:conditionType>
@@ -266,6 +326,13 @@
     <pd:transition>
         <pd:from>REST Interface</pd:from>
         <pd:to>Send HTTP Response</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Set Request</pd:from>
+        <pd:to>REST Interface</pd:to>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>always</pd:conditionType>

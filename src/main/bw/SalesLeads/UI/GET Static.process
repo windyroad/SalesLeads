@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:ns2="http://www.tibco.com/pe/GenerateErrorActivity/InputSchema" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns1="www.tibco.com/plugin/java/JavaMethodActivityOutput" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns4="www.tibco.com/plugin/java/JavaToXmlActivityInput" xmlns:ns="http://windyroad.org/HTTP1.1-StatusCodeDefinitions" xmlns:ns3="www.tibco.com/plugin/java/JavaMethodActivityInput" xmlns:bwu="java://org.windyroad.bwunit.CustomFunctions" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tib="http://www.tibco.com/bw/xslt/custom-functions" xmlns:pfx2="http://windyroad.org/rest-delegate.xsd" xmlns:ns5="www.tibco.com/plugin/java/xmlSchema/au.com.windyroad.Resource" xmlns:ns6="www.tibco.com/plugin/java/JavaToXmlActivityOutput" xmlns:pfx="http://windyroad.org/rest4BW.xsd" xmlns:ns7="http://windyroad.org/wr-http.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <xsd:import namespace="http://windyroad.org/rest-delegate.xsd"/>
+    <xsd:import namespace="http://windyroad.org/HTTP1.1-StatusCodeDefinitions" schemaLocation="/rest4BW/Private/Schemas/StatusCodeDefinitions.xsd"/>
+    <xsd:import namespace="http://windyroad.org/rest4BW.xsd" schemaLocation="/rest4BW/Schemas/rest4BW.xsd"/>
+    <pd:name>UI/GET Static.process</pd:name>
+    <pd:description/>
+    <pd:startName>Start</pd:startName>
+    <pd:startType ref="pfx:request"/>
+    <pd:startX>67</pd:startX>
+    <pd:startY>78</pd:startY>
+    <pd:returnBindings>
+        <xsl:choose>
+            <xsl:when test="$Get-Contents/ns1:JavaMethodActivityOutput">
+                <pfx:response xsi:type="ns:sc-200_OK">
+                    <pfx:binary-content>
+                        <xsl:value-of select="$Get-Contents/ns1:JavaMethodActivityOutput/MethodReturnValue"/>
+                    </pfx:binary-content>
+                    <pfx:headers>
+                        <xsl:if test="$Get-Mime-Type/ns1:JavaMethodActivityOutput/MethodReturnValue">
+                            <xsl:attribute name="content-type">
+                                <xsl:value-of select="$Get-Mime-Type/ns1:JavaMethodActivityOutput/MethodReturnValue"/>
+                            </xsl:attribute>
+                        </xsl:if>
+                        <xsl:if test="$Get-Modification-Time/ns1:JavaMethodActivityOutput/MethodReturnValue">
+                            <xsl:attribute name="last-modified">
+                                <xsl:value-of select="$Get-Modification-Time/ns1:JavaMethodActivityOutput/MethodReturnValue"/>
+                            </xsl:attribute>
+                        </xsl:if>
+                        <xsl:attribute name="cache-control">max-age=604800, public</xsl:attribute>
+                        <xsl:attribute name="expires">
+                            <xsl:value-of select="tib:add-to-dateTime(current-dateTime(), 1, 0, 0, 0, 0, 0)"/>
+                        </xsl:attribute>
+                    </pfx:headers>
+                </pfx:response>
+            </xsl:when>
+            <xsl:otherwise>
+                <pfx:response xsi:type="ns:sc-304_Not_Modified">
+                    <pfx:headers>
+                        <xsl:if test="$Get-Mime-Type/ns1:JavaMethodActivityOutput/MethodReturnValue">
+                            <xsl:attribute name="content-type">
+                                <xsl:value-of select="$Get-Mime-Type/ns1:JavaMethodActivityOutput/MethodReturnValue"/>
+                            </xsl:attribute>
+                        </xsl:if>
+                        <xsl:if test="$Get-Modification-Time/ns1:JavaMethodActivityOutput/MethodReturnValue">
+                            <xsl:attribute name="last-modified">
+                                <xsl:value-of select="$Get-Modification-Time/ns1:JavaMethodActivityOutput/MethodReturnValue"/>
+                            </xsl:attribute>
+                        </xsl:if>
+                        <xsl:attribute name="cache-control">max-age=604800, public</xsl:attribute>
+                        <xsl:attribute name="expires">
+                            <xsl:value-of select="tib:add-to-dateTime(current-dateTime(), 1, 0, 0, 0, 0, 0)"/>
+                        </xsl:attribute>
+                    </pfx:headers>
+                </pfx:response>
+            </xsl:otherwise>
+        </xsl:choose>
+    </pd:returnBindings>
+    <pd:endName>End</pd:endName>
+    <pd:endType ref="pfx:response"/>
+    <pd:endX>876</pd:endX>
+    <pd:endY>80</pd:endY>
+    <pd:errorSchemas>
+        <Error ref="pfx:error"/>
+    </pd:errorSchemas>
+    <pd:processVariables/>
+    <pd:targetNamespace>http://xmlns.example.com/1338181537186</pd:targetNamespace>
+    <pd:activity name="404 Not Found">
+        <pd:type>com.tibco.pe.core.GenerateErrorActivity</pd:type>
+        <pd:resourceType>ae.activities.throw</pd:resourceType>
+        <pd:x>377</pd:x>
+        <pd:y>246</pd:y>
+        <config>
+            <faultName>Error</faultName>
+        </config>
+        <pd:inputBindings>
+            <ns2:ActivityInput>
+                <message>Not Found</message>
+                <messageCode>
+                    <xsl:value-of select="404"/>
+                </messageCode>
+                <data>
+                    <pfx:error xsi:type="ns:sc-404_Not_Found">
+                        <pfx:text-content>Not Found</pfx:text-content>
+                        <pfx:headers/>
+                    </pfx:error>
+                </data>
+            </ns2:ActivityInput>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Get Resource">
+        <pd:type>com.tibco.plugin.java.JavaMethodActivity</pd:type>
+        <pd:resourceType>ae.activities.JavaMethodActivity</pd:resourceType>
+        <pd:x>230</pd:x>
+        <pd:y>79</pd:y>
+        <config>
+            <ConstructDeclaredClass>true</ConstructDeclaredClass>
+            <CacheConstructedClass>false</CacheConstructedClass>
+            <InvokeCleanupMethod>false</InvokeCleanupMethod>
+            <MethodInfo>
+                <classLocation>p:/projects/salesleads/lib/salesleads.jar</classLocation>
+                <classPath>/resources/AliasLibrary.aliaslib</classPath>
+                <className>au.com.windyroad.Resource</className>
+                <isConstructor>true</isConstructor>
+                <methodParameter>java.lang.String</methodParameter>
+            </MethodInfo>
+        </config>
+        <pd:inputBindings>
+            <ns3:JavaMethodActivityInput>
+                <MethodParameters>
+                    <Parameter1>
+                        <xsl:value-of select="concat(&quot;/au/com/windyroad/salesleads/ui&quot;, $Start/pfx:request/pfx:command)"/>
+                    </Parameter1>
+                </MethodParameters>
+            </ns3:JavaMethodActivityInput>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Get Request">
+        <pd:type>com.tibco.pe.core.GetSharedVariableActivity</pd:type>
+        <pd:resourceType>ae.activities.getSharedVariable</pd:resourceType>
+        <pd:x>664</pd:x>
+        <pd:y>78</pd:y>
+        <config>
+            <variableConfig>/UI/Request.jobsharedvariable</variableConfig>
+        </config>
+        <pd:inputBindings/>
+    </pd:activity>
+    <pd:activity name="Get Modification Time">
+        <pd:type>com.tibco.plugin.java.JavaMethodActivity</pd:type>
+        <pd:resourceType>ae.activities.JavaMethodActivity</pd:resourceType>
+        <pd:x>372</pd:x>
+        <pd:y>86</pd:y>
+        <config>
+            <ConstructDeclaredClass>false</ConstructDeclaredClass>
+            <CacheConstructedClass>false</CacheConstructedClass>
+            <InvokeCleanupMethod>false</InvokeCleanupMethod>
+            <MethodInfo>
+                <classLocation>p:/projects/salesleads/lib/salesleads.jar</classLocation>
+                <classPath>/resources/AliasLibrary.aliaslib</classPath>
+                <className>au.com.windyroad.Resource</className>
+                <methodName>getModificationTime</methodName>
+                <methodReturn>java.util.Date</methodReturn>
+            </MethodInfo>
+        </config>
+        <pd:inputBindings>
+            <ns3:JavaMethodActivityInput>
+                <au.com.windyroad.Resource>
+                    <xsl:value-of select="$Get-Resource/ns1:JavaMethodActivityOutput/MethodReturnValue"/>
+                </au.com.windyroad.Resource>
+            </ns3:JavaMethodActivityInput>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Get Mime Type">
+        <pd:type>com.tibco.plugin.java.JavaMethodActivity</pd:type>
+        <pd:resourceType>ae.activities.JavaMethodActivity</pd:resourceType>
+        <pd:x>507</pd:x>
+        <pd:y>80</pd:y>
+        <config>
+            <ConstructDeclaredClass>false</ConstructDeclaredClass>
+            <CacheConstructedClass>false</CacheConstructedClass>
+            <InvokeCleanupMethod>false</InvokeCleanupMethod>
+            <MethodInfo>
+                <classLocation>p:/projects/salesleads/lib/salesleads.jar</classLocation>
+                <classPath>/resources/AliasLibrary.aliaslib</classPath>
+                <className>au.com.windyroad.Resource</className>
+                <methodName>getMimeType</methodName>
+                <methodReturn>java.lang.String</methodReturn>
+            </MethodInfo>
+        </config>
+        <pd:inputBindings>
+            <ns3:JavaMethodActivityInput>
+                <au.com.windyroad.Resource>
+                    <xsl:value-of select="$Get-Resource/ns1:JavaMethodActivityOutput/MethodReturnValue"/>
+                </au.com.windyroad.Resource>
+            </ns3:JavaMethodActivityInput>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Get Contents">
+        <pd:type>com.tibco.plugin.java.JavaMethodActivity</pd:type>
+        <pd:resourceType>ae.activities.JavaMethodActivity</pd:resourceType>
+        <pd:x>774</pd:x>
+        <pd:y>240</pd:y>
+        <config>
+            <ConstructDeclaredClass>false</ConstructDeclaredClass>
+            <CacheConstructedClass>false</CacheConstructedClass>
+            <InvokeCleanupMethod>false</InvokeCleanupMethod>
+            <MethodInfo>
+                <classLocation>p:/projects/salesleads/lib/salesleads.jar</classLocation>
+                <classPath>/resources/AliasLibrary.aliaslib</classPath>
+                <className>au.com.windyroad.Resource</className>
+                <methodName>getContents</methodName>
+                <methodReturn>[B</methodReturn>
+            </MethodInfo>
+        </config>
+        <pd:inputBindings>
+            <ns3:JavaMethodActivityInput>
+                <au.com.windyroad.Resource>
+                    <xsl:value-of select="$Get-Resource/ns1:JavaMethodActivityOutput/MethodReturnValue"/>
+                </au.com.windyroad.Resource>
+            </ns3:JavaMethodActivityInput>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>Get Resource</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Get Resource</pd:from>
+        <pd:to>404 Not Found</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-52480</pd:lineColor>
+        <pd:conditionType>error</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Get Request</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Get Resource</pd:from>
+        <pd:to>Get Modification Time</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Get Modification Time</pd:from>
+        <pd:to>Get Mime Type</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Get Request</pd:from>
+        <pd:to>Get Contents</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>xpath</pd:conditionType>
+        <pd:xpath>empty($Get-Request/root/ns7:request/ns7:Headers/ns7:If-Modified-Since) or
+tib:compare-dateTime($Get-Request/root/ns7:request/ns7:Headers/ns7:If-Modified-Since,
+   bwu:fromRFC1123(bwu:toRFC1123($Get-Modification-Time/ns1:JavaMethodActivityOutput/MethodReturnValue))) = -1</pd:xpath>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Get Mime Type</pd:from>
+        <pd:to>Get Request</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Get Contents</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+</pd:ProcessDefinition>
