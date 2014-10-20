@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pd:ProcessDefinition xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns2="http://windyroad.com.au/schemas/SalesLead.xsd" xmlns:ns1="http://www.w3.org/1999/xhtml" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns="http://windyroad.com.au/services/SalesLead" xmlns:ns3="http://windyroad.org/HTTP1.1-StatusCodeDefinitions" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tib="http://www.tibco.com/bw/xslt/custom-functions" xmlns:pfx2="http://windyroad.org/rest4BW.xsd" xmlns:pfx="http://www.tibco.com/ns/no_namespace_schema_location/schemas/xhtml1-strict.dtd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <xsd:import namespace="http://www.tibco.com/ns/no_namespace_schema_location/schemas/xhtml1-strict.dtd" schemaLocation="/schemas/xhtml1-strict.dtd"/>
+<pd:ProcessDefinition xmlns:ns2="http://windyroad.com.au/schemas/SalesLead.xsd" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns1="http://www.w3.org/1999/xhtml" xmlns:ns="http://windyroad.com.au/services/SalesLead" xmlns:ns3="http://windyroad.org/HTTP1.1-StatusCodeDefinitions" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tib="http://www.tibco.com/bw/xslt/custom-functions" xmlns:pfx2="http://windyroad.org/rest4BW.xsd" xmlns:pfx="http://www.tibco.com/ns/no_namespace_schema_location/schemas/xhtml1-strict.dtd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <xsd:import namespace="http://windyroad.org/rest4BW.xsd" schemaLocation="/rest4BW/Schemas/rest4BW.xsd"/>
+    <xsd:import namespace="http://www.tibco.com/ns/no_namespace_schema_location/schemas/xhtml1-strict.dtd"/>
+    <xsd:import namespace="http://www.w3.org/1999/xhtml" schemaLocation="/schemas/xhtml-strict.xsd"/>
     <pd:name>UI/GetHomePage.process</pd:name>
     <pd:startName>Start</pd:startName>
     <pd:startType ref="pfx2:request"/>
@@ -48,7 +49,7 @@
         <pd:x>480</pd:x>
         <pd:y>62</pd:y>
         <config>
-            <element ref="pfx:html"/>
+            <element ref="ns1:html"/>
         </config>
         <pd:inputBindings>
             <ns1:html lang="en">
@@ -111,45 +112,45 @@
                                     </xsl:for-each>
                                     <ns1:tr>
                                         <ns1:td>
-                                            <input>
+                                            <ns1:input>
                                                 <xsl:attribute name="id">FirstName</xsl:attribute>
                                                 <xsl:attribute name="type">text</xsl:attribute>
                                                 <xsl:attribute name="name">FirstName</xsl:attribute>
                                                 <xsl:attribute name="class">form-control</xsl:attribute>
-                                            </input>
+                                            </ns1:input>
                                         </ns1:td>
                                         <ns1:td>
-                                            <input>
+                                            <ns1:input>
                                                 <xsl:attribute name="id">LastName</xsl:attribute>
                                                 <xsl:attribute name="type">text</xsl:attribute>
                                                 <xsl:attribute name="name">LastName</xsl:attribute>
                                                 <xsl:attribute name="class">form-control</xsl:attribute>
-                                            </input>
+                                            </ns1:input>
                                         </ns1:td>
                                         <ns1:td>
-                                            <input>
+                                            <ns1:input>
                                                 <xsl:attribute name="id">Email</xsl:attribute>
                                                 <xsl:attribute name="type">text</xsl:attribute>
                                                 <xsl:attribute name="name">Email</xsl:attribute>
                                                 <xsl:attribute name="class">form-control</xsl:attribute>
-                                            </input>
+                                            </ns1:input>
                                         </ns1:td>
                                         <ns1:td>
-                                            <input>
+                                            <ns1:input>
                                                 <xsl:attribute name="id">PhoneNumber</xsl:attribute>
                                                 <xsl:attribute name="type">text</xsl:attribute>
                                                 <xsl:attribute name="name">PhoneNumber</xsl:attribute>
                                                 <xsl:attribute name="class">form-control</xsl:attribute>
-                                            </input>
+                                            </ns1:input>
                                         </ns1:td>
                                         <ns1:td>
-                                            <input>
+                                            <ns1:input>
                                                 <xsl:attribute name="id">AddLead</xsl:attribute>
                                                 <xsl:attribute name="type">submit</xsl:attribute>
                                                 <xsl:attribute name="name">AddLead</xsl:attribute>
                                                 <xsl:attribute name="value">Add Lead</xsl:attribute>
                                                 <xsl:attribute name="class">btn btn-primary</xsl:attribute>
-                                            </input>
+                                            </ns1:input>
                                         </ns1:td>
                                     </ns1:tr>
                                 </ns1:tbody>

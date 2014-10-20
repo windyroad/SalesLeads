@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pd:ProcessDefinition xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns="http://windyroad.org/bwunit-asserts-0.0.0.xsd" xmlns:pfx="http://windyroad.com.au/schemas/SalesLead.xsd">
+<pd:ProcessDefinition xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns2="www.tibco.com/plugin/java/JavaMethodActivityInput" xmlns:BW="java://com.tibco.pe.core.JavaCustomXPATHFunctions" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns1="www.tibco.com/plugin/java/JavaMethodActivityOutput" xmlns:ns4="http://www.tibco.com/pe/DeployedVarsType" xmlns:ns="http://windyroad.org/bwunit-asserts-0.0.0.xsd" xmlns:ns3="http://www.tibco.com/namespaces/tnt/plugins/file" xmlns:pfx2="http://www.tibco.com/pe/EngineTypes" xmlns:pfx="http://windyroad.com.au/schemas/SalesLead.xsd">
     <pd:name>test/SystemIntegrationTestSuite/SalesLeadTestCase/NewContactTest.process</pd:name>
     <pd:description>@Timeout(60000)</pd:description>
     <pd:startName>Start</pd:startName>
@@ -7,27 +7,39 @@
     <pd:startY>55</pd:startY>
     <pd:returnBindings/>
     <pd:endName>End</pd:endName>
-    <pd:endX>863</pd:endX>
-    <pd:endY>56</pd:endY>
+    <pd:endX>1006</pd:endX>
+    <pd:endY>54</pd:endY>
     <pd:errorSchemas/>
     <pd:processVariables/>
     <pd:targetNamespace>http://xmlns.example.com/1352340691435</pd:targetNamespace>
-    <pd:activity name="When the following contact is added to the sales lead database">
+    <pd:activity name="Catch">
+        <pd:type>com.tibco.pe.core.CatchActivity</pd:type>
+        <pd:resourceType>ae.activities.catch</pd:resourceType>
+        <pd:x>282</pd:x>
+        <pd:y>253</pd:y>
+        <pd:handler>true</pd:handler>
+        <config>
+            <catchAll>true</catchAll>
+        </config>
+        <pd:inputBindings/>
+    </pd:activity>
+    <pd:activity name="Given there are no contacts in the sales lead database">
         <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
         <pd:resourceType>ae.process.subprocess</pd:resourceType>
-        <pd:x>460</pd:x>
-        <pd:y>77</pd:y>
+        <pd:x>248</pd:x>
+        <pd:y>78</pd:y>
         <config>
-            <processName>/test/SystemIntegrationTestSuite/steps/The following contact is added to the sales lead database.process</processName>
+            <processName>/test/UnitTestSuite/steps/There are no contacts in the sales lead database.process</processName>
         </config>
-        <pd:inputBindings>
-            <pfx:SalesLead>
-                <pfx:FirstName>Jane</pfx:FirstName>
-                <pfx:LastName>Doe</pfx:LastName>
-                <pfx:Email>john@doe.com.au</pfx:Email>
-                <pfx:PhoneNumber>+61255556789</pfx:PhoneNumber>
-            </pfx:SalesLead>
-        </pd:inputBindings>
+        <pd:inputBindings/>
+    </pd:activity>
+    <pd:activity name="Rethrow">
+        <pd:type>com.tibco.pe.core.RethrowActivity</pd:type>
+        <pd:resourceType>ae.activities.rethrow</pd:resourceType>
+        <pd:x>584</pd:x>
+        <pd:y>252</pd:y>
+        <config/>
+        <pd:inputBindings/>
     </pd:activity>
     <pd:activity name="Then the following records will exist in the sales lead database">
         <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
@@ -39,24 +51,58 @@
         </config>
         <pd:inputBindings>
             <pfx:SalesLeads>
-                <pfx:SalesLead>
-                    <pfx:FirstName>Jane</pfx:FirstName>
-                    <pfx:LastName>Doe</pfx:LastName>
-                    <pfx:Email>john@doe.com.au</pfx:Email>
-                    <pfx:PhoneNumber>+61255556789</pfx:PhoneNumber>
-                </pfx:SalesLead>
+                <xsl:copy-of select="$When-the-following-contact-is-added-to-the-sales-lead-database/pfx:SalesLead"/>
             </pfx:SalesLeads>
         </pd:inputBindings>
     </pd:activity>
-    <pd:activity name="Given there are no contacts in the sales lead database">
+    <pd:activity name="When the following contact is added to the sales lead database">
         <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
         <pd:resourceType>ae.process.subprocess</pd:resourceType>
-        <pd:x>248</pd:x>
-        <pd:y>78</pd:y>
+        <pd:x>460</pd:x>
+        <pd:y>77</pd:y>
         <config>
-            <processName>/test/UnitTestSuite/steps/There are no contacts in the sales lead database.process</processName>
+            <processName>/test/SystemIntegrationTestSuite/steps/The following contact is added to the sales lead database.process</processName>
         </config>
-        <pd:inputBindings/>
+        <pd:inputBindings>
+            <pfx:SalesLead>
+                <pfx:FirstName>John</pfx:FirstName>
+                <pfx:LastName>Doe</pfx:LastName>
+                <pfx:Email>john@doe.com.au</pfx:Email>
+                <pfx:PhoneNumber>+61255556789</pfx:PhoneNumber>
+            </pfx:SalesLead>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Record Error Screen Shot">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>428</pd:x>
+        <pd:y>262</pd:y>
+        <config>
+            <processName>/test/SystemIntegrationTestSuite/steps/RecordScreenShot.process</processName>
+        </config>
+        <pd:inputBindings>
+            <input>
+                <filename>
+                    <xsl:value-of select="concat($_globalVariables/ns4:GlobalVariables/Test/ScreenShotDir, '/', BW:getCurrentProcessName($_processContext/pfx2:ProcessContext/ProcessId),'-error.png')"/>
+                </filename>
+            </input>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Record Success Screen Shot">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>830</pd:x>
+        <pd:y>63</pd:y>
+        <config>
+            <processName>/test/SystemIntegrationTestSuite/steps/RecordScreenShot.process</processName>
+        </config>
+        <pd:inputBindings>
+            <input>
+                <filename>
+                    <xsl:value-of select="concat($_globalVariables/ns4:GlobalVariables/Test/ScreenShotDir, '/', BW:getCurrentProcessName($_processContext/pfx2:ProcessContext/ProcessId),'.png')"/>
+                </filename>
+            </input>
+        </pd:inputBindings>
     </pd:activity>
     <pd:transition>
         <pd:from>Start</pd:from>
@@ -74,7 +120,7 @@
     </pd:transition>
     <pd:transition>
         <pd:from>Then the following records will exist in the sales lead database</pd:from>
-        <pd:to>End</pd:to>
+        <pd:to>Record Success Screen Shot</pd:to>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>always</pd:conditionType>
@@ -82,6 +128,27 @@
     <pd:transition>
         <pd:from>Given there are no contacts in the sales lead database</pd:from>
         <pd:to>When the following contact is added to the sales lead database</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Catch</pd:from>
+        <pd:to>Record Error Screen Shot</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Record Error Screen Shot</pd:from>
+        <pd:to>Rethrow</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Record Success Screen Shot</pd:from>
+        <pd:to>End</pd:to>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>always</pd:conditionType>
