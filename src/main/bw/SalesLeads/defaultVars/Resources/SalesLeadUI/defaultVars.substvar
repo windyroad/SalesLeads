@@ -4,10 +4,20 @@
 		<globalVariable>
 			<name>Port</name>
 			<value>80</value>
+			<description></description>
 			<deploymentSettable>true</deploymentSettable>
 			<serviceSettable>false</serviceSettable>
 			<type>String</type>
-			<modTime>1413762796264</modTime>
+			<modTime>1413815266225</modTime>
+		</globalVariable>
+		<globalVariable>
+			<name>Stubbed</name>
+			<value>true</value>
+			<deploymentSettable>true</deploymentSettable>
+			<serviceSettable>false</serviceSettable>
+			<type>Boolean</type>
+			<constraint></constraint>
+			<modTime>1413815266256</modTime>
 		</globalVariable>
 	</globalVariables>
 </repository>

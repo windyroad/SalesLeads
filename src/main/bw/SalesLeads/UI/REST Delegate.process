@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pd:ProcessDefinition xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns2="http://www.tibco.com/pe/GenerateErrorActivity/InputSchema" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns1="http://www.tibco.com/pe/EngineTypes" xmlns:ns="http://windyroad.org/HTTP1.1-StatusCodeDefinitions" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tib="http://www.tibco.com/bw/xslt/custom-functions" xmlns:pfx3="http://www.tibco.com/pe/WriteToLogActivitySchema" xmlns:pfx2="http://windyroad.org/rest-delegate.xsd" xmlns:pfx="http://windyroad.org/rest4BW.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<pd:ProcessDefinition xmlns:ns2="http://www.tibco.com/pe/GenerateErrorActivity/InputSchema" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns1="http://www.tibco.com/pe/EngineTypes" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns="http://windyroad.org/HTTP1.1-StatusCodeDefinitions" xmlns:ns3="http://www.tibco.com/pe/DeployedVarsType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tib="http://www.tibco.com/bw/xslt/custom-functions" xmlns:pfx3="http://www.tibco.com/pe/WriteToLogActivitySchema" xmlns:pfx2="http://windyroad.org/rest-delegate.xsd" xmlns:pfx="http://windyroad.org/rest4BW.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <xsd:import namespace="http://windyroad.org/rest-delegate.xsd"/>
     <xsd:import namespace="http://windyroad.org/HTTP1.1-StatusCodeDefinitions" schemaLocation="/rest4BW/Private/Schemas/StatusCodeDefinitions.xsd"/>
     <xsd:import namespace="http://windyroad.org/rest4BW.xsd" schemaLocation="/rest4BW/Schemas/rest4BW.xsd"/>
@@ -10,7 +10,7 @@
     <pd:startX>67</pd:startX>
     <pd:startY>78</pd:startY>
     <pd:returnBindings>
-        <xsl:copy-of select="($GET/pfx:response | $POST/pfx:response )[1]"/>
+        <xsl:copy-of select="$User-Interface/pfx:response"/>
     </pd:returnBindings>
     <pd:endName>End</pd:endName>
     <pd:endType ref="pfx:response"/>
@@ -32,6 +32,12 @@
         <pd:inputBindings>
             <input>
                 <xsl:copy-of select="$Start/pfx:request"/>
+                <xsl:if test="$_globalVariables/ns3:GlobalVariables/Resources/SalesLeadUI/Stubbed='true'">
+                    <bridge-impl>
+                        <AddSalesLead>test/UnitTestSuite/UITestCase/stub/AddSalesLead.process</AddSalesLead>
+                        <GetSalesLeads>test/UnitTestSuite/UITestCase/stub/GetSalesLeads.process</GetSalesLeads>
+                    </bridge-impl>
+                </xsl:if>
             </input>
         </pd:inputBindings>
     </pd:activity>

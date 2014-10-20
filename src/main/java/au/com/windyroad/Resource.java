@@ -14,6 +14,8 @@ import java.util.TimeZone;
 
 import javax.activation.MimetypesFileTypeMap;
 
+import org.apache.log4j.Logger;
+
 public class Resource implements Serializable {
 
 	private static final long serialVersionUID = -3005947385105850799L;
@@ -53,9 +55,15 @@ public class Resource implements Serializable {
 	}
 
 	public Date getModificationTime() throws IOException {
+		try {
 		Calendar c = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
 		c.setTimeInMillis(getRawModificationTime());
 		return c.getTime();
+		}
+		catch(Throwable t) {
+			Logger.getLogger("bw.logger").error("Error getting modification time", t);
+			throw t;
+		}
 	}
 
 	private static MimetypesFileTypeMap mimeMap = initMimeMap();

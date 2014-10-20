@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BWSharedResource xmlns:pfx="http://windyroad.com.au/schemas/SalesLead.xsd">
+    <import namespace="http://windyroad.com.au/schemas/SalesLead.xsd" schemaLocation="/SalesLead.xsd"/>
+    <name>SalesLeads</name>
+    <resourceType>ae.shared.sharedVariable</resourceType>
+    <config xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <persistent>false</persistent>
+        <multi-engine>false</multi-engine>
+        <initialValue>byData</initialValue>
+        <initialValueData>&lt;?xml version="1.0" encoding="UTF-8"?&gt; &lt;SalesLeads xmlns="http://windyroad.com.au/schemas/SalesLead.xsd"/&gt;</initialValueData>
+        <xsdString ref="pfx:SalesLeads"/>
+    </config>
+</BWSharedResource>

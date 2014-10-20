@@ -6,53 +6,40 @@
     <pd:startName>Start</pd:startName>
     <pd:startType wsMsgRef="pfx2:GetSalesLeadsRequest"/>
     <pd:startX>150</pd:startX>
-    <pd:startY>64</pd:startY>
+    <pd:startY>56</pd:startY>
     <pd:returnBindings>
         <pfx2:GetSalesLeadsResponse>
             <GetSalesLeadsResponse>
-                <xsl:copy-of select="$GetSalesLeads/ns:SalesLeads"/>
+                <xsl:copy-of select="$GetVariable/ns:SalesLeads"/>
             </GetSalesLeadsResponse>
         </pfx2:GetSalesLeadsResponse>
     </pd:returnBindings>
     <pd:endName>End</pd:endName>
     <pd:endType wsMsgRef="pfx2:GetSalesLeadsResponse"/>
     <pd:endX>450</pd:endX>
-    <pd:endY>64</pd:endY>
+    <pd:endY>56</pd:endY>
     <pd:errorSchemas/>
     <pd:processVariables/>
     <pd:targetNamespace>http://xmlns.example.com/1413543826533</pd:targetNamespace>
-    <pd:activity name="GetSalesLeads">
-        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
-        <pd:resourceType>ae.process.subprocess</pd:resourceType>
-        <pd:x>299</pd:x>
-        <pd:y>63</pd:y>
+    <pd:activity name="GetVariable">
+        <pd:type>com.tibco.pe.core.GetSharedVariableActivity</pd:type>
+        <pd:resourceType>ae.activities.getSharedVariable</pd:resourceType>
+        <pd:x>304</pd:x>
+        <pd:y>62</pd:y>
         <config>
-            <processName>/private/GetSalesLeads.process</processName>
+            <variableConfig>/test/UnitTestSuite/UITestCase/stub/SalesLeads.sharedvariable</variableConfig>
         </config>
-        <pd:inputBindings>
-            <Input>
-                <xsl:if test="$Start/pfx2:GetSalesLeadsRequest/GetSalesLeadsRequest/ns:GetSalesLeadsRequest/ns:Limit">
-                    <Limit>
-                        <xsl:value-of select="$Start/pfx2:GetSalesLeadsRequest/GetSalesLeadsRequest/ns:GetSalesLeadsRequest/ns:Limit"/>
-                    </Limit>
-                </xsl:if>
-                <xsl:if test="$Start/pfx2:GetSalesLeadsRequest/GetSalesLeadsRequest/ns:GetSalesLeadsRequest/ns:Offset">
-                    <Offset>
-                        <xsl:value-of select="$Start/pfx2:GetSalesLeadsRequest/GetSalesLeadsRequest/ns:GetSalesLeadsRequest/ns:Offset"/>
-                    </Offset>
-                </xsl:if>
-            </Input>
-        </pd:inputBindings>
+        <pd:inputBindings/>
     </pd:activity>
     <pd:transition>
         <pd:from>Start</pd:from>
-        <pd:to>GetSalesLeads</pd:to>
+        <pd:to>GetVariable</pd:to>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>always</pd:conditionType>
     </pd:transition>
     <pd:transition>
-        <pd:from>GetSalesLeads</pd:from>
+        <pd:from>GetVariable</pd:from>
         <pd:to>End</pd:to>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>

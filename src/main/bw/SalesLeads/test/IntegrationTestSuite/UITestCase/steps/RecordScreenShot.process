@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pd:ProcessDefinition xmlns:ns2="www.tibco.com/plugin/java/JavaMethodActivityOutput" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns1="http://www.tibco.com/pe/EngineTypes" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns="http://www.tibco.com/pe/DeployedVarsType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns12="http://www.tibco.com/namespaces/tnt/plugins/file">
-    <pd:name>test/SystemIntegrationTestSuite/steps/RecordScreenShot.process</pd:name>
+<pd:ProcessDefinition xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns2="www.tibco.com/plugin/java/JavaMethodActivityOutput" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns1="http://www.tibco.com/pe/EngineTypes" xmlns:ns="http://www.tibco.com/pe/DeployedVarsType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns12="http://www.tibco.com/namespaces/tnt/plugins/file">
+    <pd:name>test/IntegrationTestSuite/UITestCase/steps/RecordScreenShot.process</pd:name>
     <pd:startName>Start</pd:startName>
     <pd:startType>
         <xsd:element name="input">
@@ -29,7 +29,7 @@
             <ConstructDeclaredClass>false</ConstructDeclaredClass>
             <CacheConstructedClass>false</CacheConstructedClass>
             <InvokeCleanupMethod>false</InvokeCleanupMethod>
-            <JavaGlobalInstance>/test/SystemIntegrationTestSuite/WebDriver.serviceagent</JavaGlobalInstance>
+            <JavaGlobalInstance>/WebDriver.serviceagent</JavaGlobalInstance>
             <MethodInfo>
                 <className>au.com.windyroad.salesleads.ui.Driver</className>
                 <methodName>getPngScreenShot</methodName>
