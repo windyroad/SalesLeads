@@ -1,12 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pd:ProcessDefinition xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns="http://windyroad.org/HTTP1.1-StatusCodeDefinitions" xmlns:bwu="java://org.windyroad.bwunit.CustomFunctions" xmlns:ns5="www.tibco.com/plugin/java/xmlSchema/au.com.windyroad.Resource" xmlns:ns6="www.tibco.com/plugin/java/JavaToXmlActivityOutput" xmlns:ns7="http://windyroad.org/wr-http.xsd" xmlns:pfx="http://windyroad.org/rest4BW.xsd" xmlns:ns2="http://www.tibco.com/pe/GenerateErrorActivity/InputSchema" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns1="www.tibco.com/plugin/java/JavaMethodActivityOutput" xmlns:ns4="www.tibco.com/plugin/java/JavaToXmlActivityInput" xmlns:ns3="www.tibco.com/plugin/java/JavaMethodActivityInput" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tib="http://www.tibco.com/bw/xslt/custom-functions" xmlns:pfx2="http://windyroad.org/rest-delegate.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<pd:ProcessDefinition xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns2="http://www.tibco.com/pe/GenerateErrorActivity/InputSchema" xmlns:ns1="www.tibco.com/plugin/java/JavaMethodActivityOutput" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns4="www.tibco.com/plugin/java/JavaToXmlActivityInput" xmlns:ns="http://windyroad.org/HTTP1.1-StatusCodeDefinitions" xmlns:ns3="www.tibco.com/plugin/java/JavaMethodActivityInput" xmlns:bwu="java://org.windyroad.bwunit.CustomFunctions" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tib="http://www.tibco.com/bw/xslt/custom-functions" xmlns:pfx2="http://windyroad.org/rest-delegate.xsd" xmlns:ns5="www.tibco.com/plugin/java/xmlSchema/au.com.windyroad.Resource" xmlns:ns6="www.tibco.com/plugin/java/JavaToXmlActivityOutput" xmlns:pfx="http://windyroad.org/rest4BW.xsd" xmlns:ns7="http://windyroad.org/wr-http.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <xsd:import namespace="http://windyroad.org/rest-delegate.xsd"/>
     <xsd:import namespace="http://windyroad.org/HTTP1.1-StatusCodeDefinitions" schemaLocation="/rest4BW/Private/Schemas/StatusCodeDefinitions.xsd"/>
     <xsd:import namespace="http://windyroad.org/rest4BW.xsd" schemaLocation="/rest4BW/Schemas/rest4BW.xsd"/>
     <pd:name>UI/GET Static.process</pd:name>
     <pd:description/>
     <pd:startName>Start</pd:startName>
-    <pd:startType ref="pfx:request"/>
+    <pd:startType>
+        <xsd:element name="input">
+            <xsd:complexType>
+                <xsd:sequence>
+                    <xsd:element ref="pfx:request"/>
+                    <xsd:element name="bridge-impl" minOccurs="0">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="AddSalesLead" type="xsd:string" minOccurs="0"/>
+                                <xsd:element name="GetSalesLeads" type="xsd:string" minOccurs="0"/>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+        </xsd:element>
+    </pd:startType>
     <pd:startX>67</pd:startX>
     <pd:startY>78</pd:startY>
     <pd:returnBindings>

@@ -1,12 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pd:ProcessDefinition xmlns:ns2="http://www.tibco.com/pe/GenerateErrorActivity/InputSchema" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns="http://windyroad.org/HTTP1.1-StatusCodeDefinitions" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:pfx2="http://windyroad.org/rest-delegate.xsd" xmlns:pfx="http://windyroad.org/rest4BW.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<pd:ProcessDefinition xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns2="http://www.tibco.com/pe/GenerateErrorActivity/InputSchema" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns="http://windyroad.org/HTTP1.1-StatusCodeDefinitions" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:pfx2="http://windyroad.org/rest-delegate.xsd" xmlns:pfx="http://windyroad.org/rest4BW.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <xsd:import namespace="http://windyroad.org/rest-delegate.xsd"/>
     <xsd:import namespace="http://windyroad.org/HTTP1.1-StatusCodeDefinitions" schemaLocation="/rest4BW/Private/Schemas/StatusCodeDefinitions.xsd"/>
     <xsd:import namespace="http://windyroad.org/rest4BW.xsd" schemaLocation="/rest4BW/Schemas/rest4BW.xsd"/>
     <pd:name>UI/POST.process</pd:name>
     <pd:description/>
     <pd:startName>Start</pd:startName>
-    <pd:startType ref="pfx:request"/>
+    <pd:startType>
+        <xsd:element name="input">
+            <xsd:complexType>
+                <xsd:sequence>
+                    <xsd:element ref="pfx:request"/>
+                    <xsd:element name="bridge-impl" minOccurs="0">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="AddSalesLead" type="xsd:string" minOccurs="0"/>
+                                <xsd:element name="GetSalesLeads" type="xsd:string" minOccurs="0"/>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+        </xsd:element>
+    </pd:startType>
     <pd:startX>67</pd:startX>
     <pd:startY>78</pd:startY>
     <pd:returnBindings>
@@ -47,13 +63,13 @@
     <pd:activity name="AddSalesLead">
         <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
         <pd:resourceType>ae.process.subprocess</pd:resourceType>
-        <pd:x>257</pd:x>
-        <pd:y>83</pd:y>
+        <pd:x>281</pd:x>
+        <pd:y>88</pd:y>
         <config>
             <processName>/UI/AddSalesLead.process</processName>
         </config>
         <pd:inputBindings>
-            <xsl:copy-of select="$Start/pfx:request"/>
+            <xsl:copy-of select="$Start/input"/>
         </pd:inputBindings>
     </pd:activity>
     <pd:transition>
@@ -69,7 +85,7 @@
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>xpath</pd:conditionType>
-        <pd:xpath>'/'=$Start/pfx:request/pfx:command</pd:xpath>
+        <pd:xpath>'/'=$Start/input/pfx:request/pfx:command</pd:xpath>
     </pd:transition>
     <pd:transition>
         <pd:from>AddSalesLead</pd:from>

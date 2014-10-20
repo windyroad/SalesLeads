@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns1="http://xmlns.tibco.com/encodings/mime" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns="http://windyroad.com.au/schemas/SalesLead.xsd" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:pfx2="http://windyroad.com.au/services/SalesLead" xmlns:pfx="http://windyroad.com.au/services/concreate/SalesLead">
+    <wsdl:import namespace="http://windyroad.com.au/services/SalesLead" location="/SalesLead.wsdl"/>
+    <pd:name>test/UnitTestSuite/UITestCase/stub/AddSalesLead.process</pd:name>
+    <pd:startName>Start</pd:startName>
+    <pd:startType wsMsgRef="pfx2:AddSalesLeadRequest"/>
+    <pd:startX>150</pd:startX>
+    <pd:startY>64</pd:startY>
+    <pd:returnBindings>
+        <pfx2:AddSalesLeadResponse/>
+    </pd:returnBindings>
+    <pd:endName>End</pd:endName>
+    <pd:endType wsMsgRef="pfx2:AddSalesLeadResponse"/>
+    <pd:endX>450</pd:endX>
+    <pd:endY>64</pd:endY>
+    <pd:errorSchemas/>
+    <pd:processVariables/>
+    <pd:targetNamespace>http://xmlns.example.com/1413543826533</pd:targetNamespace>
+    <pd:activity name="AddSalesLead">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>312</pd:x>
+        <pd:y>67</pd:y>
+        <config>
+            <processName>/private/AddSalesLead.process</processName>
+        </config>
+        <pd:inputBindings>
+            <xsl:copy-of select="$Start/pfx2:AddSalesLeadRequest/AddSalesLead/ns:SalesLead"/>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>AddSalesLead</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>AddSalesLead</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+</pd:ProcessDefinition>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns="http://windyroad.org/rest4BW.xsd" xmlns:pfx="http://windyroad.com.au/schemas/SalesLead.xsd">
+    <pd:name>test/UnitTestSuite/UITestCase/steps/The following contact is added to the sales lead database.process</pd:name>
+    <pd:startName>Start</pd:startName>
+    <pd:startType ref="pfx:SalesLead"/>
+    <pd:startX>150</pd:startX>
+    <pd:startY>64</pd:startY>
+    <pd:returnBindings>
+        <xsl:copy-of select="$Start/pfx:SalesLead"/>
+    </pd:returnBindings>
+    <pd:endName>End</pd:endName>
+    <pd:endType ref="pfx:SalesLead"/>
+    <pd:endX>450</pd:endX>
+    <pd:endY>64</pd:endY>
+    <pd:errorSchemas/>
+    <pd:processVariables/>
+    <pd:targetNamespace>http://xmlns.example.com/1413193119895</pd:targetNamespace>
+    <pd:activity name="AddSalesLead">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>294</pd:x>
+        <pd:y>65</pd:y>
+        <config>
+            <processName>/UI/User Interface.process</processName>
+        </config>
+        <pd:inputBindings>
+            <input>
+                <ns:request>
+                    <ns:method>POST</ns:method>
+                    <ns:command>/</ns:command>
+                    <ns:post>
+                        <ns:part>
+                            <ns:meta>
+                                <xsl:attribute name="value">FirstName</xsl:attribute>
+                                <xsl:attribute name="name">name</xsl:attribute>
+                            </ns:meta>
+                            <ns:text-content>
+                                <xsl:value-of select="$Start/pfx:SalesLead/pfx:FirstName"/>
+                            </ns:text-content>
+                        </ns:part>
+                        <ns:part>
+                            <ns:meta>
+                                <xsl:attribute name="value">LastName</xsl:attribute>
+                                <xsl:attribute name="name">name</xsl:attribute>
+                            </ns:meta>
+                            <ns:text-content>
+                                <xsl:value-of select="$Start/pfx:SalesLead/pfx:LastName"/>
+                            </ns:text-content>
+                        </ns:part>
+                        <ns:part>
+                            <ns:meta>
+                                <xsl:attribute name="value">Email</xsl:attribute>
+                                <xsl:attribute name="name">name</xsl:attribute>
+                            </ns:meta>
+                            <ns:text-content>
+                                <xsl:value-of select="$Start/pfx:SalesLead/pfx:Email"/>
+                            </ns:text-content>
+                        </ns:part>
+                        <ns:part>
+                            <ns:meta>
+                                <xsl:attribute name="value">PhoneNumber</xsl:attribute>
+                                <xsl:attribute name="name">name</xsl:attribute>
+                            </ns:meta>
+                            <ns:text-content>
+                                <xsl:value-of select="$Start/pfx:SalesLead/pfx:PhoneNumber"/>
+                            </ns:text-content>
+                        </ns:part>
+                    </ns:post>
+                    <ns:query/>
+                    <ns:host>127.0.0.1</ns:host>
+                    <ns:accepts/>
+                    <ns:etag/>
+                </ns:request>
+                <bridge-impl>
+                    <AddSalesLead>test/UnitTestSuite/UITestCase/stub/AddSalesLead.process</AddSalesLead>
+                    <GetSalesLeads>test/UnitTestSuite/UITestCase/stub/GetSalesLeads.process</GetSalesLeads>
+                </bridge-impl>
+            </input>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>AddSalesLead</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>AddSalesLead</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+</pd:ProcessDefinition>

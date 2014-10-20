@@ -1,12 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pd:ProcessDefinition xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns2="http://windyroad.com.au/schemas/SalesLead.xsd" xmlns:ns1="http://www.w3.org/1999/xhtml" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns="http://windyroad.com.au/services/SalesLead" xmlns:ns4="http://www.tibco.com/pe/DeployedVarsType" xmlns:ns3="http://windyroad.org/HTTP1.1-StatusCodeDefinitions" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tib="http://www.tibco.com/bw/xslt/custom-functions" xmlns:pfx2="http://windyroad.org/rest4BW.xsd" xmlns:pfx="http://www.tibco.com/ns/no_namespace_schema_location/schemas/xhtml1-strict.dtd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<pd:ProcessDefinition xmlns:ns2="http://windyroad.com.au/schemas/SalesLead.xsd" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns1="http://www.w3.org/1999/xhtml" xmlns:ns4="http://www.tibco.com/pe/DeployedVarsType" xmlns:ns="http://windyroad.com.au/services/SalesLead" xmlns:ns3="http://windyroad.org/HTTP1.1-StatusCodeDefinitions" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tib="http://www.tibco.com/bw/xslt/custom-functions" xmlns:pfx2="http://windyroad.org/rest4BW.xsd" xmlns:pfx="http://www.tibco.com/ns/no_namespace_schema_location/schemas/xhtml1-strict.dtd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <xsd:import namespace="http://windyroad.org/rest4BW.xsd" schemaLocation="/rest4BW/Schemas/rest4BW.xsd"/>
     <xsd:import namespace="http://www.tibco.com/ns/no_namespace_schema_location/schemas/xhtml1-strict.dtd"/>
     <pd:name>UI/AddSalesLead.process</pd:name>
     <pd:startName>Start</pd:startName>
-    <pd:startType ref="pfx2:request"/>
-    <pd:startX>70</pd:startX>
-    <pd:startY>62</pd:startY>
+    <pd:startType>
+        <xsd:element name="input">
+            <xsd:complexType>
+                <xsd:sequence>
+                    <xsd:element ref="pfx2:request"/>
+                    <xsd:element name="bridge-impl" minOccurs="0">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="AddSalesLead" type="xsd:string" minOccurs="0"/>
+                                <xsd:element name="GetSalesLeads" type="xsd:string" minOccurs="0"/>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+        </xsd:element>
+    </pd:startType>
+    <pd:startX>69</pd:startX>
+    <pd:startY>61</pd:startY>
     <pd:returnBindings>
         <pfx2:response xsi:type="ns3:sc-303_See_Other">
             <pfx2:headers>
@@ -30,22 +46,23 @@
         <pd:y>65</pd:y>
         <config>
             <processName>/UI/Bridge/AddSalesLead.process</processName>
+            <processNameXPath>$Start/input/bridge-impl/AddSalesLead</processNameXPath>
         </config>
         <pd:inputBindings>
             <ns:AddSalesLeadRequest>
                 <AddSalesLead>
                     <ns2:SalesLead>
                         <ns2:FirstName>
-                            <xsl:value-of select="$Start/pfx2:request/pfx2:post/pfx2:part[pfx2:meta[@name='name' and @value='FirstName']]/pfx2:text-content"/>
+                            <xsl:value-of select="$Start/input/pfx2:request/pfx2:post/pfx2:part[pfx2:meta[@name='name' and @value='FirstName']]/pfx2:text-content"/>
                         </ns2:FirstName>
                         <ns2:LastName>
-                            <xsl:value-of select="$Start/pfx2:request/pfx2:post/pfx2:part[pfx2:meta[@name='name' and @value='LastName']]/pfx2:text-content"/>
+                            <xsl:value-of select="$Start/input/pfx2:request/pfx2:post/pfx2:part[pfx2:meta[@name='name' and @value='LastName']]/pfx2:text-content"/>
                         </ns2:LastName>
                         <ns2:Email>
-                            <xsl:value-of select="$Start/pfx2:request/pfx2:post/pfx2:part[pfx2:meta[@name='name' and @value='Email']]/pfx2:text-content"/>
+                            <xsl:value-of select="$Start/input/pfx2:request/pfx2:post/pfx2:part[pfx2:meta[@name='name' and @value='Email']]/pfx2:text-content"/>
                         </ns2:Email>
                         <ns2:PhoneNumber>
-                            <xsl:value-of select="$Start/pfx2:request/pfx2:post/pfx2:part[pfx2:meta[@name='name' and @value='PhoneNumber']]/pfx2:text-content"/>
+                            <xsl:value-of select="$Start/input/pfx2:request/pfx2:post/pfx2:part[pfx2:meta[@name='name' and @value='PhoneNumber']]/pfx2:text-content"/>
                         </ns2:PhoneNumber>
                     </ns2:SalesLead>
                 </AddSalesLead>
