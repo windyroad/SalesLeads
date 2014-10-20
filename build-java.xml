@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="jar" name="SalesLeads-Java" xmlns:ivy="antlib:org.apache.ivy.ant">
+
+    <target name="-retrieve" depends="jar">
+
+    </target>
+
+    <target name="jar" depends="javac" description="Build SalesLead jar">
+        <jar destfile="${bwda.lib.dir}/${ant.project.name}.jar" duplicate="preserve" index="true">
+            <fileset dir="${salesleads.classes.dir}" includes="**/*" />
+            <fileset dir="src/main/resources" includes="**/*" />
+        </jar>
+        <jar destfile="${bwda.lib.dir}/${ant.project.name}-test.jar" duplicate="preserve" index="true">
+            <fileset dir="${salesleads.test.classes.dir}" includes="**/*" />
+        </jar>
+    </target>
+
+    <target name="javac" depends="ivy-bootstrap.-retrieve">
+        <property name="debuglevel" value="source,lines,vars" />
+        <property name="target" value="1.6" />
+        <property name="source" value="1.6" />
+        <mkdir dir="${salesleads.classes.dir}" />
+        <javac debug="true"
+               debuglevel="${debuglevel}"
+               includeAntRuntime="false"
+               destdir="${salesleads.classes.dir}"
+               source="${source}"
+               target="${target}">
+            <src path="src/main/java" />
+            <classpath>
+                <fileset dir="${bwda.lib.dir}">
+                    <include name="*.jar" />
+                    <exclude name="${ant.project.name}.jar"/>
+                    <exclude name="${ant.project.name}-test.jar"/>
+                </fileset>
+            </classpath>
+        </javac>
+        <mkdir dir="${salesleads.test.classes.dir}" />
+        <javac debug="true"
+               debuglevel="${debuglevel}"
+               includeAntRuntime="false"
+               destdir="${salesleads.test.classes.dir}"
+               source="${source}"
+               target="${target}">
+            <src path="src/test/java" />
+            <classpath>
+                <fileset dir="${bwda.lib.dir}">
+                    <include name="*.jar" />
+                    <exclude name="${ant.project.name}.jar"/>
+                    <exclude name="${ant.project.name}-test.jar"/>
+                </fileset>
+            </classpath>
+        </javac>
+    </target>
+</project>
