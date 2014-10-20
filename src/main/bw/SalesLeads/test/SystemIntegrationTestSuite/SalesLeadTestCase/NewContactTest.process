@@ -22,7 +22,7 @@
         </config>
         <pd:inputBindings>
             <pfx:SalesLead>
-                <pfx:FirstName>John</pfx:FirstName>
+                <pfx:FirstName>Jane</pfx:FirstName>
                 <pfx:LastName>Doe</pfx:LastName>
                 <pfx:Email>john@doe.com.au</pfx:Email>
                 <pfx:PhoneNumber>+61255556789</pfx:PhoneNumber>
@@ -40,7 +40,7 @@
         <pd:inputBindings>
             <pfx:SalesLeads>
                 <pfx:SalesLead>
-                    <pfx:FirstName>John</pfx:FirstName>
+                    <pfx:FirstName>Jane</pfx:FirstName>
                     <pfx:LastName>Doe</pfx:LastName>
                     <pfx:Email>john@doe.com.au</pfx:Email>
                     <pfx:PhoneNumber>+61255556789</pfx:PhoneNumber>

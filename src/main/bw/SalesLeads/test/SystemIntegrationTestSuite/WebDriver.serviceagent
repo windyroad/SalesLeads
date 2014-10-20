@@ -20,7 +20,7 @@
             <row>
                 <ParameterName>Parameter1</ParameterName>
                 <ParameterType>string</ParameterType>
-                <ParameterValue>1234</ParameterValue>
+                <ParameterValue>org.openqa.selenium.firefox.FirefoxDriver</ParameterValue>
             </row>
         </ConstructorParameters>
     </config>
