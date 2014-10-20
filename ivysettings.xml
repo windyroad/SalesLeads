@@ -41,9 +41,9 @@
             </url>
         </chain>
         <chain name="public" >
+            <ibiblio root="https://windyroad.artifactoryonline.com/windyroad/mavenCentral" name="maven2" m2compatible="true"/>
             <ibiblio name="maven2" m2compatible="true"/>
             <resolver ref="windyroad"/>
-            <ibiblio root="https://windyroad.artifactoryonline.com/windyroad/mavenCentral" name="maven2" m2compatible="true"/>
         </chain>
     </resolvers>
     <include url="${ivy.default.settings.dir}/ivysettings-local.xml"/>
