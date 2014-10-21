@@ -5,6 +5,8 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
@@ -37,6 +39,9 @@ public class Driver implements Serializable {
 			InvocationTargetException {
 		try {
 		Logger.getLogger("bw.logger").info("WebDriver Classname: " + driverClassname);
+		for( Entry<Object, Object> property : System.getProperties().entrySet() ) {
+			Logger.getLogger("bw.logger").info(property.getKey() + " -> " + property.getValue());
+		}
 		if ("org.openqa.selenium.htmlunit.HtmlUnitDriver"
 				.equals(driverClassname)) {
 			driver = new HtmlUnitDriver(true);
