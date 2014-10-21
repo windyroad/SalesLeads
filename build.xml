@@ -5,10 +5,11 @@
 	<property name="bwunit.importer.url"
 	          value="http://windyroad.com.au/bwunit-importer/${bwunit.importer.version}/full.xml" />
 
+	<import file="build-java.xml" />
+
 	<import>
 		<url url="${bwunit.importer.url}" />
 	</import>
 
-	<import file="build-java.xml" />
 
 </project>

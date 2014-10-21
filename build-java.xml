@@ -33,6 +33,7 @@
                     <exclude name="${ant.project.name}.jar"/>
                     <exclude name="${ant.project.name}-test.jar"/>
                 </fileset>
+            	<pathelement path="${tibco.home.classpath.log4j}"/>
             </classpath>
         </javac>
         <mkdir dir="${salesleads.test.classes.dir}" />
@@ -49,6 +50,7 @@
                     <exclude name="${ant.project.name}.jar"/>
                     <exclude name="${ant.project.name}-test.jar"/>
                 </fileset>
+                <pathelement path="${tibco.home.classpath.log4j}"/>
             </classpath>
         </javac>
     </target>

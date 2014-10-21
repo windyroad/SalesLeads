@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pd:ProcessDefinition xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns2="www.tibco.com/plugin/java/JavaMethodActivityOutput" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns1="http://www.tibco.com/pe/EngineTypes" xmlns:ns="http://www.tibco.com/pe/DeployedVarsType" xmlns:ns3="http://www.tibco.com/pe/WriteToLogActivitySchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns12="http://www.tibco.com/namespaces/tnt/plugins/file">
+<pd:ProcessDefinition xmlns:ns2="www.tibco.com/plugin/java/JavaMethodActivityOutput" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns1="http://www.tibco.com/pe/EngineTypes" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns="http://www.tibco.com/pe/DeployedVarsType" xmlns:ns3="http://www.tibco.com/pe/WriteToLogActivitySchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns12="http://www.tibco.com/namespaces/tnt/plugins/file">
     <pd:name>test/IntegrationTestSuite/UITestCase/steps/RecordScreenShot.process</pd:name>
     <pd:startName>Start</pd:startName>
     <pd:startType>
@@ -15,16 +15,16 @@
     <pd:startY>64</pd:startY>
     <pd:returnBindings/>
     <pd:endName>End</pd:endName>
-    <pd:endX>659</pd:endX>
-    <pd:endY>60</pd:endY>
+    <pd:endX>893</pd:endX>
+    <pd:endY>57</pd:endY>
     <pd:errorSchemas/>
     <pd:processVariables/>
     <pd:targetNamespace>http://xmlns.example.com/1413811310866</pd:targetNamespace>
     <pd:activity name="Get Screen Shot">
         <pd:type>com.tibco.plugin.java.JavaMethodActivity</pd:type>
         <pd:resourceType>ae.activities.JavaMethodActivity</pd:resourceType>
-        <pd:x>266</pd:x>
-        <pd:y>62</pd:y>
+        <pd:x>485</pd:x>
+        <pd:y>183</pd:y>
         <config>
             <ConstructDeclaredClass>false</ConstructDeclaredClass>
             <CacheConstructedClass>false</CacheConstructedClass>
@@ -43,8 +43,8 @@
     <pd:activity name="Write File">
         <pd:type>com.tibco.plugin.file.FileWriteActivity</pd:type>
         <pd:resourceType>ae.activities.FileWriteActivity</pd:resourceType>
-        <pd:x>401</pd:x>
-        <pd:y>64</pd:y>
+        <pd:x>635</pd:x>
+        <pd:y>181</pd:y>
         <config>
             <encoding>binary</encoding>
             <compressFile>None</compressFile>
@@ -64,8 +64,8 @@
     <pd:activity name="Log">
         <pd:type>com.tibco.pe.core.WriteToLogActivity</pd:type>
         <pd:resourceType>ae.activities.log</pd:resourceType>
-        <pd:x>534</pd:x>
-        <pd:y>63</pd:y>
+        <pd:x>773</pd:x>
+        <pd:y>181</pd:y>
         <config>
             <role>User</role>
         </config>
@@ -77,9 +77,29 @@
             </ns3:ActivityInput>
         </pd:inputBindings>
     </pd:activity>
+    <pd:activity name="Can Screen Shot">
+        <pd:type>com.tibco.plugin.java.JavaMethodActivity</pd:type>
+        <pd:resourceType>ae.activities.JavaMethodActivity</pd:resourceType>
+        <pd:x>291</pd:x>
+        <pd:y>62</pd:y>
+        <config>
+            <ConstructDeclaredClass>false</ConstructDeclaredClass>
+            <CacheConstructedClass>false</CacheConstructedClass>
+            <InvokeCleanupMethod>false</InvokeCleanupMethod>
+            <JavaGlobalInstance>/WebDriver.serviceagent</JavaGlobalInstance>
+            <MethodInfo>
+                <className>au.com.windyroad.salesleads.ui.Driver</className>
+                <methodName>canPngScreenShot</methodName>
+                <methodReturn>boolean</methodReturn>
+            </MethodInfo>
+        </config>
+        <pd:inputBindings>
+            <ns1:JavaMethodActivityInput xmlns:ns1="www.tibco.com/plugin/java/JavaMethodActivityInput"/>
+        </pd:inputBindings>
+    </pd:activity>
     <pd:transition>
         <pd:from>Start</pd:from>
-        <pd:to>Get Screen Shot</pd:to>
+        <pd:to>Can Screen Shot</pd:to>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>always</pd:conditionType>
@@ -104,5 +124,20 @@
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Can Screen Shot</pd:from>
+        <pd:to>Get Screen Shot</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>xpath</pd:conditionType>
+        <pd:xpath>$Can-Screen-Shot/ns2:JavaMethodActivityOutput/MethodReturnValue='true'</pd:xpath>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Can Screen Shot</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>otherwise</pd:conditionType>
     </pd:transition>
 </pd:ProcessDefinition>

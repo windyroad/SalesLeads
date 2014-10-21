@@ -9,5 +9,13 @@
 			<type>String</type>
 			<modTime>1413808898930</modTime>
 		</globalVariable>
+		<globalVariable>
+			<name>WebDriver</name>
+			<value>org.openqa.selenium.firefox.FirefoxDriver</value>
+			<deploymentSettable>true</deploymentSettable>
+			<serviceSettable>false</serviceSettable>
+			<type>String</type>
+			<modTime>1413847602991</modTime>
+		</globalVariable>
 	</globalVariables>
 </repository>

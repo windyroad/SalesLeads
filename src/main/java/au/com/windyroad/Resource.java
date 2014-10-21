@@ -1,6 +1,5 @@
 package au.com.windyroad;
 
-
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -55,15 +54,9 @@ public class Resource implements Serializable {
 	}
 
 	public Date getModificationTime() throws IOException {
-		try {
 		Calendar c = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
 		c.setTimeInMillis(getRawModificationTime());
 		return c.getTime();
-		}
-		catch(Throwable t) {
-			Logger.getLogger("bw.logger").error("Error getting modification time", t);
-			throw t;
-		}
 	}
 
 	private static MimetypesFileTypeMap mimeMap = initMimeMap();

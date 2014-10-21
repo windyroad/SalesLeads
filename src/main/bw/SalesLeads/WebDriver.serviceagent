@@ -20,7 +20,7 @@
             <row>
                 <ParameterName>Parameter1</ParameterName>
                 <ParameterType>string</ParameterType>
-                <ParameterValue>org.openqa.selenium.firefox.FirefoxDriver</ParameterValue>
+                <ParameterValue>%%Test/WebDriver%%</ParameterValue>
             </row>
         </ConstructorParameters>
     </config>

@@ -25,32 +25,40 @@ public class Driver implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private final WebDriver driver;
-	
-	public Driver(String driverClassname) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		if ("org.openqa.selenium.htmlunit.HtmlUnitDriver".equals(driverClassname)) {
-			driver =  new HtmlUnitDriver(true);
-		} else if ("org.openqa.selenium.chrome.ChromeDriver".equals(driverClassname)) {
+
+	public Driver(String driverClassname) throws ClassNotFoundException,
+			NoSuchMethodException, SecurityException, InstantiationException,
+			IllegalAccessException, IllegalArgumentException,
+			InvocationTargetException {
+		if ("org.openqa.selenium.htmlunit.HtmlUnitDriver"
+				.equals(driverClassname)) {
+			driver = new HtmlUnitDriver(true);
+		} else if ("org.openqa.selenium.chrome.ChromeDriver"
+				.equals(driverClassname)) {
 			DesiredCapabilities capabilities = DesiredCapabilities.chrome();
 			capabilities.setJavascriptEnabled(true);
-			driver =  new ChromeDriver(capabilities);
-		} else if ("org.openqa.selenium.firefox.FirefoxDriver".equals(driverClassname)) {
+			driver = new ChromeDriver(capabilities);
+		} else if ("org.openqa.selenium.firefox.FirefoxDriver"
+				.equals(driverClassname)) {
 			DesiredCapabilities capabilities = DesiredCapabilities.firefox();
 			capabilities.setJavascriptEnabled(true);
 			driver = new FirefoxDriver(capabilities);
-			final int width = Integer.parseInt(System.getProperty("browser.window.width", "1024"));
-			final int height = Integer.parseInt(System.getProperty("browser.window.height", "768"));
+			final int width = Integer.parseInt(System.getProperty(
+					"browser.window.width", "1024"));
+			final int height = Integer.parseInt(System.getProperty(
+					"browser.window.height", "768"));
 			driver.manage().window().setSize(new Dimension(width, height));
 		} else {
 			Class<?> driverClass = Class.forName(driverClassname);
 			Constructor<?> constructor = driverClass.getConstructor();
-			driver =  (WebDriver) constructor.newInstance();
+			driver = (WebDriver) constructor.newInstance();
 		}
 	}
 
 	public void destroy() {
 		driver.quit();
 	}
-	
+
 	public Driver getSelf() {
 		return this;
 	}
@@ -59,8 +67,16 @@ public class Driver implements Serializable {
 		return driver;
 	}
 
-	public byte[] getPngScreenShot() {
-		return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+	public boolean canPngScreenShot() {
+		return driver instanceof TakesScreenshot;
 	}
-	
+
+	public byte[] getPngScreenShot() {
+		if (canPngScreenShot()) {
+			return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+		} else {
+			return null;
+		}
+	}
+
 }
