@@ -11,5 +11,26 @@
 		<url url="${bwunit.importer.url}" />
 	</import>
 
+    <target name="-init-unit-tests" depends="-set-coverage-exclusions,BWUnitTest.-init-unit-tests"/>
+    <target name="-init-integration-tests" depends="-set-coverage-exclusions,BWUnitTest.-init-integration-tests"/>
+
+	<target name="-set-coverage-exclusions" depends="-retrieve-test">
+		<pathconvert property="bwda.coverage.exclusions.rest4BW" dirsep="/" pathsep=",">
+			<map from="${bwda.dep.rest4BW.rest4BW.projlib}:" to="/" />
+			<zipfileset src="${bwda.dep.rest4BW.rest4BW.projlib}">
+				<include name="**/*.process" />
+			</zipfileset>
+		</pathconvert>
+		<pathconvert property="bwda.coverage.exclusions.local" dirsep="/" pathsep=",">
+			<map from="${basedir}/${bwda.bw.project.path}" to="" />
+			<path>
+				<fileset dir="${bwda.bw.project.path}/UI/Bridge">
+					<include name="**/*.process" />
+				</fileset>
+			
+			</path>
+		</pathconvert>
+		<property name="bwda.coverage.exclusions" value="${bwda.coverage.exclusions.local},${bwda.coverage.exclusions.rest4BW}"/>
+	</target>
 
 </project>
