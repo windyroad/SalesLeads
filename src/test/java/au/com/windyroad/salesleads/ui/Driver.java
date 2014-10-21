@@ -39,9 +39,6 @@ public class Driver implements Serializable {
 			InvocationTargetException {
 		try {
 		Logger.getLogger("bw.logger").info("WebDriver Classname: " + driverClassname);
-		for( Entry<Object, Object> property : System.getProperties().entrySet() ) {
-			Logger.getLogger("bw.logger").info(property.getKey() + " -> " + property.getValue());
-		}
 		if ("org.openqa.selenium.htmlunit.HtmlUnitDriver"
 				.equals(driverClassname)) {
 			driver = new HtmlUnitDriver(true);
