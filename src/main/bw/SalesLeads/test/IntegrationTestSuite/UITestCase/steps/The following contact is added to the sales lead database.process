@@ -151,7 +151,7 @@ webDriver.getDriver().findElement(By.id("SalesLeadsForm")).findElement(By.id("Ad
         <pd:inputBindings>
             <javaCodeActivityInput>
                 <url>
-                    <xsl:value-of select="concat(&quot;http://localhost:&quot;, $_globalVariables/ns1:GlobalVariables/Resources/SalesLeadUI/Port)"/>
+                    <xsl:value-of select="concat(&quot;http://&quot;,$_globalVariables/ns1:GlobalVariables/Resources/SalesLeadUI/Host,&quot;:&quot;, $_globalVariables/ns1:GlobalVariables/Resources/SalesLeadUI/Port)"/>
                 </url>
                 <firstName>
                     <xsl:value-of select="$Start/pfx:SalesLead/pfx:FirstName"/>

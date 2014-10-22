@@ -34,7 +34,7 @@
             <servicePort>SalesLead</servicePort>
             <operation>GetSalesLeads</operation>
             <soapAction>/SalesLead/GetSalesLeads</soapAction>
-            <endpointURL>http://localhost:%%Resources/SalesLeadService/Port%%/SalesLead</endpointURL>
+            <endpointURL>http://%%Resources/SalesLeadService/Host%%:%%Resources/SalesLeadService/Port%%/SalesLead</endpointURL>
             <authScheme>NONE</authScheme>
         </config>
         <pd:inputBindings>

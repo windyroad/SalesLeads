@@ -221,7 +221,7 @@ Driver webDriver = (Driver)driver;
         <pd:inputBindings>
             <javaCodeActivityInput>
                 <url>
-                    <xsl:value-of select="concat(&quot;http://localhost:&quot;, $_globalVariables/ns1:GlobalVariables/Resources/SalesLeadUI/Port)"/>
+                    <xsl:value-of select="concat(&quot;http://&quot;,$_globalVariables/ns1:GlobalVariables/Resources/SalesLeadUI/Host,&quot;:&quot;, $_globalVariables/ns1:GlobalVariables/Resources/SalesLeadUI/Port)"/>
                 </url>
                 <driver>
                     <xsl:value-of select="$Get-Web-Driver/ns3:JavaMethodActivityOutput/MethodReturnValue"/>
