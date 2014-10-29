@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <pd:name>util/SetSystemProperty.process</pd:name>
+    <pd:startName>Start</pd:startName>
+    <pd:startType>
+        <xsd:element name="property">
+            <xsd:complexType>
+                <xsd:sequence/>
+                <xsd:attribute name="key" type="xsd:string" use="required"/>
+                <xsd:attribute name="value" type="xsd:string" use="required"/>
+            </xsd:complexType>
+        </xsd:element>
+    </pd:startType>
+    <pd:startX>150</pd:startX>
+    <pd:startY>64</pd:startY>
+    <pd:returnBindings>
+        <previousProperty>
+            <xsl:attribute name="key">
+                <xsl:value-of select="$Start/property/@key"/>
+            </xsl:attribute>
+            <xsl:if test="$Java-Code/javaCodeActivityOutput/previousValue">
+                <xsl:attribute name="value">
+                    <xsl:value-of select="$Java-Code/javaCodeActivityOutput/previousValue"/>
+                </xsl:attribute>
+            </xsl:if>
+        </previousProperty>
+    </pd:returnBindings>
+    <pd:endName>End</pd:endName>
+    <pd:endType>
+        <xsd:element name="previousProperty">
+            <xsd:complexType>
+                <xsd:sequence/>
+                <xsd:attribute name="key" type="xsd:string" use="required"/>
+                <xsd:attribute name="value" type="xsd:string"/>
+            </xsd:complexType>
+        </xsd:element>
+    </pd:endType>
+    <pd:endX>450</pd:endX>
+    <pd:endY>64</pd:endY>
+    <pd:errorSchemas/>
+    <pd:processVariables/>
+    <pd:targetNamespace>http://xmlns.example.com/1414550008316</pd:targetNamespace>
+    <pd:activity name="Java Code">
+        <pd:type>com.tibco.plugin.java.JavaActivity</pd:type>
+        <pd:resourceType>ae.javapalette.javaActivity</pd:resourceType>
+        <pd:x>302</pd:x>
+        <pd:y>62</pd:y>
+        <config>
+            <fileName>SetSystemPropertyJavaCode</fileName>
+            <packageName>util.SetSystemProperty</packageName>
+            <fullsource>package util.SetSystemProperty;
+import java.util.*;
+import java.io.*;
+public class SetSystemPropertyJavaCode{
+/****** START SET/GET METHOD, DO NOT MODIFY *****/
+	protected String key = "";
+	protected String value = "";
+	protected String previousValue = "";
+	public String getkey() {
+		return key;
+	}
+	public void setkey(String val) {
+		key = val;
+	}
+	public String getvalue() {
+		return value;
+	}
+	public void setvalue(String val) {
+		value = val;
+	}
+	public String getpreviousValue() {
+		return previousValue;
+	}
+	public void setpreviousValue(String val) {
+		previousValue = val;
+	}
+/****** END SET/GET METHOD, DO NOT MODIFY *****/
+	public SetSystemPropertyJavaCode() {
+	}
+	public void invoke() throws Exception {
+/* Available Variables: DO NOT MODIFY
+	In  : String key
+	In  : String value
+	Out : String previousValue
+* Available Variables: DO NOT MODIFY *****/
+
+previousValue = System.setProperty(key, value);
+}
+}
+</fullsource>
+            <inputData>
+                <row>
+                    <fieldName>key</fieldName>
+                    <fieldType>string</fieldType>
+                    <fieldRequired>required</fieldRequired>
+                </row>
+                <row>
+                    <fieldName>value</fieldName>
+                    <fieldType>string</fieldType>
+                    <fieldRequired>required</fieldRequired>
+                </row>
+            </inputData>
+            <outputData>
+                <row>
+                    <fieldName>previousValue</fieldName>
+                    <fieldType>string</fieldType>
+                    <fieldRequired>optional</fieldRequired>
+                </row>
+            </outputData>
+            <byteCode>
+                <class>
+                    <name>SetSystemPropertyJavaCode</name>
+                    <byteCode>yv66vgAAADMAKwkABwAeCQAHAB8JAAcAIAoACAAhCAAiCgAjACQHACUHACYBAANrZXkBABJMamF2YS9sYW5nL1N0cmluZzsBAAV2YWx1ZQEADXByZXZpb3VzVmFsdWUBAAZnZXRrZXkBABQoKUxqYXZhL2xhbmcvU3RyaW5nOwEABENvZGUBAA9MaW5lTnVtYmVyVGFibGUBAAZzZXRrZXkBABUoTGphdmEvbGFuZy9TdHJpbmc7KVYBAAhnZXR2YWx1ZQEACHNldHZhbHVlAQAQZ2V0cHJldmlvdXNWYWx1ZQEAEHNldHByZXZpb3VzVmFsdWUBAAY8aW5pdD4BAAMoKVYBAAZpbnZva2UBAApFeGNlcHRpb25zBwAnAQAKU291cmNlRmlsZQEAHlNldFN5c3RlbVByb3BlcnR5SmF2YUNvZGUuamF2YQwACQAKDAALAAoMAAwACgwAFwAYAQAABwAoDAApACoBADB1dGlsL1NldFN5c3RlbVByb3BlcnR5L1NldFN5c3RlbVByb3BlcnR5SmF2YUNvZGUBABBqYXZhL2xhbmcvT2JqZWN0AQATamF2YS9sYW5nL0V4Y2VwdGlvbgEAEGphdmEvbGFuZy9TeXN0ZW0BAAtzZXRQcm9wZXJ0eQEAOChMamF2YS9sYW5nL1N0cmluZztMamF2YS9sYW5nL1N0cmluZzspTGphdmEvbGFuZy9TdHJpbmc7ACEABwAIAAAAAwAEAAkACgAAAAQACwAKAAAABAAMAAoAAAAIAAEADQAOAAEADwAAAB0AAQABAAAABSq0AAGwAAAAAQAQAAAABgABAAAACgABABEAEgABAA8AAAAiAAIAAgAAAAYqK7UAAbEAAAABABAAAAAKAAIAAAANAAUADgABABMADgABAA8AAAAdAAEAAQAAAAUqtAACsAAAAAEAEAAAAAYAAQAAABAAAQAUABIAAQAPAAAAIgACAAIAAAAGKiu1AAKxAAAAAQAQAAAACgACAAAAEwAFABQAAQAVAA4AAQAPAAAAHQABAAEAAAAFKrQAA7AAAAABABAAAAAGAAEAAAAWAAEAFgASAAEADwAAACIAAgACAAAABiortQADsQAAAAEAEAAAAAoAAgAAABkABQAaAAEAFwAYAAEADwAAAD8AAgABAAAAFyq3AAQqEgW1AAEqEgW1AAIqEgW1AAOxAAAAAQAQAAAAFgAFAAAAHAAEAAYACgAHABAACAAWAB0AAQAZABgAAgAPAAAALAADAAEAAAAQKiq0AAEqtAACuAAGtQADsQAAAAEAEAAAAAoAAgAAACUADwAmABoAAAAEAAEAGwABABwAAAACAB0=</byteCode>
+                </class>
+            </byteCode>
+        </config>
+        <pd:inputBindings>
+            <javaCodeActivityInput>
+                <key>
+                    <xsl:value-of select="$Start/property/@key"/>
+                </key>
+                <value>
+                    <xsl:value-of select="$Start/property/@value"/>
+                </value>
+            </javaCodeActivityInput>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>Java Code</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Java Code</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+</pd:ProcessDefinition>

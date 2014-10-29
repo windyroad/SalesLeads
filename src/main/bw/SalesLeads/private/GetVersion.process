@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns="http://www.tibco.com/pe/DeployedVarsType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tib="http://www.tibco.com/bw/xslt/custom-functions" xmlns:pfx="http://windyroad.com.au/schemas/SalesLead.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <xsd:import namespace="http://windyroad.com.au/schemas/SalesLead.xsd" schemaLocation="/SalesLead.xsd"/>
+    <pd:name>private/GetVersion.process</pd:name>
+    <pd:startName>Start</pd:startName>
+    <pd:startX>150</pd:startX>
+    <pd:startY>64</pd:startY>
+    <pd:returnBindings>
+        <pfx:Version>
+            <xsl:attribute name="binary">
+                <xsl:value-of select="$GetBinaryVersion/property/@value"/>
+            </xsl:attribute>
+            <xsl:attribute name="configuration">
+                <xsl:value-of select="$GetConfigVersion/property/@value"/>
+            </xsl:attribute>
+        </pfx:Version>
+    </pd:returnBindings>
+    <pd:endName>End</pd:endName>
+    <pd:endType ref="pfx:Version"/>
+    <pd:endX>553</pd:endX>
+    <pd:endY>60</pd:endY>
+    <pd:errorSchemas/>
+    <pd:processVariables/>
+    <pd:targetNamespace>http://xmlns.example.com/1413194253280</pd:targetNamespace>
+    <pd:activity name="GetBinaryVersion">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>269</pd:x>
+        <pd:y>67</pd:y>
+        <config>
+            <processName>/util/GetSystemProperty.process</processName>
+        </config>
+        <pd:inputBindings>
+            <property>
+                <xsl:attribute name="key">
+                    <xsl:value-of select="$_globalVariables/ns:GlobalVariables/CONST/BINARY_VERSION_PROPERTY"/>
+                </xsl:attribute>
+            </property>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="GetConfigVersion">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>415</pd:x>
+        <pd:y>68</pd:y>
+        <config>
+            <processName>/util/GetSystemProperty.process</processName>
+        </config>
+        <pd:inputBindings>
+            <property>
+                <xsl:attribute name="key">
+                    <xsl:value-of select="$_globalVariables/ns:GlobalVariables/CONST/CONFIG_VERSION_PROPERTY"/>
+                </xsl:attribute>
+            </property>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>GetBinaryVersion</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>GetBinaryVersion</pd:from>
+        <pd:to>GetConfigVersion</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>GetConfigVersion</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+</pd:ProcessDefinition>
