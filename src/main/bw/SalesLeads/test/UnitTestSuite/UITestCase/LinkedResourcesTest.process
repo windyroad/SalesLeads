@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pd:ProcessDefinition xmlns:ns2="http://windyroad.org/rest4BW.xsd" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns="http://windyroad.org/bwunit-asserts-0.0.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:pfx2="http://www.w3.org/1999/xhtml" xmlns:pfx="http://windyroad.com.au/schemas/SalesLead.xsd">
+<pd:ProcessDefinition xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns2="http://windyroad.org/rest4BW.xsd" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns="http://windyroad.org/bwunit-asserts-0.0.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:pfx2="http://www.w3.org/1999/xhtml" xmlns:pfx="http://windyroad.com.au/schemas/SalesLead.xsd">
     <pd:name>test/UnitTestSuite/UITestCase/LinkedResourcesTest.process</pd:name>
     <pd:description>@Timeout(60000)</pd:description>
     <pd:startName>Start</pd:startName>
@@ -36,6 +36,7 @@
             <bridge-impl>
                 <AddSalesLead>test/UnitTestSuite/UITestCase/stub/AddSalesLead.process</AddSalesLead>
                 <GetSalesLeads>test/UnitTestSuite/UITestCase/stub/GetSalesLeads.process</GetSalesLeads>
+                <GetVersion>test/UnitTestSuite/UITestCase/stub/GetVersion.process</GetVersion>
             </bridge-impl>
         </pd:inputBindings>
     </pd:activity>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pd:ProcessDefinition xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns1="http://windyroad.org/rest4BW.xsd" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:pfx2="http://www.w3.org/1999/xhtml">
+<pd:ProcessDefinition xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns1="http://windyroad.org/rest4BW.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:pfx2="http://www.w3.org/1999/xhtml">
     <xsd:import namespace="http://www.w3.org/1999/xhtml" schemaLocation="/schemas/xhtml-strict.xsd"/>
     <pd:name>test/UnitTestSuite/UITestCase/steps/The sales leads are requested.process</pd:name>
     <pd:startName>Start</pd:startName>
@@ -9,6 +9,7 @@
                 <xsd:sequence>
                     <xsd:element name="AddSalesLead" type="xsd:string" minOccurs="0"/>
                     <xsd:element name="GetSalesLeads" type="xsd:string" minOccurs="0"/>
+                    <xsd:element name="GetVersion" type="xsd:string" minOccurs="0"/>
                 </xsd:sequence>
             </xsd:complexType>
         </xsd:element>
@@ -55,6 +56,11 @@
                     <GetSalesLeads>
                         <xsl:value-of select="$Start/bridge-impl/GetSalesLeads"/>
                     </GetSalesLeads>
+                    <xsl:if test="$Start/bridge-impl/GetVersion">
+                        <GetVersion>
+                            <xsl:value-of select="$Start/bridge-impl/GetVersion"/>
+                        </GetVersion>
+                    </xsl:if>
                 </bridge-impl>
             </input>
         </pd:inputBindings>
