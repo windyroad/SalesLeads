@@ -39,9 +39,9 @@
         <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
         <pd:resourceType>ae.process.subprocess</pd:resourceType>
         <pd:x>296</pd:x>
-        <pd:y>66</pd:y>
+        <pd:y>62</pd:y>
         <config>
-            <processName>/test/IntegrationTestSuite/UITestCase/steps/Get Raw Resource.process</processName>
+            <processName>/UI/User Interface.process</processName>
         </config>
         <pd:inputBindings>
             <input>
