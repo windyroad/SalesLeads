@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--Created by TIBCO WSDL-->
-<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://windyroad.com.au/services/concreate/SalesLead" xmlns:ns0="http://windyroad.com.au/services/SalesLead" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="Untitled" targetNamespace="http://windyroad.com.au/services/concreate/SalesLead">
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://windyroad.com.au/services/concreate/SalesLead" xmlns:ns0="http://windyroad.com.au/services/SalesLead" xmlns:soap1="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="Untitled" targetNamespace="http://windyroad.com.au/services/concreate/SalesLead">
     <wsdl:import location="SalesLead.wsdl" namespace="http://windyroad.com.au/services/SalesLead"/>
     <wsdl:service name="SalesLead">
         <wsdl:port binding="tns:SalesLeadBinding" name="SalesLead">
             <soap:address location="http://localhost:9999/SalesLead"/>
+        </wsdl:port>
+        <wsdl:port binding="tns:MetaDataBinding" name="MetaData">
+            <soap:address location="http://localhost:9999/SalesLead/MetaData"/>
         </wsdl:port>
     </wsdl:service>
     <wsdl:binding name="SalesLeadBinding" type="ns0:SalesLead">
@@ -25,6 +28,18 @@
             </wsdl:input>
             <wsdl:output>
                 <soap:body parts="GetSalesLeadsResponse" use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="MetaDataBinding" type="ns0:MetaData">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="GetVersion">
+            <soap:operation soapAction="/SalesLead.serviceagent/MetaDataEndpoint1/GetVersion" style="document"/>
+            <wsdl:input>
+                <soap:body parts="" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body parts="GetVersionResponse" use="literal"/>
             </wsdl:output>
         </wsdl:operation>
     </wsdl:binding>

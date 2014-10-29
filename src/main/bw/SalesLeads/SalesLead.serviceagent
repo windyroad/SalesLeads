@@ -9,8 +9,9 @@
         <groups>
             <row isDefault="true" groupName="Default"/>
         </groups>
-        <serviceChange>Wed Oct 29 13:40:26 EST 2014</serviceChange>
+        <serviceChange>Wed Oct 29 23:22:16 EST 2014</serviceChange>
         <wsdl namespace="http://windyroad.com.au/services/concreate/SalesLead" embedWsdlComponents="false" embedSchemaComponents="false" embedJndiProperties="false"/>
+        <isAMXCompliant>false</isAMXCompliant>
         <interfaceImpl>
             <tab>
                 <tabName>SalesLead</tabName>
@@ -73,6 +74,74 @@
                                                                 <general>
                                                                     <config>
                                                                         <soapAction>/SalesLead/GetSalesLeads</soapAction>
+                                                                        <operationStyle/>
+                                                                        <soapUse>literal</soapUse>
+                                                                        <inputNamespace/>
+                                                                        <outputNamespace/>
+                                                                        <faultNamespace/>
+                                                                        <portAddressPrefix/>
+                                                                    </config>
+                                                                </general>
+                                                            </operation>
+                                                        </soap>
+                                                    </config>
+                                                </tab>
+                                            </epDetail>
+                                        </config>
+                                    </row>
+                                </epBindings>
+                            </config>
+                        </tab>
+                    </detail>
+                </config>
+            </tab>
+            <tab>
+                <tabName>MetaData</tabName>
+                <tabType>bw</tabType>
+                <config>
+                    <wsdlDetail location="/SalesLead.wsdl" portType="MetaData" ns="http://windyroad.com.au/services/SalesLead"/>
+                    <detail>
+                        <tab>
+                            <tabName>service.definition.impl.tab.label</tabName>
+                            <tabType>impl</tabType>
+                            <config>
+                                <operations>
+                                    <row opName="GetVersion" opImpl="/Impl/GetVersion.process"/>
+                                </operations>
+                            </config>
+                        </tab>
+                        <tab>
+                            <tabName>service.definition.ep.tab.label</tabName>
+                            <tabType>ep</tabType>
+                            <config>
+                                <epBindings>
+                                    <row epName="MetaData" epType="soap">
+                                        <config>
+                                            <epDetail>
+                                                <tab>
+                                                    <tabName>soap.service.transport.ui.transport.tab.label</tabName>
+                                                    <tabType>transport</tabType>
+                                                    <config>
+                                                        <sharedChannel>/resources/SalesLeadHTTPService.sharedhttp</sharedChannel>
+                                                        <transport>
+                                                            <config>
+                                                                <useBasicAuthentication>false</useBasicAuthentication>
+                                                                <httpURI>/SalesLead/MetaData</httpURI>
+                                                            </config>
+                                                        </transport>
+                                                    </config>
+                                                </tab>
+                                                <tab>
+                                                    <tabName>soap.service.transport.ui.details.tab.label</tabName>
+                                                    <tabType>details</tabType>
+                                                    <config>
+                                                        <operationStyle>document</operationStyle>
+                                                        <soapVersion>SOAP 1.1</soapVersion>
+                                                        <soap>
+                                                            <operation name="GetVersion">
+                                                                <general>
+                                                                    <config>
+                                                                        <soapAction>/SalesLead.serviceagent/MetaDataEndpoint1/GetVersion</soapAction>
                                                                         <operationStyle/>
                                                                         <soapUse>literal</soapUse>
                                                                         <inputNamespace/>

@@ -11,6 +11,10 @@
     <message name="GetSalesLeadsResponse">
         <part name="GetSalesLeadsResponse" element="ns:SalesLeads"/>
     </message>
+    <message name="GetVersionRequest"/>
+    <message name="GetVersionResponse">
+        <part name="GetVersionResponse" element="ns:Version"/>
+    </message>
     <portType name="SalesLead">
         <operation name="AddSalesLead">
             <input name="input" message="tns:AddSalesLeadRequest"/>
@@ -19,6 +23,12 @@
         <operation name="GetSalesLeads">
             <input message="tns:GetSalesLeadsRequest"/>
             <output message="tns:GetSalesLeadsResponse"/>
+        </operation>
+    </portType>
+    <portType name="MetaData">
+        <operation name="GetVersion">
+            <input message="tns:GetVersionRequest"/>
+            <output message="tns:GetVersionResponse"/>
         </operation>
     </portType>
 </definitions>
