@@ -41,12 +41,12 @@
         <pd:x>296</pd:x>
         <pd:y>66</pd:y>
         <config>
-            <processName>/UI/User Interface.process</processName>
+            <processName>/test/IntegrationTestSuite/UITestCase/steps/Get Raw Resource.process</processName>
         </config>
         <pd:inputBindings>
             <input>
                 <ns1:request>
-                    <ns1:method>WHATISTHIS</ns1:method>
+                    <ns1:method>OPTIONS</ns1:method>
                     <ns1:command>/</ns1:command>
                     <ns1:post/>
                     <ns1:query/>

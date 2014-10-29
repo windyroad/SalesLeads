@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pd:ProcessDefinition xmlns:ns2="http://windyroad.org/rest4BW.xsd" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns1="http://www.tibco.com/pe/EngineTypes" xmlns:ns="http://windyroad.org/bwunit-asserts-0.0.0.xsd" xmlns:ns3="http://windyroad.org/HTTP1.1-StatusCodeDefinitions" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:pfx2="http://www.w3.org/1999/xhtml" xmlns:pfx="http://windyroad.com.au/schemas/SalesLead.xsd">
+<pd:ProcessDefinition xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns2="http://windyroad.org/rest4BW.xsd" xmlns:ns1="http://www.tibco.com/pe/EngineTypes" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns="http://windyroad.org/bwunit-asserts-0.0.0.xsd" xmlns:ns3="http://windyroad.org/HTTP1.1-StatusCodeDefinitions" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:pfx2="http://www.w3.org/1999/xhtml" xmlns:pfx="http://windyroad.com.au/schemas/SalesLead.xsd">
     <xsd:import namespace="http://windyroad.org/HTTP1.1-StatusCodeDefinitions" schemaLocation="/rest4BW/Private/Schemas/StatusCodeDefinitions.xsd"/>
     <pd:name>test/UnitTestSuite/UITestCase/MissingPostTest.process</pd:name>
     <pd:description>@Timeout(60000)</pd:description>
     <pd:startName>Start</pd:startName>
     <pd:startX>79</pd:startX>
-    <pd:startY>54</pd:startY>
+    <pd:startY>59</pd:startY>
     <pd:returnBindings/>
     <pd:endName>End</pd:endName>
-    <pd:endX>633</pd:endX>
-    <pd:endY>54</pd:endY>
+    <pd:endX>568</pd:endX>
+    <pd:endY>61</pd:endY>
     <pd:errorSchemas/>
     <pd:processVariables/>
     <pd:targetNamespace>http://xmlns.example.com/1352340691435</pd:targetNamespace>
     <pd:activity name="A post is made to a missing resource">
         <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
         <pd:resourceType>ae.process.subprocess</pd:resourceType>
-        <pd:x>242</pd:x>
-        <pd:y>81</pd:y>
+        <pd:x>254</pd:x>
+        <pd:y>68</pd:y>
         <config>
             <processName>/test/UnitTestSuite/UITestCase/steps/When a post is made to a missing resource.process</processName>
         </config>
@@ -28,8 +28,8 @@
     <pd:activity name="Then a 404 Not Found Status is Returned">
         <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
         <pd:resourceType>ae.process.subprocess</pd:resourceType>
-        <pd:x>439</pd:x>
-        <pd:y>76</pd:y>
+        <pd:x>420</pd:x>
+        <pd:y>73</pd:y>
         <config>
             <processName>/test/UnitTestSuite/UITestCase/steps/Then a 404 Not Found Status is Returned.process</processName>
         </config>
