@@ -27,7 +27,7 @@
             <service>pfx2:SalesLead</service>
             <servicePort>MetaData</servicePort>
             <operation>GetVersion</operation>
-            <soapAction>/SalesLead.serviceagent/MetaDataEndpoint1/GetVersion</soapAction>
+            <soapAction>/SalesLead/MetaData/GetVersion</soapAction>
             <endpointURL>http://%%Resources/SalesLeadService/Host%%:%%Resources/SalesLeadService/Port%%/SalesLead/MetaData</endpointURL>
             <authScheme>NONE</authScheme>
         </config>
