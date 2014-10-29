@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pd:ProcessDefinition xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns2="http://windyroad.org/rest4BW.xsd" xmlns:ns1="http://www.tibco.com/pe/EngineTypes" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns="http://windyroad.org/bwunit-asserts-0.0.0.xsd" xmlns:ns3="http://windyroad.org/HTTP1.1-StatusCodeDefinitions" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:pfx2="http://www.w3.org/1999/xhtml" xmlns:pfx="http://windyroad.com.au/schemas/SalesLead.xsd">
+<pd:ProcessDefinition xmlns:ns2="http://windyroad.org/rest4BW.xsd" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns1="http://www.tibco.com/pe/EngineTypes" xmlns:ns="http://windyroad.org/bwunit-asserts-0.0.0.xsd" xmlns:ns3="http://windyroad.org/HTTP1.1-StatusCodeDefinitions" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:pfx2="http://www.w3.org/1999/xhtml" xmlns:pfx="http://windyroad.com.au/schemas/SalesLead.xsd">
     <xsd:import namespace="http://windyroad.org/HTTP1.1-StatusCodeDefinitions" schemaLocation="/rest4BW/Private/Schemas/StatusCodeDefinitions.xsd"/>
-    <pd:name>test/UnitTestSuite/UITestCase/MissingResourceTest.process</pd:name>
+    <pd:name>test/UnitTestSuite/UITestCase/MissingPostTest.process</pd:name>
     <pd:description>@Timeout(60000)</pd:description>
     <pd:startName>Start</pd:startName>
     <pd:startX>79</pd:startX>
@@ -13,13 +13,13 @@
     <pd:errorSchemas/>
     <pd:processVariables/>
     <pd:targetNamespace>http://xmlns.example.com/1352340691435</pd:targetNamespace>
-    <pd:activity name="When a missing resource is requested">
+    <pd:activity name="A post is made to a missing resource">
         <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
         <pd:resourceType>ae.process.subprocess</pd:resourceType>
         <pd:x>242</pd:x>
-        <pd:y>67</pd:y>
+        <pd:y>81</pd:y>
         <config>
-            <processName>/test/UnitTestSuite/UITestCase/steps/A missing resource is requested.process</processName>
+            <processName>/test/UnitTestSuite/UITestCase/steps/When a post is made to a missing resource.process</processName>
         </config>
         <pd:inputBindings>
             <bridge-impl/>
@@ -37,18 +37,18 @@
             <pd:coercion xpath="$_error/ns1:ErrorReport/Data/*" type="ns3:StatusCodeErrorDefType"/>
         </pd:coercions>
         <pd:inputBindings>
-            <xsl:copy-of select="$When-a-missing-resource-is-requested/ns2:error"/>
+            <xsl:copy-of select="$A-post-is-made-to-a-missing-resource/ns2:error"/>
         </pd:inputBindings>
     </pd:activity>
     <pd:transition>
         <pd:from>Start</pd:from>
-        <pd:to>When a missing resource is requested</pd:to>
+        <pd:to>A post is made to a missing resource</pd:to>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>always</pd:conditionType>
     </pd:transition>
     <pd:transition>
-        <pd:from>When a missing resource is requested</pd:from>
+        <pd:from>A post is made to a missing resource</pd:from>
         <pd:to>Then a 404 Not Found Status is Returned</pd:to>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
