@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pd:ProcessDefinition xmlns:ns2="http://www.tibco.com/pe/GenerateErrorActivity/InputSchema" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns1="http://windyroad.org/rest4BW.xsd" xmlns:ns4="http://www.tibco.com/pe/DeployedVarsType" xmlns:ns="http://www.tibco.com/pe/EngineTypes" xmlns:ns3="http://windyroad.org/HTTP1.1-StatusCodeDefinitions" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:pfx2="http://www.w3.org/1999/xhtml">
+<pd:ProcessDefinition xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns2="http://www.tibco.com/pe/GenerateErrorActivity/InputSchema" xmlns:ns1="http://windyroad.org/rest4BW.xsd" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns="http://www.tibco.com/pe/EngineTypes" xmlns:ns3="http://windyroad.org/HTTP1.1-StatusCodeDefinitions" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:pfx2="http://www.w3.org/1999/xhtml">
     <xsd:import namespace="http://www.w3.org/1999/xhtml" schemaLocation="/schemas/xhtml-strict.xsd"/>
     <xsd:import namespace="http://windyroad.org/HTTP1.1-StatusCodeDefinitions" schemaLocation="/rest4BW/Private/Schemas/StatusCodeDefinitions.xsd"/>
-    <pd:name>test/UnitTestSuite/UITestCase/steps/An invalid method is used against the UI.process</pd:name>
+    <pd:name>test/IntegrationTestSuite/UITestCase/steps/When a post is made to a missing resource.process</pd:name>
     <pd:startName>Start</pd:startName>
     <pd:startType>
         <xsd:element name="bridge-impl">
@@ -35,7 +35,7 @@
     </pd:errorSchemas>
     <pd:processVariables/>
     <pd:targetNamespace>http://xmlns.example.com/1414552564085</pd:targetNamespace>
-    <pd:activity name="GetResource">
+    <pd:activity name="PostResource">
         <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
         <pd:resourceType>ae.process.subprocess</pd:resourceType>
         <pd:x>296</pd:x>
@@ -46,13 +46,11 @@
         <pd:inputBindings>
             <input>
                 <ns1:request>
-                    <ns1:method>OPTIONS</ns1:method>
-                    <ns1:command>/</ns1:command>
+                    <ns1:method>POST</ns1:method>
+                    <ns1:command>/doesnotexist.jpg</ns1:command>
                     <ns1:post/>
                     <ns1:query/>
-                    <ns1:host>
-                        <xsl:value-of select="$_globalVariables/ns4:GlobalVariables/Resources/SalesLeadUI/Host"/>
-                    </ns1:host>
+                    <ns1:host>127.0.0.1</ns1:host>
                     <ns1:accepts>
                         <ns1:accept>
                             <xsl:attribute xmlns:xsl="http://www.w3.org/1999/XSL/Transform" name="type">application/xhtml+xml</xsl:attribute>
@@ -73,13 +71,13 @@
     </pd:activity>
     <pd:transition>
         <pd:from>Start</pd:from>
-        <pd:to>GetResource</pd:to>
+        <pd:to>PostResource</pd:to>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>always</pd:conditionType>
     </pd:transition>
     <pd:transition>
-        <pd:from>GetResource</pd:from>
+        <pd:from>PostResource</pd:from>
         <pd:to>End</pd:to>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-65536</pd:lineColor>

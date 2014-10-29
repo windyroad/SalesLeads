@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns1="http://windyroad.org/rest4BW.xsd" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns="http://www.tibco.com/pe/DeployedVarsType" xmlns:ns0="http://windyroad.org/bwunit-asserts-0.0.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns12="http://windyroad.org/wr-http.xsd" xmlns:pfx="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <pd:name>test/IntegrationTestSuite/UITestCase/steps/Then the linked resources are available.process</pd:name>
+    <pd:startName>Start</pd:startName>
+    <pd:startType ref="pfx:html"/>
+    <pd:startX>59</pd:startX>
+    <pd:startY>244</pd:startY>
+    <pd:returnBindings/>
+    <pd:endName>End</pd:endName>
+    <pd:endX>772</pd:endX>
+    <pd:endY>247</pd:endY>
+    <pd:errorSchemas/>
+    <pd:processVariables/>
+    <pd:targetNamespace>http://xmlns.example.com/1414552592671</pd:targetNamespace>
+    <pd:group name="Group">
+        <pd:type>com.tibco.pe.core.LoopGroup</pd:type>
+        <pd:resourceType>ae.process.group</pd:resourceType>
+        <pd:x>243</pd:x>
+        <pd:y>58</pd:y>
+        <pd:width>349</pd:width>
+        <pd:height>355</pd:height>
+        <pd:collapsedWidth>57</pd:collapsedWidth>
+        <pd:collapsedHeight>70</pd:collapsedHeight>
+        <pd:groupVariables/>
+        <pd:joinToggle>inherit</pd:joinToggle>
+        <config>
+            <pd:groupType>inputLoop</pd:groupType>
+            <pd:serializable>false</pd:serializable>
+            <pd:over>$Start//pfx:*/@href | $Start//pfx:*/@src</pd:over>
+            <pd:iterationElementSlot>href</pd:iterationElementSlot>
+            <pd:indexSlot>i</pd:indexSlot>
+            <pd:activityOutputName/>
+            <pd:accumulateOutput>false</pd:accumulateOutput>
+        </config>
+        <pd:inputBindings/>
+        <pd:expanded>true</pd:expanded>
+        <pd:transition>
+            <pd:from>start</pd:from>
+            <pd:to>Get Resource</pd:to>
+            <pd:lineType>Default</pd:lineType>
+            <pd:lineColor>-16777216</pd:lineColor>
+            <pd:conditionType>always</pd:conditionType>
+        </pd:transition>
+        <pd:transition>
+            <pd:from>Get Resource</pd:from>
+            <pd:to>end</pd:to>
+            <pd:lineType>Default</pd:lineType>
+            <pd:lineColor>-16777216</pd:lineColor>
+            <pd:conditionType>always</pd:conditionType>
+        </pd:transition>
+        <pd:activity name="Get Resource">
+            <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+            <pd:resourceType>ae.process.subprocess</pd:resourceType>
+            <pd:x>332</pd:x>
+            <pd:y>244</pd:y>
+            <config>
+                <processName>/test/IntegrationTestSuite/UITestCase/steps/Get Raw Resource.process</processName>
+            </config>
+            <pd:inputBindings>
+                <xsl:variable name="href" select="($Start//pfx:*/@href | $Start//pfx:*/@src)[$i]"/>
+                <input>
+                    <ns1:request>
+                        <ns1:method>GET</ns1:method>
+                        <xsl:choose>
+                            <xsl:when test="starts-with($href, &quot;/&quot;)">
+                                <ns1:command>
+                                    <xsl:value-of select="$href"/>
+                                </ns1:command>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <ns1:command>
+                                    <xsl:value-of select="concat(&quot;/&quot;, $href)"/>
+                                </ns1:command>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                        <ns1:post/>
+                        <ns1:query/>
+                        <ns1:host>
+                            <xsl:value-of select="$_globalVariables/ns:GlobalVariables/Resources/SalesLeadUI/Host"/>
+                        </ns1:host>
+                        <ns1:accepts/>
+                        <ns1:etag/>
+                    </ns1:request>
+                </input>
+            </pd:inputBindings>
+        </pd:activity>
+    </pd:group>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>Group</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Group</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:label>
+        <pd:name>Label</pd:name>
+        <pd:description>No Assert Needed as Get Resource will raise an error if the resource
+is not found.</pd:description>
+        <pd:x>859</pd:x>
+        <pd:y>391</pd:y>
+        <pd:width>427</pd:width>
+        <pd:height>97</pd:height>
+        <pd:fontColor>-16777216</pd:fontColor>
+        <pd:color>-1</pd:color>
+        <pd:type>solid</pd:type>
+        <pd:thickness>0</pd:thickness>
+        <pd:fade>true</pd:fade>
+    </pd:label>
+</pd:ProcessDefinition>

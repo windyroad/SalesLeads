@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:ns2="www.tibco.com/plugin/java/JavaMethodActivityInput" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns1="http://www.tibco.com/pe/DeployedVarsType" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns="http://windyroad.org/bwunit-asserts-0.0.0.xsd" xmlns:ns3="www.tibco.com/plugin/java/JavaMethodActivityOutput" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:pfx4="http://windyroad.com.au/services/SalesLead" xmlns:pfx3="http://windyroad.com.au/services/concreate/SalesLead" xmlns:pfx2="http://windyroad.com.au/services/concrete/SalesLead" xmlns:pfx="http://windyroad.com.au/schemas/SalesLead.xsd">
+    <xsd:import namespace="http://windyroad.com.au/schemas/SalesLead.xsd" schemaLocation="/SalesLead.xsd"/>
+    <wsdl:import namespace="http://windyroad.com.au/services/concreate/SalesLead" location="/SalesLeadConcrete.wsdl"/>
+    <pd:name>test/IntegrationTestSuite/UITestCase/steps/Get Resource.process</pd:name>
+    <pd:startName>Start</pd:startName>
+    <pd:startType>
+        <xsd:element name="url" type="xsd:string"/>
+    </pd:startType>
+    <pd:startX>146</pd:startX>
+    <pd:startY>72</pd:startY>
+    <pd:returnBindings>
+        <content>
+            <xsl:value-of select="$Get-Resource/javaCodeActivityOutput/content"/>
+        </content>
+    </pd:returnBindings>
+    <pd:endName>End</pd:endName>
+    <pd:endType>
+        <xsd:element name="content" type="xsd:string"/>
+    </pd:endType>
+    <pd:endX>654</pd:endX>
+    <pd:endY>73</pd:endY>
+    <pd:errorSchemas/>
+    <pd:processVariables/>
+    <pd:targetNamespace>http://xmlns.example.com/1413193119895</pd:targetNamespace>
+    <pd:activity name="Get Web Driver">
+        <pd:type>com.tibco.plugin.java.JavaMethodActivity</pd:type>
+        <pd:resourceType>ae.activities.JavaMethodActivity</pd:resourceType>
+        <pd:x>303</pd:x>
+        <pd:y>72</pd:y>
+        <config>
+            <ConstructDeclaredClass>false</ConstructDeclaredClass>
+            <CacheConstructedClass>false</CacheConstructedClass>
+            <InvokeCleanupMethod>false</InvokeCleanupMethod>
+            <JavaGlobalInstance>/test/WebDriver.serviceagent</JavaGlobalInstance>
+            <MethodInfo>
+                <className>au.com.windyroad.salesleads.ui.Driver</className>
+                <methodName>getSelf</methodName>
+                <methodReturn>au.com.windyroad.salesleads.ui.Driver</methodReturn>
+            </MethodInfo>
+        </config>
+        <pd:inputBindings>
+            <ns2:JavaMethodActivityInput/>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Get Resource">
+        <pd:type>com.tibco.plugin.java.JavaActivity</pd:type>
+        <pd:resourceType>ae.javapalette.javaActivity</pd:resourceType>
+        <pd:x>490</pd:x>
+        <pd:y>74</pd:y>
+        <config>
+            <fileName>GetResourceGetResource</fileName>
+            <packageName>test.IntegrationTestSuite.UITestCase.steps.GetResource</packageName>
+            <fullsource>package test.IntegrationTestSuite.UITestCase.steps.GetResource;
+import java.util.*;
+import java.io.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import  au.com.windyroad.salesleads.ui.Driver;
+
+public class GetResourceGetResource{
+/****** START SET/GET METHOD, DO NOT MODIFY *****/
+	protected String url = "";
+	protected Object driver = null;
+	protected String content = "";
+	public String geturl() {
+		return url;
+	}
+	public void seturl(String val) {
+		url = val;
+	}
+	public Object getdriver() {
+		return driver;
+	}
+	public void setdriver(Object val) {
+		driver = val;
+	}
+	public String getcontent() {
+		return content;
+	}
+	public void setcontent(String val) {
+		content = val;
+	}
+/****** END SET/GET METHOD, DO NOT MODIFY *****/
+	public GetResourceGetResource() {
+	}
+	public void invoke() throws Exception {
+/* Available Variables: DO NOT MODIFY
+	In  : String url
+	In  : Object driver
+	Out : String content
+* Available Variables: DO NOT MODIFY *****/
+
+Driver webDriver = (Driver)driver;
+
+		webDriver.getDriver().get(url);
+		content = webDriver.getDriver().getPageSource();
+
+
+}
+}
+</fullsource>
+            <inputData>
+                <row>
+                    <fieldName>url</fieldName>
+                    <fieldType>string</fieldType>
+                    <fieldRequired>required</fieldRequired>
+                </row>
+                <row>
+                    <fieldName>driver</fieldName>
+                    <fieldType>ObjectReference</fieldType>
+                    <fieldRequired>required</fieldRequired>
+                </row>
+            </inputData>
+            <outputData>
+                <row>
+                    <fieldName>content</fieldName>
+                    <fieldType>string</fieldType>
+                    <fieldRequired>required</fieldRequired>
+                </row>
+            </outputData>
+            <byteCode>
+                <class>
+                    <name>GetResourceGetResource</name>
+                    <byteCode>yv66vgAAADMANgkACgAkCQAKACUJAAoAJgoACwAnCAAoBwApCgAGACoLACsALAsAKwAtBwAuBwAvAQADdXJsAQASTGphdmEvbGFuZy9TdHJpbmc7AQAGZHJpdmVyAQASTGphdmEvbGFuZy9PYmplY3Q7AQAHY29udGVudAEABmdldHVybAEAFCgpTGphdmEvbGFuZy9TdHJpbmc7AQAEQ29kZQEAD0xpbmVOdW1iZXJUYWJsZQEABnNldHVybAEAFShMamF2YS9sYW5nL1N0cmluZzspVgEACWdldGRyaXZlcgEAFCgpTGphdmEvbGFuZy9PYmplY3Q7AQAJc2V0ZHJpdmVyAQAVKExqYXZhL2xhbmcvT2JqZWN0OylWAQAKZ2V0Y29udGVudAEACnNldGNvbnRlbnQBAAY8aW5pdD4BAAMoKVYBAAZpbnZva2UBAApFeGNlcHRpb25zBwAwAQAKU291cmNlRmlsZQEAG0dldFJlc291cmNlR2V0UmVzb3VyY2UuamF2YQwADAANDAAOAA8MABAADQwAHQAeAQAAAQAlYXUvY29tL3dpbmR5cm9hZC9zYWxlc2xlYWRzL3VpL0RyaXZlcgwAMQAyBwAzDAA0ABYMADUAEgEATXRlc3QvSW50ZWdyYXRpb25UZXN0U3VpdGUvVUlUZXN0Q2FzZS9zdGVwcy9HZXRSZXNvdXJjZS9HZXRSZXNvdXJjZUdldFJlc291cmNlAQAQamF2YS9sYW5nL09iamVjdAEAE2phdmEvbGFuZy9FeGNlcHRpb24BAAlnZXREcml2ZXIBACEoKUxvcmcvb3BlbnFhL3NlbGVuaXVtL1dlYkRyaXZlcjsBAB1vcmcvb3BlbnFhL3NlbGVuaXVtL1dlYkRyaXZlcgEAA2dldAEADWdldFBhZ2VTb3VyY2UAIQAKAAsAAAADAAQADAANAAAABAAOAA8AAAAEABAADQAAAAgAAQARABIAAQATAAAAHQABAAEAAAAFKrQAAbAAAAABABQAAAAGAAEAAAAQAAEAFQAWAAEAEwAAACIAAgACAAAABiortQABsQAAAAEAFAAAAAoAAgAAABMABQAUAAEAFwAYAAEAEwAAAB0AAQABAAAABSq0AAKwAAAAAQAUAAAABgABAAAAFgABABkAGgABABMAAAAiAAIAAgAAAAYqK7UAArEAAAABABQAAAAKAAIAAAAZAAUAGgABABsAEgABABMAAAAdAAEAAQAAAAUqtAADsAAAAAEAFAAAAAYAAQAAABwAAQAcABYAAQATAAAAIgACAAIAAAAGKiu1AAOxAAAAAQAUAAAACgACAAAAHwAFACAAAQAdAB4AAQATAAAAPgACAAEAAAAWKrcABCoSBbUAASoBtQACKhIFtQADsQAAAAEAFAAAABYABQAAACIABAAMAAoADQAPAA4AFQAjAAEAHwAeAAIAEwAAAEcAAgACAAAAIyq0AALAAAZMK7YAByq0AAG5AAgCACortgAHuQAJAQC1AAOxAAAAAQAUAAAAEgAEAAAAKwAIAC0AFQAuACIAMQAgAAAABAABACEAAQAiAAAAAgAj</byteCode>
+                </class>
+            </byteCode>
+        </config>
+        <pd:inputBindings>
+            <javaCodeActivityInput>
+                <url>
+                    <xsl:value-of select="concat(&quot;http://&quot;,$_globalVariables/ns1:GlobalVariables/Resources/SalesLeadUI/Host,&quot;:&quot;, $_globalVariables/ns1:GlobalVariables/Resources/SalesLeadUI/Port, $Start/url)"/>
+                </url>
+                <driver>
+                    <xsl:value-of select="$Get-Web-Driver/ns3:JavaMethodActivityOutput/MethodReturnValue"/>
+                </driver>
+            </javaCodeActivityInput>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>Get Web Driver</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Get Web Driver</pd:from>
+        <pd:to>Get Resource</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Get Resource</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+</pd:ProcessDefinition>

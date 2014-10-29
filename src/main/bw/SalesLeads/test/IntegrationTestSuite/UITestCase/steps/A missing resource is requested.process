@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:ns2="http://www.tibco.com/pe/GenerateErrorActivity/InputSchema" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns1="http://windyroad.org/rest4BW.xsd" xmlns:ns="http://www.tibco.com/pe/EngineTypes" xmlns:ns3="http://windyroad.org/HTTP1.1-StatusCodeDefinitions" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:pfx2="http://www.w3.org/1999/xhtml">
+    <xsd:import namespace="http://www.w3.org/1999/xhtml" schemaLocation="/schemas/xhtml-strict.xsd"/>
+    <xsd:import namespace="http://windyroad.org/HTTP1.1-StatusCodeDefinitions" schemaLocation="/rest4BW/Private/Schemas/StatusCodeDefinitions.xsd"/>
+    <pd:name>test/IntegrationTestSuite/UITestCase/steps/A missing resource is requested.process</pd:name>
+    <pd:startName>Start</pd:startName>
+    <pd:startType/>
+    <pd:startX>150</pd:startX>
+    <pd:startY>64</pd:startY>
+    <pd:returnCoercions>
+        <pd:coercion xpath="$_error/ns:ErrorReport/Data/*" type="ns3:StatusCodeErrorDefType"/>
+    </pd:returnCoercions>
+    <pd:returnBindings>
+        <content>
+            <xsl:value-of select="$GetResource/content"/>
+        </content>
+    </pd:returnBindings>
+    <pd:endName>End</pd:endName>
+    <pd:endType>
+        <xsd:element name="content" type="xsd:string"/>
+    </pd:endType>
+    <pd:endX>583</pd:endX>
+    <pd:endY>66</pd:endY>
+    <pd:errorSchemas>
+        <Error ref="ns1:error"/>
+    </pd:errorSchemas>
+    <pd:processVariables/>
+    <pd:targetNamespace>http://xmlns.example.com/1414552564085</pd:targetNamespace>
+    <pd:activity name="GetResource">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>296</pd:x>
+        <pd:y>65</pd:y>
+        <config>
+            <processName>/test/IntegrationTestSuite/UITestCase/steps/Get Resource.process</processName>
+        </config>
+        <pd:inputBindings>
+            <url>/doesnotexist.jpg</url>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>GetResource</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>GetResource</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+</pd:ProcessDefinition>
