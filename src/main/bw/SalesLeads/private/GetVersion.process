@@ -8,10 +8,10 @@
     <pd:returnBindings>
         <pfx:Version>
             <xsl:attribute name="binary">
-                <xsl:value-of select="$GetBinaryVersion/property/@value"/>
+                <xsl:value-of select="tib:if-absent($GetBinaryVersion/property/@value, &quot;LOCAL&quot;)"/>
             </xsl:attribute>
             <xsl:attribute name="configuration">
-                <xsl:value-of select="$GetConfigVersion/property/@value"/>
+                <xsl:value-of select="tib:if-absent($GetConfigVersion/property/@value, &quot;LOCAL&quot;)"/>
             </xsl:attribute>
         </pfx:Version>
     </pd:returnBindings>
