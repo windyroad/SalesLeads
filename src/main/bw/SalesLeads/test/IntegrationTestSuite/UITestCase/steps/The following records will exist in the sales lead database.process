@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pd:ProcessDefinition xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns2="www.tibco.com/plugin/java/JavaMethodActivityInput" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns1="http://www.tibco.com/pe/DeployedVarsType" xmlns:ns="http://windyroad.org/bwunit-asserts-0.0.0.xsd" xmlns:ns3="www.tibco.com/plugin/java/JavaMethodActivityOutput" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:pfx4="http://windyroad.com.au/services/SalesLead" xmlns:pfx3="http://windyroad.com.au/services/concreate/SalesLead" xmlns:pfx2="http://windyroad.com.au/services/concrete/SalesLead" xmlns:pfx="http://windyroad.com.au/schemas/SalesLead.xsd">
+<pd:ProcessDefinition xmlns:BW="java://com.tibco.pe.core.JavaCustomXPATHFunctions" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns="http://windyroad.org/bwunit-asserts-0.0.0.xsd" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:pfx="http://windyroad.com.au/schemas/SalesLead.xsd" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns2="www.tibco.com/plugin/java/JavaMethodActivityInput" xmlns:ns1="http://www.tibco.com/pe/DeployedVarsType" xmlns:ns4="http://www.tibco.com/pe/EngineTypes" xmlns:ns3="www.tibco.com/plugin/java/JavaMethodActivityOutput" xmlns:pfx4="http://windyroad.com.au/services/SalesLead" xmlns:pfx3="http://windyroad.com.au/services/concreate/SalesLead" xmlns:pfx2="http://windyroad.com.au/services/concrete/SalesLead">
     <xs:import xmlns:xs="http://www.w3.org/2001/XMLSchema" namespace="http://windyroad.com.au/schemas/SalesLead.xsd" schemaLocation="/SalesLead.xsd"/>
     <wsdl:import namespace="http://windyroad.com.au/services/concreate/SalesLead" location="/SalesLeadConcrete.wsdl"/>
     <pd:name>test/IntegrationTestSuite/UITestCase/steps/The following records will exist in the sales lead database.process</pd:name>
@@ -9,16 +9,16 @@
     <pd:startY>72</pd:startY>
     <pd:returnBindings/>
     <pd:endName>End</pd:endName>
-    <pd:endX>862</pd:endX>
-    <pd:endY>73</pd:endY>
+    <pd:endX>921</pd:endX>
+    <pd:endY>80</pd:endY>
     <pd:errorSchemas/>
     <pd:processVariables/>
     <pd:targetNamespace>http://xmlns.example.com/1413193119895</pd:targetNamespace>
     <pd:activity name="AssertEqual">
         <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
         <pd:resourceType>ae.process.subprocess</pd:resourceType>
-        <pd:x>708</pd:x>
-        <pd:y>71</pd:y>
+        <pd:x>782</pd:x>
+        <pd:y>81</pd:y>
         <config>
             <processName>/BWUnit/Public/Asserts/AssertEqual.process</processName>
         </config>
@@ -229,6 +229,22 @@ Driver webDriver = (Driver)driver;
             </javaCodeActivityInput>
         </pd:inputBindings>
     </pd:activity>
+    <pd:activity name="Record Success Screen Shot">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>651</pd:x>
+        <pd:y>86</pd:y>
+        <config>
+            <processName>/test/IntegrationTestSuite/UITestCase/steps/RecordScreenShot.process</processName>
+        </config>
+        <pd:inputBindings>
+            <input>
+                <filename>
+                    <xsl:value-of select="concat($_globalVariables/ns1:GlobalVariables/Test/ScreenShotDir, '/', BW:getCurrentProcessName($_processContext/ns4:ProcessContext/ProcessId),'.png')"/>
+                </filename>
+            </input>
+        </pd:inputBindings>
+    </pd:activity>
     <pd:transition>
         <pd:from>AssertEqual</pd:from>
         <pd:to>End</pd:to>
@@ -252,6 +268,13 @@ Driver webDriver = (Driver)driver;
     </pd:transition>
     <pd:transition>
         <pd:from>Get Sales Leads</pd:from>
+        <pd:to>Record Success Screen Shot</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Record Success Screen Shot</pd:from>
         <pd:to>AssertEqual</pd:to>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
