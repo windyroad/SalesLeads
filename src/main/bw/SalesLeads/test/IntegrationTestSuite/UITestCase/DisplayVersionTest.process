@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns="http://windyroad.org/bwunit-asserts-0.0.0.xsd" xmlns:pfx="http://windyroad.com.au/schemas/SalesLead.xsd">
+    <pd:name>test/IntegrationTestSuite/UITestCase/DisplayVersionTest.process</pd:name>
+    <pd:description>@Timeout(60000)</pd:description>
+    <pd:startName>Start</pd:startName>
+    <pd:startX>77</pd:startX>
+    <pd:startY>80</pd:startY>
+    <pd:returnBindings/>
+    <pd:endName>End</pd:endName>
+    <pd:endX>861</pd:endX>
+    <pd:endY>80</pd:endY>
+    <pd:errorSchemas/>
+    <pd:processVariables/>
+    <pd:targetNamespace>http://xmlns.example.com/1352340691435</pd:targetNamespace>
+    <pd:activity name="And the current configuration version is [X]">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>336</pd:x>
+        <pd:y>95</pd:y>
+        <config>
+            <processName>/test/UnitTestSuite/steps/The current configuration version is [X].process</processName>
+        </config>
+        <pd:inputBindings>
+            <version>2.9.3</version>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Given the current binary version is [X]">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>195</pd:x>
+        <pd:y>95</pd:y>
+        <config>
+            <processName>/test/UnitTestSuite/steps/The current binary version is [X].process</processName>
+        </config>
+        <pd:inputBindings>
+            <version>2.9</version>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Then the binary version [X] will be reported">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>602</pd:x>
+        <pd:y>95</pd:y>
+        <config>
+            <processName>/test/UnitTestSuite/steps/The binary version [X] will be reported.process</processName>
+        </config>
+        <pd:inputBindings>
+            <input>
+                <expectedVersion>
+                    <xsl:value-of select="$Given-the-current-binary-version-is-X/version"/>
+                </expectedVersion>
+                <actualVersion>
+                    <xsl:value-of select="$When-the-application-version-is-requested/pfx:Version/@binary"/>
+                </actualVersion>
+            </input>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Then the configuration version [X] will be reported">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>742</pd:x>
+        <pd:y>103</pd:y>
+        <config>
+            <processName>/test/UnitTestSuite/steps/The configuration version [X] will be reported.process</processName>
+        </config>
+        <pd:inputBindings>
+            <input>
+                <expectedVersion>
+                    <xsl:value-of select="$And-the-current-configuration-version-is-X/version"/>
+                </expectedVersion>
+                <actualVersion>
+                    <xsl:value-of select="$When-the-application-version-is-requested/pfx:Version/@configuration"/>
+                </actualVersion>
+            </input>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="When the application version is requested">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>467</pd:x>
+        <pd:y>100</pd:y>
+        <config>
+            <processName>/test/IntegrationTestSuite/UITestCase/steps/The application version is requested.process</processName>
+        </config>
+        <pd:inputBindings/>
+    </pd:activity>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>Given the current binary version is [X]</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Given the current binary version is [X]</pd:from>
+        <pd:to>And the current configuration version is [X]</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>And the current configuration version is [X]</pd:from>
+        <pd:to>When the application version is requested</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>When the application version is requested</pd:from>
+        <pd:to>Then the binary version [X] will be reported</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Then the binary version [X] will be reported</pd:from>
+        <pd:to>Then the configuration version [X] will be reported</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Then the configuration version [X] will be reported</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:iconImage>R0lGODlhMAAwAOemACk6Rys8SSw9SS09SjNEUDREUTVFUTZGUjdHUzhHUzhIVDlJVUBPW0NRXUNS&#xD;
+XkZVYFJfalNha2BsdmdzfGdzfWh0fWl1fnB7hHN+h2KRwGWTwWmWxImTmmqZxI2WnW+bx3GdyHah&#xD;
+y3eizHymzn+nzp+mrKCnrYOs0oWt0o6w0oqx1aatsoyy1ZKy06mwtZO01KqxtpC22Za21pO32Zi3&#xD;
+1660ua62u5u52LC3u7G3vJe83J272Zm83Z+92qG/3KTB3Li+wqbB26bD3qPF46rE3ajF36TH47HF&#xD;
+2K7G36rH4bPG2q3I4cDFyLXI27LK4a/L47jL3bHN5LXN5K/P6rTO5rDP6bvN3rzO27zO3bbP5sjM&#xD;
+0L7P4LnQ5cDR38DS4bzT587S1cPU4r3V68XV47/W68DW6dDU17vY8MfW4bzZ8MTY683X38rZ5tXZ&#xD;
+28Xc78fc78ve79De6cji99Ti7M7j9Mrk9s/k9NLk89/i5ODi5eHj5eLk5uPl59bp+Nnp9tjq+Obo&#xD;
+6ufp6t7r9ujq6+nq7Ors7evt7uzt7+zu8O3u7+3v8O3v8e7v8O7w8u/w8e/w8u/x8vDx8vHy8/Lz&#xD;
+9PT19vb39/f4+Pj4+fj5+fn5+fn5+vn6+vr6+/r7+/v7/Pv8/Pz8/Pz8/fz9/f39/f39/v7+/v//&#xD;
+////////////////////////////////////////////////////////////////////////////&#xD;
+////////////////////////////////////////////////////////////////////////////&#xD;
+////////////////////////////////////////////////////////////////////////////&#xD;
+////////////////////////////////////////////////////////////////////////////&#xD;
+/////////////////////////////////////////////////////yH5BAEKAP8ALAAAAAAwADAA&#xD;
+AAj+AP8JHPjPlMGDCBMqXKiQoMOBDCNKnPhQ4MSLGBsSzGgQiAUKIEOCrGCCo6mNGQsBWMmy5Uot&#xD;
+HCFybAPgAZObOG9KAIDDpEWOZgAcWKEQCAMANXyaNFXJAYABkhIuAFCAz9Krkw4ASJRQK56rYKcy&#xD;
+6gogKtilYsmaPctRAQBHatmadAsXoda1ci/SjZsXYwIAkPj2nfg3sN2ygy8WFpyY4eLDeBsrRAAg&#xD;
+EmPJCSlbhoyZIeUjKVpoyBBE6+bOmQEoeSGjwwYiWhGhngygCY0bID4g0bpodmooO3qICOGEt2+E&#xD;
+lK34+EFihBTjxw1S3iKkCIoTXKBHp+wlyRIWKr7MaD9OOcyTKDNilBnvm/IYKll46FCjtVF06QDY&#xD;
+iCFjZAic+veZQlkcbrxRxRR3AHgfZXPQYUcaZ/ih1SMBNgDAGn38UYccgggQACcBYgCAB2hcgUUX&#xD;
+NgAQQYCmBAUAB3kckgMBAMDAoiUluATABaUEiIkihoAxgQEDQODCKCwmqeSSTF5UUJMG/QSlTBmR&#xD;
+EgoomBCyhx6ATAIWShyVQskggQQyyJmG+QQmRp44AkkloYyiSSSOXKLmQxltYkknpIji5yeWZJJR&#xD;
+RQ4dV1FAADs=&#xD;
+</pd:iconImage>
+</pd:ProcessDefinition>

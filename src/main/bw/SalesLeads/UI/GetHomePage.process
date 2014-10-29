@@ -15,6 +15,7 @@
                             <xsd:sequence>
                                 <xsd:element name="AddSalesLead" type="xsd:string" minOccurs="0"/>
                                 <xsd:element name="GetSalesLeads" type="xsd:string" minOccurs="0"/>
+                                <xsd:element name="GetVersion" type="xsd:string" minOccurs="0"/>
                             </xsd:sequence>
                         </xsd:complexType>
                     </xsd:element>
@@ -46,7 +47,7 @@
     <pd:activity name="Get List">
         <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
         <pd:resourceType>ae.process.subprocess</pd:resourceType>
-        <pd:x>277</pd:x>
+        <pd:x>188</pd:x>
         <pd:y>64</pd:y>
         <config>
             <processName>/UI/Bridge/GetSalesLeads.process</processName>
@@ -77,6 +78,7 @@
                     <ns1:link href="css/vendor/bootstrap.min.css" rel="stylesheet"/>
                     <!-- Loading Flat UI -->
                     <ns1:link href="css/flat-ui.css" rel="stylesheet"/>
+                    <ns1:link href="css/sticky-footer.css" rel="stylesheet"/>
                     <ns1:link rel="shortcut icon" href="img/favicon.ico"/>
                     <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
                     <!--[if lt IE 9]>
@@ -86,93 +88,122 @@
                 </ns1:head>
                 <ns1:body>
                     <ns1:div>
-                        <xsl:attribute name="class">container</xsl:attribute>
-                        <ns1:h1>Sales Leads</ns1:h1>
-                        <ns1:form>
-                            <xsl:attribute name="action">/</xsl:attribute>
-                            <xsl:attribute name="method">post</xsl:attribute>
-                            <xsl:attribute name="enctype">multipart/form-data</xsl:attribute>
-                            <xsl:attribute name="id">SalesLeadsForm</xsl:attribute>
-                            <ns1:table>
-                                <xsl:attribute name="id">SalesLeads</xsl:attribute>
-                                <xsl:attribute name="class">table</xsl:attribute>
-                                <ns1:thead>
-                                    <ns1:tr>
-                                        <ns1:th>First Name</ns1:th>
-                                        <ns1:th>Last Name</ns1:th>
-                                        <ns1:th>Email</ns1:th>
-                                        <ns1:th>Phone Number</ns1:th>
-                                        <ns1:th/>
-                                    </ns1:tr>
-                                </ns1:thead>
-                                <ns1:tbody>
-                                    <xsl:for-each select="$Get-List/ns:GetSalesLeadsResponse/GetSalesLeadsResponse/ns2:SalesLeads/ns2:SalesLead">
+                        <xsl:attribute name="id">wrap</xsl:attribute>
+                        <ns1:div>
+                            <xsl:attribute name="class">container</xsl:attribute>
+                            <ns1:h1>Sales Leads</ns1:h1>
+                            <ns1:form>
+                                <xsl:attribute name="action">/</xsl:attribute>
+                                <xsl:attribute name="method">post</xsl:attribute>
+                                <xsl:attribute name="enctype">multipart/form-data</xsl:attribute>
+                                <xsl:attribute name="id">SalesLeadsForm</xsl:attribute>
+                                <ns1:table>
+                                    <xsl:attribute name="id">SalesLeads</xsl:attribute>
+                                    <xsl:attribute name="class">table</xsl:attribute>
+                                    <ns1:thead>
                                         <ns1:tr>
-                                            <xsl:attribute name="class">record</xsl:attribute>
+                                            <ns1:th>First Name</ns1:th>
+                                            <ns1:th>Last Name</ns1:th>
+                                            <ns1:th>Email</ns1:th>
+                                            <ns1:th>Phone Number</ns1:th>
+                                            <ns1:th/>
+                                        </ns1:tr>
+                                    </ns1:thead>
+                                    <ns1:tbody>
+                                        <xsl:for-each select="$Get-List/ns:GetSalesLeadsResponse/GetSalesLeadsResponse/ns2:SalesLeads/ns2:SalesLead">
+                                            <ns1:tr>
+                                                <xsl:attribute name="class">record</xsl:attribute>
+                                                <ns1:td>
+                                                    <xsl:attribute name="class">firstName</xsl:attribute>
+                                                    <xsl:value-of select="ns2:FirstName"/>
+                                                </ns1:td>
+                                                <ns1:td>
+                                                    <xsl:attribute name="class">lastName</xsl:attribute>
+                                                    <xsl:value-of select="ns2:LastName"/>
+                                                </ns1:td>
+                                                <ns1:td>
+                                                    <xsl:attribute name="class">email</xsl:attribute>
+                                                    <xsl:value-of select="ns2:Email"/>
+                                                </ns1:td>
+                                                <ns1:td>
+                                                    <xsl:attribute name="class">phoneNumber</xsl:attribute>
+                                                    <xsl:value-of select="ns2:PhoneNumber"/>
+                                                </ns1:td>
+                                            </ns1:tr>
+                                        </xsl:for-each>
+                                        <ns1:tr>
                                             <ns1:td>
-                                                <xsl:attribute name="class">firstName</xsl:attribute>
-                                                <xsl:value-of select="ns2:FirstName"/>
+                                                <ns1:input>
+                                                    <xsl:attribute name="id">FirstName</xsl:attribute>
+                                                    <xsl:attribute name="type">text</xsl:attribute>
+                                                    <xsl:attribute name="name">FirstName</xsl:attribute>
+                                                    <xsl:attribute name="class">form-control</xsl:attribute>
+                                                </ns1:input>
                                             </ns1:td>
                                             <ns1:td>
-                                                <xsl:attribute name="class">lastName</xsl:attribute>
-                                                <xsl:value-of select="ns2:LastName"/>
+                                                <ns1:input>
+                                                    <xsl:attribute name="id">LastName</xsl:attribute>
+                                                    <xsl:attribute name="type">text</xsl:attribute>
+                                                    <xsl:attribute name="name">LastName</xsl:attribute>
+                                                    <xsl:attribute name="class">form-control</xsl:attribute>
+                                                </ns1:input>
                                             </ns1:td>
                                             <ns1:td>
-                                                <xsl:attribute name="class">email</xsl:attribute>
-                                                <xsl:value-of select="ns2:Email"/>
+                                                <ns1:input>
+                                                    <xsl:attribute name="id">Email</xsl:attribute>
+                                                    <xsl:attribute name="type">text</xsl:attribute>
+                                                    <xsl:attribute name="name">Email</xsl:attribute>
+                                                    <xsl:attribute name="class">form-control</xsl:attribute>
+                                                </ns1:input>
                                             </ns1:td>
                                             <ns1:td>
-                                                <xsl:attribute name="class">phoneNumber</xsl:attribute>
-                                                <xsl:value-of select="ns2:PhoneNumber"/>
+                                                <ns1:input>
+                                                    <xsl:attribute name="id">PhoneNumber</xsl:attribute>
+                                                    <xsl:attribute name="type">text</xsl:attribute>
+                                                    <xsl:attribute name="name">PhoneNumber</xsl:attribute>
+                                                    <xsl:attribute name="class">form-control</xsl:attribute>
+                                                </ns1:input>
+                                            </ns1:td>
+                                            <ns1:td>
+                                                <ns1:input>
+                                                    <xsl:attribute name="id">AddLead</xsl:attribute>
+                                                    <xsl:attribute name="type">submit</xsl:attribute>
+                                                    <xsl:attribute name="name">AddLead</xsl:attribute>
+                                                    <xsl:attribute name="value">Add Lead</xsl:attribute>
+                                                    <xsl:attribute name="class">btn btn-primary</xsl:attribute>
+                                                </ns1:input>
                                             </ns1:td>
                                         </ns1:tr>
-                                    </xsl:for-each>
-                                    <ns1:tr>
-                                        <ns1:td>
-                                            <ns1:input>
-                                                <xsl:attribute name="id">FirstName</xsl:attribute>
-                                                <xsl:attribute name="type">text</xsl:attribute>
-                                                <xsl:attribute name="name">FirstName</xsl:attribute>
-                                                <xsl:attribute name="class">form-control</xsl:attribute>
-                                            </ns1:input>
-                                        </ns1:td>
-                                        <ns1:td>
-                                            <ns1:input>
-                                                <xsl:attribute name="id">LastName</xsl:attribute>
-                                                <xsl:attribute name="type">text</xsl:attribute>
-                                                <xsl:attribute name="name">LastName</xsl:attribute>
-                                                <xsl:attribute name="class">form-control</xsl:attribute>
-                                            </ns1:input>
-                                        </ns1:td>
-                                        <ns1:td>
-                                            <ns1:input>
-                                                <xsl:attribute name="id">Email</xsl:attribute>
-                                                <xsl:attribute name="type">text</xsl:attribute>
-                                                <xsl:attribute name="name">Email</xsl:attribute>
-                                                <xsl:attribute name="class">form-control</xsl:attribute>
-                                            </ns1:input>
-                                        </ns1:td>
-                                        <ns1:td>
-                                            <ns1:input>
-                                                <xsl:attribute name="id">PhoneNumber</xsl:attribute>
-                                                <xsl:attribute name="type">text</xsl:attribute>
-                                                <xsl:attribute name="name">PhoneNumber</xsl:attribute>
-                                                <xsl:attribute name="class">form-control</xsl:attribute>
-                                            </ns1:input>
-                                        </ns1:td>
-                                        <ns1:td>
-                                            <ns1:input>
-                                                <xsl:attribute name="id">AddLead</xsl:attribute>
-                                                <xsl:attribute name="type">submit</xsl:attribute>
-                                                <xsl:attribute name="name">AddLead</xsl:attribute>
-                                                <xsl:attribute name="value">Add Lead</xsl:attribute>
-                                                <xsl:attribute name="class">btn btn-primary</xsl:attribute>
-                                            </ns1:input>
-                                        </ns1:td>
-                                    </ns1:tr>
-                                </ns1:tbody>
-                            </ns1:table>
-                        </ns1:form>
+                                    </ns1:tbody>
+                                </ns1:table>
+                            </ns1:form>
+                        </ns1:div>
+                    </ns1:div>
+                    <ns1:div>
+                        <xsl:attribute name="class">footer</xsl:attribute>
+                        <ns1:div class="container">
+                            <xsl:attribute name="id">version</xsl:attribute>
+                            <ns1:p/>
+                            <ns1:div>
+                                <xsl:attribute name="style">
+                                    <xsl:value-of select="'float: right'"/>
+                                </xsl:attribute>© 2014 <ns1:a>
+                                    <xsl:attribute name="href">
+                                        <xsl:value-of select="'http://windyroad.com.au'"/>
+                                    </xsl:attribute>
+                                    <xsl:value-of select="' Windy Road Technology'"/>
+                                </ns1:a>
+                            </ns1:div>
+                            <ns1:p>
+                                <xsl:attribute name="class">text-muted</xsl:attribute>Sales Leads - v<ns1:span>
+                                    <xsl:attribute name="id">binaryVersion</xsl:attribute>
+                                    <xsl:value-of select="$GetVersion/ns:GetVersionResponse/GetVersionResponse/ns2:Version/@binary"/>
+                                </ns1:span>, c<ns1:span>
+                                    <xsl:attribute name="id">configurationVersion</xsl:attribute>
+                                    <xsl:value-of select="$GetVersion/ns:GetVersionResponse/GetVersionResponse/ns2:Version/@configuration"/>
+                                </ns1:span>
+                            </ns1:p>
+                        </ns1:div>
                     </ns1:div>
                 </ns1:body>
             </ns1:html>
@@ -196,6 +227,19 @@
             </textInput>
         </pd:inputBindings>
     </pd:activity>
+    <pd:activity name="GetVersion">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>320</pd:x>
+        <pd:y>62</pd:y>
+        <config>
+            <processName>/UI/Bridge/GetVersion.process</processName>
+            <processNameXPath>$Start/input/bridge-impl/GetVersion</processNameXPath>
+        </config>
+        <pd:inputBindings>
+            <ns:GetVersionRequest/>
+        </pd:inputBindings>
+    </pd:activity>
     <pd:transition>
         <pd:from>Start</pd:from>
         <pd:to>Get List</pd:to>
@@ -205,7 +249,7 @@
     </pd:transition>
     <pd:transition>
         <pd:from>Get List</pd:from>
-        <pd:to>Map Data</pd:to>
+        <pd:to>GetVersion</pd:to>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>always</pd:conditionType>
@@ -220,6 +264,13 @@
     <pd:transition>
         <pd:from>Transform XML</pd:from>
         <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>GetVersion</pd:from>
+        <pd:to>Map Data</pd:to>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>always</pd:conditionType>

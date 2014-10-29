@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns1="www.tibco.com/plugin/java/JavaMethodActivityOutput" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns="http://www.tibco.com/pe/DeployedVarsType" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:pfx2="http://windyroad.com.au/services/concreate/SalesLead" xmlns:pfx="http://windyroad.com.au/schemas/SalesLead.xsd">
+    <wsdl:import namespace="http://windyroad.com.au/services/concreate/SalesLead" location="/SalesLeadConcrete.wsdl"/>
+    <pd:name>test/IntegrationTestSuite/UITestCase/steps/The application version is requested.process</pd:name>
+    <pd:startName>Start</pd:startName>
+    <pd:startX>150</pd:startX>
+    <pd:startY>64</pd:startY>
+    <pd:returnBindings>
+        <pfx:Version>
+            <xsl:attribute name="binary">
+                <xsl:value-of select="$Get-Version/javaCodeActivityOutput/binaryVersion"/>
+            </xsl:attribute>
+            <xsl:attribute name="configuration">
+                <xsl:value-of select="$Get-Version/javaCodeActivityOutput/configurationVersion"/>
+            </xsl:attribute>
+        </pfx:Version>
+    </pd:returnBindings>
+    <pd:endName>End</pd:endName>
+    <pd:endType ref="pfx:Version"/>
+    <pd:endX>558</pd:endX>
+    <pd:endY>64</pd:endY>
+    <pd:errorSchemas/>
+    <pd:processVariables/>
+    <pd:targetNamespace>http://xmlns.example.com/1414549630557</pd:targetNamespace>
+    <pd:activity name="Get Web Driver">
+        <pd:type>com.tibco.plugin.java.JavaMethodActivity</pd:type>
+        <pd:resourceType>ae.activities.JavaMethodActivity</pd:resourceType>
+        <pd:x>269</pd:x>
+        <pd:y>58</pd:y>
+        <config>
+            <ConstructDeclaredClass>false</ConstructDeclaredClass>
+            <CacheConstructedClass>false</CacheConstructedClass>
+            <InvokeCleanupMethod>false</InvokeCleanupMethod>
+            <JavaGlobalInstance>/test/WebDriver.serviceagent</JavaGlobalInstance>
+            <MethodInfo>
+                <className>au.com.windyroad.salesleads.ui.Driver</className>
+                <methodName>getSelf</methodName>
+                <methodReturn>au.com.windyroad.salesleads.ui.Driver</methodReturn>
+            </MethodInfo>
+        </config>
+        <pd:inputBindings>
+            <ns1:JavaMethodActivityInput xmlns:ns1="www.tibco.com/plugin/java/JavaMethodActivityInput"/>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Get Version">
+        <pd:type>com.tibco.plugin.java.JavaActivity</pd:type>
+        <pd:resourceType>ae.javapalette.javaActivity</pd:resourceType>
+        <pd:x>424</pd:x>
+        <pd:y>59</pd:y>
+        <config>
+            <fileName>TheapplicationversionisrequestedGetVersion</fileName>
+            <packageName>test.IntegrationTestSuite.UITestCase.steps.Theapplicationversionisrequested</packageName>
+            <fullsource>package test.IntegrationTestSuite.UITestCase.steps.Theapplicationversionisrequested;
+import java.util.*;
+import java.io.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import  au.com.windyroad.salesleads.ui.Driver;
+
+public class TheapplicationversionisrequestedGetVersion{
+/****** START SET/GET METHOD, DO NOT MODIFY *****/
+	protected String url = "";
+	protected Object driver = null;
+	protected String binaryVersion = "";
+	protected String configurationVersion = "";
+	public String geturl() {
+		return url;
+	}
+	public void seturl(String val) {
+		url = val;
+	}
+	public Object getdriver() {
+		return driver;
+	}
+	public void setdriver(Object val) {
+		driver = val;
+	}
+	public String getbinaryVersion() {
+		return binaryVersion;
+	}
+	public void setbinaryVersion(String val) {
+		binaryVersion = val;
+	}
+	public String getconfigurationVersion() {
+		return configurationVersion;
+	}
+	public void setconfigurationVersion(String val) {
+		configurationVersion = val;
+	}
+/****** END SET/GET METHOD, DO NOT MODIFY *****/
+	public TheapplicationversionisrequestedGetVersion() {
+	}
+	public void invoke() throws Exception {
+/* Available Variables: DO NOT MODIFY
+	In  : String url
+	In  : Object driver
+	Out : String binaryVersion
+	Out : String configurationVersion
+* Available Variables: DO NOT MODIFY *****/
+
+Driver webDriver = (Driver)driver;
+
+		webDriver.getDriver().get(url);
+		binaryVersion =  webDriver.getDriver().findElement(By.id("binaryVersion")).getText();
+		configurationVersion =  webDriver.getDriver().findElement(By.id("configurationVersion")).getText();
+
+
+}
+}
+</fullsource>
+            <inputData>
+                <row>
+                    <fieldName>url</fieldName>
+                    <fieldType>string</fieldType>
+                    <fieldRequired>required</fieldRequired>
+                </row>
+                <row>
+                    <fieldName>driver</fieldName>
+                    <fieldType>ObjectReference</fieldType>
+                    <fieldRequired>required</fieldRequired>
+                </row>
+            </inputData>
+            <outputData>
+                <row>
+                    <fieldName>binaryVersion</fieldName>
+                    <fieldType>string</fieldType>
+                    <fieldRequired>required</fieldRequired>
+                </row>
+                <row>
+                    <fieldName>configurationVersion</fieldName>
+                    <fieldType>string</fieldType>
+                    <fieldRequired>required</fieldRequired>
+                </row>
+            </outputData>
+            <byteCode>
+                <class>
+                    <name>TheapplicationversionisrequestedGetVersion</name>
+                    <byteCode>yv66vgAAADMASQkADwAsCQAPAC0JAA8ALgkADwAvCgAQADAIADEHADIKAAcAMwsANAA1CAAVCgA2ADcLADQAOAsAOQA6CAAWBwA7BwA8AQADdXJsAQASTGphdmEvbGFuZy9TdHJpbmc7AQAGZHJpdmVyAQASTGphdmEvbGFuZy9PYmplY3Q7AQANYmluYXJ5VmVyc2lvbgEAFGNvbmZpZ3VyYXRpb25WZXJzaW9uAQAGZ2V0dXJsAQAUKClMamF2YS9sYW5nL1N0cmluZzsBAARDb2RlAQAPTGluZU51bWJlclRhYmxlAQAGc2V0dXJsAQAVKExqYXZhL2xhbmcvU3RyaW5nOylWAQAJZ2V0ZHJpdmVyAQAUKClMamF2YS9sYW5nL09iamVjdDsBAAlzZXRkcml2ZXIBABUoTGphdmEvbGFuZy9PYmplY3Q7KVYBABBnZXRiaW5hcnlWZXJzaW9uAQAQc2V0YmluYXJ5VmVyc2lvbgEAF2dldGNvbmZpZ3VyYXRpb25WZXJzaW9uAQAXc2V0Y29uZmlndXJhdGlvblZlcnNpb24BAAY8aW5pdD4BAAMoKVYBAAZpbnZva2UBAApFeGNlcHRpb25zBwA9AQAKU291cmNlRmlsZQEAL1RoZWFwcGxpY2F0aW9udmVyc2lvbmlzcmVxdWVzdGVkR2V0VmVyc2lvbi5qYXZhDAARABIMABMAFAwAFQASDAAWABIMACUAJgEAAAEAJWF1L2NvbS93aW5keXJvYWQvc2FsZXNsZWFkcy91aS9Ecml2ZXIMAD4APwcAQAwAQQAcBwBCDABDAEQMAEUARgcARwwASAAYAQB2dGVzdC9JbnRlZ3JhdGlvblRlc3RTdWl0ZS9VSVRlc3RDYXNlL3N0ZXBzL1RoZWFwcGxpY2F0aW9udmVyc2lvbmlzcmVxdWVzdGVkL1RoZWFwcGxpY2F0aW9udmVyc2lvbmlzcmVxdWVzdGVkR2V0VmVyc2lvbgEAEGphdmEvbGFuZy9PYmplY3QBABNqYXZhL2xhbmcvRXhjZXB0aW9uAQAJZ2V0RHJpdmVyAQAhKClMb3JnL29wZW5xYS9zZWxlbml1bS9XZWJEcml2ZXI7AQAdb3JnL29wZW5xYS9zZWxlbml1bS9XZWJEcml2ZXIBAANnZXQBABZvcmcvb3BlbnFhL3NlbGVuaXVtL0J5AQACaWQBACwoTGphdmEvbGFuZy9TdHJpbmc7KUxvcmcvb3BlbnFhL3NlbGVuaXVtL0J5OwEAC2ZpbmRFbGVtZW50AQA6KExvcmcvb3BlbnFhL3NlbGVuaXVtL0J5OylMb3JnL29wZW5xYS9zZWxlbml1bS9XZWJFbGVtZW50OwEAHm9yZy9vcGVucWEvc2VsZW5pdW0vV2ViRWxlbWVudAEAB2dldFRleHQAIQAPABAAAAAEAAQAEQASAAAABAATABQAAAAEABUAEgAAAAQAFgASAAAACgABABcAGAABABkAAAAdAAEAAQAAAAUqtAABsAAAAAEAGgAAAAYAAQAAABEAAQAbABwAAQAZAAAAIgACAAIAAAAGKiu1AAGxAAAAAQAaAAAACgACAAAAFAAFABUAAQAdAB4AAQAZAAAAHQABAAEAAAAFKrQAArAAAAABABoAAAAGAAEAAAAXAAEAHwAgAAEAGQAAACIAAgACAAAABiortQACsQAAAAEAGgAAAAoAAgAAABoABQAbAAEAIQAYAAEAGQAAAB0AAQABAAAABSq0AAOwAAAAAQAaAAAABgABAAAAHQABACIAHAABABkAAAAiAAIAAgAAAAYqK7UAA7EAAAABABoAAAAKAAIAAAAgAAUAIQABACMAGAABABkAAAAdAAEAAQAAAAUqtAAEsAAAAAEAGgAAAAYAAQAAACMAAQAkABwAAQAZAAAAIgACAAIAAAAGKiu1AASxAAAAAQAaAAAACgACAAAAJgAFACcAAQAlACYAAQAZAAAASAACAAEAAAAcKrcABSoSBrUAASoBtQACKhIGtQADKhIGtQAEsQAAAAEAGgAAABoABgAAACkABAAMAAoADQAPAA4AFQAPABsAKgABACcAJgACABkAAABsAAMAAgAAAEQqtAACwAAHTCu2AAgqtAABuQAJAgAqK7YACBIKuAALuQAMAgC5AA0BALUAAyortgAIEg64AAu5AAwCALkADQEAtQAEsQAAAAEAGgAAABYABQAAADMACAA1ABUANgAsADcAQwA6ACgAAAAEAAEAKQABACoAAAACACs=</byteCode>
+                </class>
+            </byteCode>
+        </config>
+        <pd:inputBindings>
+            <javaCodeActivityInput>
+                <url>
+                    <xsl:value-of select="concat(&quot;http://&quot;,$_globalVariables/ns:GlobalVariables/Resources/SalesLeadUI/Host,&quot;:&quot;, $_globalVariables/ns:GlobalVariables/Resources/SalesLeadUI/Port)"/>
+                </url>
+                <driver>
+                    <xsl:value-of select="$Get-Web-Driver/ns1:JavaMethodActivityOutput/MethodReturnValue"/>
+                </driver>
+            </javaCodeActivityInput>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>Get Web Driver</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Get Web Driver</pd:from>
+        <pd:to>Get Version</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Get Version</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+</pd:ProcessDefinition>

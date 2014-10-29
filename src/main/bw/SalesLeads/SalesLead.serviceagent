@@ -9,7 +9,7 @@
         <groups>
             <row isDefault="true" groupName="Default"/>
         </groups>
-        <serviceChange>Wed Oct 29 23:22:16 EST 2014</serviceChange>
+        <serviceChange>Thu Oct 30 00:11:03 EST 2014</serviceChange>
         <wsdl namespace="http://windyroad.com.au/services/concreate/SalesLead" embedWsdlComponents="false" embedSchemaComponents="false" embedJndiProperties="false"/>
         <isAMXCompliant>false</isAMXCompliant>
         <interfaceImpl>
@@ -141,7 +141,7 @@
                                                             <operation name="GetVersion">
                                                                 <general>
                                                                     <config>
-                                                                        <soapAction>/SalesLead.serviceagent/MetaDataEndpoint1/GetVersion</soapAction>
+                                                                        <soapAction>/SalesLead/MetaData/GetVersion</soapAction>
                                                                         <operationStyle/>
                                                                         <soapUse>literal</soapUse>
                                                                         <inputNamespace/>

@@ -34,7 +34,7 @@
     <wsdl:binding name="MetaDataBinding" type="ns0:MetaData">
         <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
         <wsdl:operation name="GetVersion">
-            <soap:operation soapAction="/SalesLead.serviceagent/MetaDataEndpoint1/GetVersion" style="document"/>
+            <soap:operation soapAction="/SalesLead/MetaData/GetVersion" style="document"/>
             <wsdl:input>
                 <soap:body parts="" use="literal"/>
             </wsdl:input>
