@@ -12,10 +12,10 @@
 		<globalVariable>
 			<name>CONFIG_VERSION_PROPERTY</name>
 			<value>config.version</value>
-			<deploymentSettable>true</deploymentSettable>
+			<deploymentSettable>false</deploymentSettable>
 			<serviceSettable>false</serviceSettable>
 			<type>String</type>
-			<modTime>1414550975565</modTime>
+			<modTime>1414620524542</modTime>
 		</globalVariable>
 	</globalVariables>
 </repository>
