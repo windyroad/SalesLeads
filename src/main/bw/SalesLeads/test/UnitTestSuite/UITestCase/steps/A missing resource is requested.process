@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pd:ProcessDefinition xmlns:ns2="http://www.tibco.com/pe/GenerateErrorActivity/InputSchema" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns1="http://windyroad.org/rest4BW.xsd" xmlns:ns="http://www.tibco.com/pe/EngineTypes" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:pfx2="http://www.w3.org/1999/xhtml">
+<pd:ProcessDefinition xmlns:ns2="http://www.tibco.com/pe/GenerateErrorActivity/InputSchema" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns1="http://windyroad.org/rest4BW.xsd" xmlns:ns="http://www.tibco.com/pe/EngineTypes" xmlns:ns3="http://windyroad.org/HTTP1.1-StatusCodeDefinitions" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:pfx2="http://www.w3.org/1999/xhtml">
     <xsd:import namespace="http://www.w3.org/1999/xhtml" schemaLocation="/schemas/xhtml-strict.xsd"/>
+    <xsd:import namespace="http://windyroad.org/HTTP1.1-StatusCodeDefinitions" schemaLocation="/rest4BW/Private/Schemas/StatusCodeDefinitions.xsd"/>
     <pd:name>test/UnitTestSuite/UITestCase/steps/A missing resource is requested.process</pd:name>
     <pd:startName>Start</pd:startName>
     <pd:startType>
@@ -15,12 +16,19 @@
     </pd:startType>
     <pd:startX>150</pd:startX>
     <pd:startY>64</pd:startY>
+    <pd:returnCoercions>
+        <pd:coercion xpath="$_error/ns:ErrorReport/Data/*" type="ns3:StatusCodeErrorDefType"/>
+    </pd:returnCoercions>
     <pd:returnBindings>
-        <xsl:copy-of select="$Parse-XML/pfx2:html"/>
+        <ns1:error>
+            <xsl:copy-of select="$_error/ns:ErrorReport/Data/*/ancestor-or-self::*/namespace::node()"/>
+            <xsl:copy-of select="$_error/ns:ErrorReport/Data/*/@*"/>
+            <xsl:copy-of select="$_error/ns:ErrorReport/Data/*/node()"/>
+        </ns1:error>
     </pd:returnBindings>
     <pd:endName>End</pd:endName>
-    <pd:endType/>
-    <pd:endX>470</pd:endX>
+    <pd:endType ref="ns1:error"/>
+    <pd:endX>583</pd:endX>
     <pd:endY>66</pd:endY>
     <pd:errorSchemas>
         <Error ref="ns1:error"/>
@@ -72,7 +80,7 @@
         <pd:from>GetResource</pd:from>
         <pd:to>End</pd:to>
         <pd:lineType>Default</pd:lineType>
-        <pd:lineColor>-16777216</pd:lineColor>
-        <pd:conditionType>always</pd:conditionType>
+        <pd:lineColor>-65536</pd:lineColor>
+        <pd:conditionType>error</pd:conditionType>
     </pd:transition>
 </pd:ProcessDefinition>

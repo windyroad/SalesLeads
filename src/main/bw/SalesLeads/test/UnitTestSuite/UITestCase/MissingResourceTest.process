@@ -37,11 +37,7 @@
             <pd:coercion xpath="$_error/ns1:ErrorReport/Data/*" type="ns3:StatusCodeErrorDefType"/>
         </pd:coercions>
         <pd:inputBindings>
-            <ns2:error>
-                <xsl:copy-of select="$_error/ns1:ErrorReport/Data/*/ancestor-or-self::*/namespace::node()"/>
-                <xsl:copy-of select="$_error/ns1:ErrorReport/Data/*/@*"/>
-                <xsl:copy-of select="$_error/ns1:ErrorReport/Data/*/node()"/>
-            </ns2:error>
+            <xsl:copy-of select="$A-missing-resource-is-requested/ns2:error"/>
         </pd:inputBindings>
     </pd:activity>
     <pd:transition>
@@ -55,8 +51,8 @@
         <pd:from>A missing resource is requested</pd:from>
         <pd:to>Then a 404 Not Found Status is Returned</pd:to>
         <pd:lineType>Default</pd:lineType>
-        <pd:lineColor>-52480</pd:lineColor>
-        <pd:conditionType>error</pd:conditionType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
     </pd:transition>
     <pd:transition>
         <pd:from>Then a 404 Not Found Status is Returned</pd:from>
