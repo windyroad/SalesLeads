@@ -78,7 +78,7 @@
                     <ns1:link href="css/vendor/bootstrap.min.css" rel="stylesheet"/>
                     <!-- Loading Flat UI -->
                     <ns1:link href="css/flat-ui.css" rel="stylesheet"/>
-                    <ns1:link href="css/sticky-footer.css" rel="stylesheet"/>
+                    <ns1:link href="css/sales-leads.css" rel="stylesheet"/>
                     <ns1:link rel="shortcut icon" href="img/favicon.ico"/>
                     <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
                     <!--[if lt IE 9]>
@@ -92,91 +92,124 @@
                         <ns1:div>
                             <xsl:attribute name="class">container</xsl:attribute>
                             <ns1:h1>Sales Leads</ns1:h1>
-                            <ns1:form>
-                                <xsl:attribute name="action">/</xsl:attribute>
-                                <xsl:attribute name="method">post</xsl:attribute>
-                                <xsl:attribute name="enctype">multipart/form-data</xsl:attribute>
-                                <xsl:attribute name="id">SalesLeadsForm</xsl:attribute>
-                                <ns1:table>
-                                    <xsl:attribute name="id">SalesLeads</xsl:attribute>
-                                    <xsl:attribute name="class">table</xsl:attribute>
-                                    <ns1:thead>
-                                        <ns1:tr>
-                                            <ns1:th>First Name</ns1:th>
-                                            <ns1:th>Last Name</ns1:th>
-                                            <ns1:th>Email</ns1:th>
-                                            <ns1:th>Phone Number</ns1:th>
-                                            <ns1:th/>
-                                        </ns1:tr>
-                                    </ns1:thead>
-                                    <ns1:tbody>
+                            <ns1:div>
+                                <xsl:attribute name="id">SalesLeads</xsl:attribute>
+                                <xsl:attribute name="class">container panel panel-primary panel-striped</xsl:attribute>
+                                <ns1:div>
+                                    <xsl:attribute name="class">row panel-heading</xsl:attribute>
+                                    <ns1:div>
+                                        <xsl:attribute name="class">col-md-2</xsl:attribute>
+                                        <ns1:h2>
+                                            <xsl:attribute name="class">panel-title</xsl:attribute>First Name</ns1:h2>
+                                    </ns1:div>
+                                    <ns1:div>
+                                        <xsl:attribute name="class">col-md-2</xsl:attribute>
+                                        <ns1:h2>
+                                            <xsl:attribute name="class">panel-title</xsl:attribute>Last Name</ns1:h2>
+                                    </ns1:div>
+                                    <ns1:div>
+                                        <xsl:attribute name="class">col-md-2</xsl:attribute>
+                                        <ns1:h2>
+                                            <xsl:attribute name="class">panel-title</xsl:attribute>Email</ns1:h2>
+                                    </ns1:div>
+                                    <ns1:div>
+                                        <xsl:attribute name="class">col-md-2</xsl:attribute>
+                                        <ns1:h2>
+                                            <xsl:attribute name="class">panel-title</xsl:attribute>Phone Number</ns1:h2>
+                                    </ns1:div>
+                                    <ns1:div>
+                                        <xsl:attribute name="class">col-md-4</xsl:attribute>
+                                    </ns1:div>
+                                </ns1:div>
+                                <xsl:if test="$Get-List/ns:GetSalesLeadsResponse/GetSalesLeadsResponse/ns2:SalesLeads/ns2:SalesLead">
+                                    <ns1:div>
+                                        <xsl:attribute name="class">panel-body</xsl:attribute>
                                         <xsl:for-each select="$Get-List/ns:GetSalesLeadsResponse/GetSalesLeadsResponse/ns2:SalesLeads/ns2:SalesLead">
-                                            <ns1:tr>
-                                                <xsl:attribute name="class">record</xsl:attribute>
-                                                <ns1:td>
-                                                    <xsl:attribute name="class">firstName</xsl:attribute>
+                                            <ns1:div>
+                                                <xsl:attribute name="class">record row</xsl:attribute>
+                                                <ns1:div>
+                                                    <xsl:attribute name="class">firstName col-md-2</xsl:attribute>
                                                     <xsl:value-of select="ns2:FirstName"/>
-                                                </ns1:td>
-                                                <ns1:td>
-                                                    <xsl:attribute name="class">lastName</xsl:attribute>
+                                                </ns1:div>
+                                                <ns1:div>
+                                                    <xsl:attribute name="class">lastName col-md-2</xsl:attribute>
                                                     <xsl:value-of select="ns2:LastName"/>
-                                                </ns1:td>
-                                                <ns1:td>
-                                                    <xsl:attribute name="class">email</xsl:attribute>
+                                                </ns1:div>
+                                                <ns1:div>
+                                                    <xsl:attribute name="class">email col-md-2</xsl:attribute>
                                                     <xsl:value-of select="ns2:Email"/>
-                                                </ns1:td>
-                                                <ns1:td>
-                                                    <xsl:attribute name="class">phoneNumber</xsl:attribute>
+                                                </ns1:div>
+                                                <ns1:div>
+                                                    <xsl:attribute name="class">phoneNumber col-md-2</xsl:attribute>
                                                     <xsl:value-of select="ns2:PhoneNumber"/>
-                                                </ns1:td>
-                                            </ns1:tr>
+                                                </ns1:div>
+                                                <ns1:div>
+                                                    <xsl:attribute name="class">col-md-4</xsl:attribute>
+                                                </ns1:div>
+                                            </ns1:div>
                                         </xsl:for-each>
-                                        <ns1:tr>
-                                            <ns1:td>
-                                                <ns1:input>
-                                                    <xsl:attribute name="id">FirstName</xsl:attribute>
-                                                    <xsl:attribute name="type">text</xsl:attribute>
-                                                    <xsl:attribute name="name">FirstName</xsl:attribute>
-                                                    <xsl:attribute name="class">form-control</xsl:attribute>
-                                                </ns1:input>
-                                            </ns1:td>
-                                            <ns1:td>
-                                                <ns1:input>
-                                                    <xsl:attribute name="id">LastName</xsl:attribute>
-                                                    <xsl:attribute name="type">text</xsl:attribute>
-                                                    <xsl:attribute name="name">LastName</xsl:attribute>
-                                                    <xsl:attribute name="class">form-control</xsl:attribute>
-                                                </ns1:input>
-                                            </ns1:td>
-                                            <ns1:td>
-                                                <ns1:input>
-                                                    <xsl:attribute name="id">Email</xsl:attribute>
-                                                    <xsl:attribute name="type">text</xsl:attribute>
-                                                    <xsl:attribute name="name">Email</xsl:attribute>
-                                                    <xsl:attribute name="class">form-control</xsl:attribute>
-                                                </ns1:input>
-                                            </ns1:td>
-                                            <ns1:td>
-                                                <ns1:input>
-                                                    <xsl:attribute name="id">PhoneNumber</xsl:attribute>
-                                                    <xsl:attribute name="type">text</xsl:attribute>
-                                                    <xsl:attribute name="name">PhoneNumber</xsl:attribute>
-                                                    <xsl:attribute name="class">form-control</xsl:attribute>
-                                                </ns1:input>
-                                            </ns1:td>
-                                            <ns1:td>
-                                                <ns1:input>
-                                                    <xsl:attribute name="id">AddLead</xsl:attribute>
-                                                    <xsl:attribute name="type">submit</xsl:attribute>
-                                                    <xsl:attribute name="name">AddLead</xsl:attribute>
-                                                    <xsl:attribute name="value">Add Lead</xsl:attribute>
-                                                    <xsl:attribute name="class">btn btn-primary</xsl:attribute>
-                                                </ns1:input>
-                                            </ns1:td>
-                                        </ns1:tr>
-                                    </ns1:tbody>
-                                </ns1:table>
-                            </ns1:form>
+                                    </ns1:div>
+                                </xsl:if>
+                                <ns1:div>
+                                    <xsl:attribute name="class">row panel-footer</xsl:attribute>
+                                    <ns1:form>
+                                        <xsl:attribute name="action">/</xsl:attribute>
+                                        <xsl:attribute name="method">post</xsl:attribute>
+                                        <xsl:attribute name="enctype">multipart/form-data</xsl:attribute>
+                                        <xsl:attribute name="id">SalesLeadsForm</xsl:attribute>
+                                        <ns1:div>
+                                            <xsl:attribute name="class">col-md-2</xsl:attribute>
+                                            <ns1:input>
+                                                <xsl:attribute name="id">FirstName</xsl:attribute>
+                                                <xsl:attribute name="type">text</xsl:attribute>
+                                                <xsl:attribute name="name">FirstName</xsl:attribute>
+                                                <xsl:attribute name="class">form-control</xsl:attribute>
+                                                <xsl:attribute name="placeholder">first name</xsl:attribute>
+                                            </ns1:input>
+                                        </ns1:div>
+                                        <ns1:div>
+                                            <xsl:attribute name="class">col-md-2</xsl:attribute>
+                                            <ns1:input>
+                                                <xsl:attribute name="id">LastName</xsl:attribute>
+                                                <xsl:attribute name="type">text</xsl:attribute>
+                                                <xsl:attribute name="name">LastName</xsl:attribute>
+                                                <xsl:attribute name="class">form-control</xsl:attribute>
+                                                <xsl:attribute name="placeholder">last name</xsl:attribute>
+                                            </ns1:input>
+                                        </ns1:div>
+                                        <ns1:div>
+                                            <xsl:attribute name="class">col-md-2</xsl:attribute>
+                                            <ns1:input>
+                                                <xsl:attribute name="id">Email</xsl:attribute>
+                                                <xsl:attribute name="type">text</xsl:attribute>
+                                                <xsl:attribute name="name">Email</xsl:attribute>
+                                                <xsl:attribute name="class">form-control</xsl:attribute>
+                                                <xsl:attribute name="placeholder">email</xsl:attribute>
+                                            </ns1:input>
+                                        </ns1:div>
+                                        <ns1:div>
+                                            <xsl:attribute name="class">col-md-2</xsl:attribute>
+                                            <ns1:input>
+                                                <xsl:attribute name="id">PhoneNumber</xsl:attribute>
+                                                <xsl:attribute name="type">text</xsl:attribute>
+                                                <xsl:attribute name="name">PhoneNumber</xsl:attribute>
+                                                <xsl:attribute name="class">form-control</xsl:attribute>
+                                                <xsl:attribute name="placeholder">phone number</xsl:attribute>
+                                            </ns1:input>
+                                        </ns1:div>
+                                        <ns1:div>
+                                            <xsl:attribute name="class">col-md-4</xsl:attribute>
+                                            <ns1:input>
+                                                <xsl:attribute name="id">AddLead</xsl:attribute>
+                                                <xsl:attribute name="type">submit</xsl:attribute>
+                                                <xsl:attribute name="name">AddLead</xsl:attribute>
+                                                <xsl:attribute name="value">Add Lead</xsl:attribute>
+                                                <xsl:attribute name="class">btn btn-primary</xsl:attribute>
+                                            </ns1:input>
+                                        </ns1:div>
+                                    </ns1:form>
+                                </ns1:div>
+                            </ns1:div>
                         </ns1:div>
                     </ns1:div>
                     <ns1:div>
@@ -187,7 +220,7 @@
                             <ns1:div>
                                 <xsl:attribute name="style">
                                     <xsl:value-of select="'float: right'"/>
-                                </xsl:attribute>© 2014 <ns1:a>
+                                </xsl:attribute>© 2014<ns1:a>
                                     <xsl:attribute name="href">
                                         <xsl:value-of select="'http://windyroad.com.au'"/>
                                     </xsl:attribute>

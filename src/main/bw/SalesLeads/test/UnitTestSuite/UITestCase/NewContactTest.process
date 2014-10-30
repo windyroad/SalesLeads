@@ -33,7 +33,7 @@
         <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
         <pd:resourceType>ae.process.subprocess</pd:resourceType>
         <pd:x>657</pd:x>
-        <pd:y>78</pd:y>
+        <pd:y>77</pd:y>
         <config>
             <processName>/test/UnitTestSuite/UITestCase/steps/The following records will exist in the sales lead database.process</processName>
         </config>
