@@ -18,7 +18,7 @@
         <pd:x>336</pd:x>
         <pd:y>95</pd:y>
         <config>
-            <processName>/test/UnitTestSuite/steps/The current configuration version is [X].process</processName>
+            <processName>/test/UnitTestSuite/steps/The configuration version is set.process</processName>
         </config>
         <pd:inputBindings>
             <version>2.9.3</version>
@@ -30,7 +30,7 @@
         <pd:x>195</pd:x>
         <pd:y>95</pd:y>
         <config>
-            <processName>/test/UnitTestSuite/steps/The current binary version is [X].process</processName>
+            <processName>/test/UnitTestSuite/steps/The binary version is set.process</processName>
         </config>
         <pd:inputBindings>
             <version>2.9</version>

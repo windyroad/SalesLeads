@@ -14,24 +14,28 @@
     <pd:startX>150</pd:startX>
     <pd:startY>64</pd:startY>
     <pd:returnBindings>
-        <previousProperty>
+        <property>
             <xsl:attribute name="key">
                 <xsl:value-of select="$Start/property/@key"/>
             </xsl:attribute>
+            <xsl:attribute name="newValue">
+                <xsl:value-of select="$Start/property/@value"/>
+            </xsl:attribute>
             <xsl:if test="$Java-Code/javaCodeActivityOutput/previousValue">
-                <xsl:attribute name="value">
+                <xsl:attribute name="previousValue">
                     <xsl:value-of select="$Java-Code/javaCodeActivityOutput/previousValue"/>
                 </xsl:attribute>
             </xsl:if>
-        </previousProperty>
+        </property>
     </pd:returnBindings>
     <pd:endName>End</pd:endName>
     <pd:endType>
-        <xsd:element name="previousProperty">
+        <xsd:element name="property">
             <xsd:complexType>
                 <xsd:sequence/>
                 <xsd:attribute name="key" type="xsd:string" use="required"/>
-                <xsd:attribute name="value" type="xsd:string"/>
+                <xsd:attribute name="newValue" type="xsd:string" use="required"/>
+                <xsd:attribute name="previousValue" type="xsd:string"/>
             </xsd:complexType>
         </xsd:element>
     </pd:endType>
