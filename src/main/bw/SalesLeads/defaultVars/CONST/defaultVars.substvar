@@ -11,7 +11,7 @@
 		</globalVariable>
 		<globalVariable>
 			<name>CONFIG_VERSION_PROPERTY</name>
-			<value>config.version</value>
+			<value>configuration.version</value>
 			<deploymentSettable>false</deploymentSettable>
 			<serviceSettable>false</serviceSettable>
 			<type>String</type>
