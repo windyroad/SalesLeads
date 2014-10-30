@@ -12,7 +12,7 @@
     <pd:errorSchemas/>
     <pd:processVariables/>
     <pd:targetNamespace>http://xmlns.example.com/1352340691435</pd:targetNamespace>
-    <pd:activity name="And the current configuration version is [X]">
+    <pd:activity name="And the configuration version is set">
         <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
         <pd:resourceType>ae.process.subprocess</pd:resourceType>
         <pd:x>336</pd:x>
@@ -24,11 +24,11 @@
             <version>2.9.3</version>
         </pd:inputBindings>
     </pd:activity>
-    <pd:activity name="Given the current binary version is [X]">
+    <pd:activity name="Given the binary version is set">
         <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
         <pd:resourceType>ae.process.subprocess</pd:resourceType>
         <pd:x>195</pd:x>
-        <pd:y>95</pd:y>
+        <pd:y>87</pd:y>
         <config>
             <processName>/test/UnitTestSuite/steps/The binary version is set.process</processName>
         </config>
@@ -47,7 +47,7 @@
         <pd:inputBindings>
             <input>
                 <expectedVersion>
-                    <xsl:value-of select="$Given-the-current-binary-version-is-X/version"/>
+                    <xsl:value-of select="$Given-the-binary-version-is-set/version"/>
                 </expectedVersion>
                 <actualVersion>
                     <xsl:value-of select="$When-the-application-version-is-requested/pfx:Version/@binary"/>
@@ -66,7 +66,7 @@
         <pd:inputBindings>
             <input>
                 <expectedVersion>
-                    <xsl:value-of select="$And-the-current-configuration-version-is-X/version"/>
+                    <xsl:value-of select="$And-the-configuration-version-is-set/version"/>
                 </expectedVersion>
                 <actualVersion>
                     <xsl:value-of select="$When-the-application-version-is-requested/pfx:Version/@configuration"/>
@@ -78,7 +78,7 @@
         <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
         <pd:resourceType>ae.process.subprocess</pd:resourceType>
         <pd:x>473</pd:x>
-        <pd:y>95</pd:y>
+        <pd:y>103</pd:y>
         <config>
             <processName>/test/UnitTestSuite/steps/The application version is requested.process</processName>
         </config>
@@ -86,20 +86,20 @@
     </pd:activity>
     <pd:transition>
         <pd:from>Start</pd:from>
-        <pd:to>Given the current binary version is [X]</pd:to>
+        <pd:to>Given the binary version is set</pd:to>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>always</pd:conditionType>
     </pd:transition>
     <pd:transition>
-        <pd:from>Given the current binary version is [X]</pd:from>
-        <pd:to>And the current configuration version is [X]</pd:to>
+        <pd:from>Given the binary version is set</pd:from>
+        <pd:to>And the configuration version is set</pd:to>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>always</pd:conditionType>
     </pd:transition>
     <pd:transition>
-        <pd:from>And the current configuration version is [X]</pd:from>
+        <pd:from>And the configuration version is set</pd:from>
         <pd:to>When the application version is requested</pd:to>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
