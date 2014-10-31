@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pd:ProcessDefinition xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns2="http://windyroad.com.au/schemas/SalesLead.xsd" xmlns:ns1="http://www.w3.org/1999/xhtml" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns="http://windyroad.com.au/services/SalesLead" xmlns:ns3="http://windyroad.org/HTTP1.1-StatusCodeDefinitions" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tib="http://www.tibco.com/bw/xslt/custom-functions" xmlns:pfx2="http://windyroad.org/rest4BW.xsd" xmlns:pfx="http://www.tibco.com/ns/no_namespace_schema_location/schemas/xhtml1-strict.dtd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<pd:ProcessDefinition xmlns:ns2="http://windyroad.com.au/schemas/SalesLead.xsd" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns1="http://www.w3.org/1999/xhtml" xmlns:ns="http://windyroad.com.au/services/SalesLead" xmlns:ns3="http://windyroad.org/HTTP1.1-StatusCodeDefinitions" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tib="http://www.tibco.com/bw/xslt/custom-functions" xmlns:pfx2="http://windyroad.org/rest4BW.xsd" xmlns:pfx="http://www.tibco.com/ns/no_namespace_schema_location/schemas/xhtml1-strict.dtd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <xsd:import namespace="http://windyroad.org/rest4BW.xsd" schemaLocation="/rest4BW/Schemas/rest4BW.xsd"/>
     <xsd:import namespace="http://www.tibco.com/ns/no_namespace_schema_location/schemas/xhtml1-strict.dtd"/>
     <xsd:import namespace="http://www.w3.org/1999/xhtml" schemaLocation="/schemas/xhtml-strict.xsd"/>
@@ -216,26 +216,26 @@
                         <xsl:attribute name="class">footer</xsl:attribute>
                         <ns1:div class="container">
                             <xsl:attribute name="id">version</xsl:attribute>
-                            <ns1:p/>
                             <ns1:div>
-                                <xsl:attribute name="style">
-                                    <xsl:value-of select="'float: right'"/>
-                                </xsl:attribute>© 2014<ns1:a>
-                                    <xsl:attribute name="href">
-                                        <xsl:value-of select="'http://windyroad.com.au'"/>
-                                    </xsl:attribute>
-                                    <xsl:value-of select="' Windy Road Technology'"/>
-                                </ns1:a>
+                                <xsl:attribute name="class">row</xsl:attribute>
+                                <ns1:div>
+                                    <xsl:attribute name="class">col-md-6 text-muted</xsl:attribute>Sales Leads - v<ns1:span>
+                                        <xsl:attribute name="id">binaryVersion</xsl:attribute>
+                                        <xsl:value-of select="$GetVersion/ns:GetVersionResponse/GetVersionResponse/ns2:Version/@binary"/>
+                                    </ns1:span>, c<ns1:span>
+                                        <xsl:attribute name="id">configurationVersion</xsl:attribute>
+                                        <xsl:value-of select="$GetVersion/ns:GetVersionResponse/GetVersionResponse/ns2:Version/@configuration"/>
+                                    </ns1:span>
+                                </ns1:div>
+                                <ns1:div>
+                                    <xsl:attribute name="class">col-md-6 text-right</xsl:attribute>© 2014<ns1:a>
+                                        <xsl:attribute name="href">
+                                            <xsl:value-of select="'http://windyroad.com.au'"/>
+                                        </xsl:attribute>
+                                        <xsl:value-of select="' Windy Road Technology'"/>
+                                    </ns1:a>
+                                </ns1:div>
                             </ns1:div>
-                            <ns1:p>
-                                <xsl:attribute name="class">text-muted</xsl:attribute>Sales Leads - v<ns1:span>
-                                    <xsl:attribute name="id">binaryVersion</xsl:attribute>
-                                    <xsl:value-of select="$GetVersion/ns:GetVersionResponse/GetVersionResponse/ns2:Version/@binary"/>
-                                </ns1:span>, c<ns1:span>
-                                    <xsl:attribute name="id">configurationVersion</xsl:attribute>
-                                    <xsl:value-of select="$GetVersion/ns:GetVersionResponse/GetVersionResponse/ns2:Version/@configuration"/>
-                                </ns1:span>
-                            </ns1:p>
                         </ns1:div>
                     </ns1:div>
                 </ns1:body>
