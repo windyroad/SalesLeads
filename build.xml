@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project default="designer" name="SalesLeads" xmlns:ivy="antlib:org.apache.ivy.ant">
+<project default="designer" name="SalesLeads" xmlns:ivy="antlib:org.apache.ivy.ant" xmlns:tibant="org.windyroad.tibant">
 
-	<property name="bwunit.importer.version" value="16.15" />
+	<property name="bwunit.importer.version" value="16.16" />
 	<property name="bwunit.importer.url"
 	          value="http://windyroad.com.au/bwunit-importer/${bwunit.importer.version}/full.xml" />
 
@@ -11,8 +11,8 @@
 		<url url="${bwunit.importer.url}" />
 	</import>
 
-    <target name="-init-unit-tests" depends="-set-coverage-exclusions,BWUnitTest.-init-unit-tests"/>
-    <target name="-init-integration-tests" depends="-set-coverage-exclusions,BWUnitTest.-init-integration-tests"/>
+	<target name="-init-unit-tests" depends="-set-coverage-exclusions,BWUnitTest.-init-unit-tests" />
+	<target name="-init-integration-tests" depends="-set-coverage-exclusions,BWUnitTest.-init-integration-tests" />
 
 	<target name="-set-coverage-exclusions" depends="-retrieve-test">
 		<pathconvert property="bwda.coverage.exclusions.rest4BW" dirsep="/" pathsep=",">
@@ -27,10 +27,12 @@
 				<fileset dir="${bwda.bw.project.path}/UI/Bridge">
 					<include name="**/*.process" />
 				</fileset>
-			
+
 			</path>
 		</pathconvert>
-		<property name="bwda.coverage.exclusions" value="${bwda.coverage.exclusions.local},${bwda.coverage.exclusions.rest4BW}"/>
+		<property name="bwda.coverage.exclusions"
+		          value="${bwda.coverage.exclusions.local},${bwda.coverage.exclusions.rest4BW}" />
 	</target>
+
 
 </project>
