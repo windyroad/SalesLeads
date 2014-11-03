@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project default="designer" name="SalesLeads" xmlns:ivy="antlib:org.apache.ivy.ant" xmlns:tibant="org.windyroad.tibant">
 
-	<property name="bwunit.importer.version" value="16.24" />
+	<property name="bwunit.importer.version" value="16.25" />
 	<property name="bwunit.importer.url"
 	          value="http://windyroad.com.au/bwunit-importer/${bwunit.importer.version}/full.xml" />
 
