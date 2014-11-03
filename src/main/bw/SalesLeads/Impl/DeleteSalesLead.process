@@ -1,46 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pd:ProcessDefinition xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns="http://windyroad.com.au/schemas/SalesLead.xsd" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlPfx="http://xmlns.example.com/1413196658183" xmlns:pfx="http://windyroad.com.au/services/SalesLead">
     <wsdl:import namespace="http://windyroad.com.au/services/SalesLead" location="/SalesLead.wsdl"/>
-    <pd:name>Impl/AddSalesLead.process</pd:name>
+    <pd:name>Impl/DeleteSalesLead.process</pd:name>
     <pd:startName>Start</pd:startName>
-    <pd:startType wsMsgRef="pfx:AddSalesLeadRequest"/>
+    <pd:startType wsMsgRef="pfx:DeleteSalesLeadRequest"/>
     <pd:startX>150</pd:startX>
     <pd:startY>65</pd:startY>
     <pd:returnBindings>
-        <pfx:AddSalesLeadResponse>
-            <SalesLead>
-                <xsl:copy-of select="$AddSalesLead/ns:SalesLead"/>
-            </SalesLead>
-        </pfx:AddSalesLeadResponse>
+        <pfx:DeleteSalesLeadResponse>
+            <ID>
+                <ns:ID>
+                    <xsl:value-of select="$Start/pfx:DeleteSalesLeadRequest/DeleteSalesLead/ns:DeleteSalesLead/ns:ID"/>
+                </ns:ID>
+            </ID>
+        </pfx:DeleteSalesLeadResponse>
     </pd:returnBindings>
     <pd:endName>End</pd:endName>
-    <pd:endType wsMsgRef="pfx:AddSalesLeadResponse"/>
+    <pd:endType wsMsgRef="pfx:DeleteSalesLeadResponse"/>
     <pd:endX>450</pd:endX>
     <pd:endY>65</pd:endY>
     <pd:errorSchemas/>
     <pd:processVariables/>
     <pd:targetNamespace>http://xmlns.example.com/1413197291911</pd:targetNamespace>
-    <pd:activity name="AddSalesLead">
+    <pd:activity name="DeleteSalesLead">
         <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
         <pd:resourceType>ae.process.subprocess</pd:resourceType>
         <pd:x>296</pd:x>
         <pd:y>70</pd:y>
         <config>
-            <processName>/privateX/AddSalesLead.process</processName>
+            <processName>/privateX/DeleteSalesLead.process</processName>
         </config>
         <pd:inputBindings>
-            <xsl:copy-of select="$Start/pfx:AddSalesLeadRequest/AddSalesLead/ns:CreateSalesLead"/>
+            <xsl:copy-of select="$Start/pfx:DeleteSalesLeadRequest/DeleteSalesLead/ns:DeleteSalesLead"/>
         </pd:inputBindings>
     </pd:activity>
     <pd:transition>
         <pd:from>Start</pd:from>
-        <pd:to>AddSalesLead</pd:to>
+        <pd:to>DeleteSalesLead</pd:to>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>always</pd:conditionType>
     </pd:transition>
     <pd:transition>
-        <pd:from>AddSalesLead</pd:from>
+        <pd:from>DeleteSalesLead</pd:from>
         <pd:to>End</pd:to>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>

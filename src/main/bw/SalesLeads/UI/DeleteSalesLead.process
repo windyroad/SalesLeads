@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pd:ProcessDefinition xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns2="http://windyroad.com.au/schemas/SalesLead.xsd" xmlns:ns1="http://www.w3.org/1999/xhtml" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns="http://windyroad.com.au/services/SalesLead" xmlns:ns4="http://www.tibco.com/pe/DeployedVarsType" xmlns:ns3="http://windyroad.org/HTTP1.1-StatusCodeDefinitions" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tib="http://www.tibco.com/bw/xslt/custom-functions" xmlns:pfx2="http://windyroad.org/rest4BW.xsd" xmlns:pfx="http://www.tibco.com/ns/no_namespace_schema_location/schemas/xhtml1-strict.dtd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<pd:ProcessDefinition xmlns:ns2="http://windyroad.com.au/schemas/SalesLead.xsd" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns1="http://www.w3.org/1999/xhtml" xmlns:ns4="http://www.tibco.com/pe/DeployedVarsType" xmlns:ns="http://windyroad.com.au/services/SalesLead" xmlns:ns3="http://windyroad.org/HTTP1.1-StatusCodeDefinitions" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tib="http://www.tibco.com/bw/xslt/custom-functions" xmlns:pfx2="http://windyroad.org/rest4BW.xsd" xmlns:pfx="http://www.tibco.com/ns/no_namespace_schema_location/schemas/xhtml1-strict.dtd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <xsd:import namespace="http://windyroad.org/rest4BW.xsd" schemaLocation="/rest4BW/Schemas/rest4BW.xsd"/>
     <xsd:import namespace="http://www.tibco.com/ns/no_namespace_schema_location/schemas/xhtml1-strict.dtd"/>
-    <pd:name>UI/AddSalesLead.process</pd:name>
+    <pd:name>UI/DeleteSalesLead.process</pd:name>
     <pd:startName>Start</pd:startName>
     <pd:startType>
         <xsd:element name="input">
@@ -29,9 +29,6 @@
         <pfx2:response xsi:type="ns3:sc-303_See_Other">
             <pfx2:headers>
                 <xsl:attribute name="content-location">/</xsl:attribute>
-                <xsl:attribute name="etag">
-                    <xsl:value-of select="$AddSalesLead/ns:AddSalesLeadResponse/SalesLead/ns2:SalesLead/ns2:ID"/>
-                </xsl:attribute>
             </pfx2:headers>
         </pfx2:response>
     </pd:returnBindings>
@@ -44,45 +41,36 @@
     </pd:errorSchemas>
     <pd:processVariables/>
     <pd:targetNamespace>http://www.w3.org/1999/xhtml</pd:targetNamespace>
-    <pd:activity name="AddSalesLead">
+    <pd:activity name="DeleteSalesLead">
         <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
         <pd:resourceType>ae.process.subprocess</pd:resourceType>
         <pd:x>239</pd:x>
         <pd:y>65</pd:y>
         <config>
-            <processName>/UI/Bridge/AddSalesLead.process</processName>
-            <processNameXPath>$Start/input/bridge-impl/AddSalesLead</processNameXPath>
+            <processName>/UI/Bridge/DeleteSalesLead.process</processName>
+            <processNameXPath>$Start/input/bridge-impl/DeleteSalesLead</processNameXPath>
         </config>
         <pd:inputBindings>
-            <ns:AddSalesLeadRequest>
-                <AddSalesLead>
-                    <ns2:CreateSalesLead>
-                        <ns2:FirstName>
-                            <xsl:value-of select="$Start/input/pfx2:request/pfx2:post/pfx2:part[pfx2:meta[@name='name' and @value='FirstName']]/pfx2:text-content"/>
-                        </ns2:FirstName>
-                        <ns2:LastName>
-                            <xsl:value-of select="$Start/input/pfx2:request/pfx2:post/pfx2:part[pfx2:meta[@name='name' and @value='LastName']]/pfx2:text-content"/>
-                        </ns2:LastName>
-                        <ns2:Email>
-                            <xsl:value-of select="$Start/input/pfx2:request/pfx2:post/pfx2:part[pfx2:meta[@name='name' and @value='Email']]/pfx2:text-content"/>
-                        </ns2:Email>
-                        <ns2:PhoneNumber>
-                            <xsl:value-of select="$Start/input/pfx2:request/pfx2:post/pfx2:part[pfx2:meta[@name='name' and @value='PhoneNumber']]/pfx2:text-content"/>
-                        </ns2:PhoneNumber>
-                    </ns2:CreateSalesLead>
-                </AddSalesLead>
-            </ns:AddSalesLeadRequest>
+            <ns:DeleteSalesLeadRequest>
+                <DeleteSalesLead>
+                    <ns2:DeleteSalesLead>
+                        <ns2:ID>
+                            <xsl:value-of select="$Start/input/pfx2:request/pfx2:post/pfx2:part[pfx2:meta[@name='id']]/pfx2:text-content"/>
+                        </ns2:ID>
+                    </ns2:DeleteSalesLead>
+                </DeleteSalesLead>
+            </ns:DeleteSalesLeadRequest>
         </pd:inputBindings>
     </pd:activity>
     <pd:transition>
         <pd:from>Start</pd:from>
-        <pd:to>AddSalesLead</pd:to>
+        <pd:to>DeleteSalesLead</pd:to>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>always</pd:conditionType>
     </pd:transition>
     <pd:transition>
-        <pd:from>AddSalesLead</pd:from>
+        <pd:from>DeleteSalesLead</pd:from>
         <pd:to>End</pd:to>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>

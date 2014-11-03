@@ -20,7 +20,7 @@
         <pd:x>298</pd:x>
         <pd:y>62</pd:y>
         <config>
-            <processName>/private/GetVersion.process</processName>
+            <processName>/privateX/GetVersion.process</processName>
         </config>
         <pd:inputBindings/>
     </pd:activity>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:pfx="http://windyroad.com.au/schemas/SalesLead.xsd">
+    <xsd:import namespace="http://windyroad.com.au/schemas/SalesLead.xsd" schemaLocation="/SalesLead.xsd"/>
+    <pd:name>privateX/DeleteSalesLead.process</pd:name>
+    <pd:startName>Start</pd:startName>
+    <pd:startType ref="pfx:DeleteSalesLead"/>
+    <pd:startX>66</pd:startX>
+    <pd:startY>66</pd:startY>
+    <pd:returnBindings>
+        <pfx:SalesLead>
+            <pfx:FirstName>
+                <xsl:value-of select="$Start/pfx:CreateSalesLead/pfx:FirstName"/>
+            </pfx:FirstName>
+            <pfx:LastName>
+                <xsl:value-of select="$Start/pfx:CreateSalesLead/pfx:LastName"/>
+            </pfx:LastName>
+            <pfx:Email>
+                <xsl:value-of select="$Start/pfx:CreateSalesLead/pfx:Email"/>
+            </pfx:Email>
+            <pfx:PhoneNumber>
+                <xsl:value-of select="$Start/pfx:CreateSalesLead/pfx:PhoneNumber"/>
+            </pfx:PhoneNumber>
+            <pfx:ID>
+                <xsl:value-of select="$Create-GUID/javaCodeActivityOutput/guid"/>
+            </pfx:ID>
+        </pfx:SalesLead>
+    </pd:returnBindings>
+    <pd:endName>End</pd:endName>
+    <pd:endType/>
+    <pd:endX>386</pd:endX>
+    <pd:endY>62</pd:endY>
+    <pd:errorSchemas/>
+    <pd:processVariables/>
+    <pd:targetNamespace>http://xmlns.example.com/1413194211051</pd:targetNamespace>
+    <pd:activity name="Delete Sales Lead">
+        <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
+        <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
+        <pd:x>226</pd:x>
+        <pd:y>65</pd:y>
+        <config>
+            <timeout>10</timeout>
+            <commit>false</commit>
+            <emptyStrAsNil>true</emptyStrAsNil>
+            <jdbcSharedConfig>/resources/SalesLeadDatabase.sharedjdbc</jdbcSharedConfig>
+            <statement>DELETE FROM SALESLEADS WHERE ID = ?</statement>
+            <Prepared_Param_DataType>
+                <parameter>
+                    <parameterName>ID</parameterName>
+                    <dataType>VARCHAR</dataType>
+                </parameter>
+            </Prepared_Param_DataType>
+        </config>
+        <pd:inputBindings>
+            <jdbcUpdateActivityInput>
+                <ID>
+                    <xsl:value-of select="$Start/pfx:DeleteSalesLead/pfx:ID"/>
+                </ID>
+            </jdbcUpdateActivityInput>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>Delete Sales Lead</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Delete Sales Lead</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+</pd:ProcessDefinition>

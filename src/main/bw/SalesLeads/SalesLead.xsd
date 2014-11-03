@@ -5,7 +5,7 @@
 	 targetNamespace="http://windyroad.com.au/schemas/SalesLead.xsd"
 	 elementFormDefault="qualified"
 	 attributeFormDefault="unqualified">
-	<xs:complexType name="SalesLead">
+	<xs:complexType name="CreateSalesLead">
 		<xs:sequence>
 			<xs:element name="FirstName" type="xs:string"/>
 			<xs:element name="LastName" type="xs:string"/>
@@ -13,7 +13,17 @@
 			<xs:element name="PhoneNumber" type="xs:string"/>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:element name="SalesLead" type="sl:SalesLead"/>
+	<xs:element name="SalesLead">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="sl:CreateSalesLead">
+					<xs:sequence>
+						<xs:element ref="sl:ID"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
 	<xs:complexType name="SalesLeads">
 		<xs:sequence>
 			<xs:element ref="sl:SalesLead" minOccurs="0" maxOccurs="unbounded"/>
@@ -50,4 +60,13 @@
 			</xs:attribute>
 		</xs:complexType>
 	</xs:element>
+	<xs:element name="CreateSalesLead" type="sl:CreateSalesLead"/>
+	<xs:element name="DeleteSalesLead">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="sl:ID"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ID" type="xs:string"/>
 </xs:schema>

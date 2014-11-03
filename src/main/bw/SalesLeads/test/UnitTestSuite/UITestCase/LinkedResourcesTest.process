@@ -7,16 +7,16 @@
     <pd:startY>54</pd:startY>
     <pd:returnBindings/>
     <pd:endName>End</pd:endName>
-    <pd:endX>633</pd:endX>
-    <pd:endY>54</pd:endY>
+    <pd:endX>859</pd:endX>
+    <pd:endY>52</pd:endY>
     <pd:errorSchemas/>
     <pd:processVariables/>
     <pd:targetNamespace>http://xmlns.example.com/1352340691435</pd:targetNamespace>
     <pd:activity name="Then the linked resources are available">
         <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
         <pd:resourceType>ae.process.subprocess</pd:resourceType>
-        <pd:x>451</pd:x>
-        <pd:y>69</pd:y>
+        <pd:x>695</pd:x>
+        <pd:y>67</pd:y>
         <config>
             <processName>/test/UnitTestSuite/UITestCase/steps/Then the linked resources are available.process</processName>
         </config>
@@ -27,8 +27,8 @@
     <pd:activity name="When the sales leads are requested">
         <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
         <pd:resourceType>ae.process.subprocess</pd:resourceType>
-        <pd:x>231</pd:x>
-        <pd:y>69</pd:y>
+        <pd:x>539</pd:x>
+        <pd:y>66</pd:y>
         <config>
             <processName>/test/UnitTestSuite/UITestCase/steps/The sales leads are requested.process</processName>
         </config>
@@ -40,13 +40,33 @@
             </bridge-impl>
         </pd:inputBindings>
     </pd:activity>
-    <pd:transition>
-        <pd:from>Start</pd:from>
-        <pd:to>When the sales leads are requested</pd:to>
-        <pd:lineType>Default</pd:lineType>
-        <pd:lineColor>-16777216</pd:lineColor>
-        <pd:conditionType>always</pd:conditionType>
-    </pd:transition>
+    <pd:activity name="Given there are no contacts in the sales lead database">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>222</pd:x>
+        <pd:y>75</pd:y>
+        <config>
+            <processName>/test/UnitTestSuite/steps/There are no contacts in the sales lead database.process</processName>
+        </config>
+        <pd:inputBindings/>
+    </pd:activity>
+    <pd:activity name="When the following contact is added to the sales lead database">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>379</pd:x>
+        <pd:y>75</pd:y>
+        <config>
+            <processName>/test/UnitTestSuite/UITestCase/steps/The following contact is added to the sales lead database.process</processName>
+        </config>
+        <pd:inputBindings>
+            <pfx:CreateSalesLead>
+                <pfx:FirstName>John</pfx:FirstName>
+                <pfx:LastName>Snow</pfx:LastName>
+                <pfx:Email>j.snow@winterfell.biz</pfx:Email>
+                <pfx:PhoneNumber>+61402123456</pfx:PhoneNumber>
+            </pfx:CreateSalesLead>
+        </pd:inputBindings>
+    </pd:activity>
     <pd:transition>
         <pd:from>When the sales leads are requested</pd:from>
         <pd:to>Then the linked resources are available</pd:to>
@@ -57,6 +77,27 @@
     <pd:transition>
         <pd:from>Then the linked resources are available</pd:from>
         <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>Given there are no contacts in the sales lead database</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Given there are no contacts in the sales lead database</pd:from>
+        <pd:to>When the following contact is added to the sales lead database</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>When the following contact is added to the sales lead database</pd:from>
+        <pd:to>When the sales leads are requested</pd:to>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>always</pd:conditionType>

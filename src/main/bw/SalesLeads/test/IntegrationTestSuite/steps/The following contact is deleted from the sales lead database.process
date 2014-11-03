@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pd:ProcessDefinition xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:pfx5="http://windyroad.com.au/services/concreate/SalesLead" xmlns:pfx4="http://windyroad.com.au/services/concrete/SalesLead" xmlns:pfx3="http://windyroad.com.au/services/SalesLead" xmlns:pfx2="http://xmlns.example.com/1413197291833" xmlns:pfx="http://windyroad.com.au/schemas/SalesLead.xsd">
+<pd:ProcessDefinition xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns="http://xmlns.tibco.com/encodings/mime" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:pfx5="http://windyroad.com.au/services/concreate/SalesLead" xmlns:pfx4="http://windyroad.com.au/services/concrete/SalesLead" xmlns:pfx3="http://windyroad.com.au/services/SalesLead" xmlns:pfx2="http://xmlns.example.com/1413197291833" xmlns:pfx="http://windyroad.com.au/schemas/SalesLead.xsd">
     <xsd:import namespace="http://windyroad.com.au/schemas/SalesLead.xsd" schemaLocation="/SalesLead.xsd"/>
     <wsdl:import namespace="http://xmlns.example.com/1413197291833" location="/SalesLead.serviceagent"/>
     <wsdl:import namespace="http://windyroad.com.au/services/SalesLead"/>
     <wsdl:import namespace="http://windyroad.com.au/services/concreate/SalesLead" location="/SalesLeadConcrete.wsdl"/>
-    <pd:name>test/IntegrationTestSuite/steps/The following contact is added to the sales lead database.process</pd:name>
+    <pd:name>test/IntegrationTestSuite/steps/The following contact is deleted from the sales lead database.process</pd:name>
     <pd:startName>Start</pd:startName>
-    <pd:startType ref="pfx:CreateSalesLead"/>
+    <pd:startType ref="pfx:DeleteSalesLead"/>
     <pd:startX>138</pd:startX>
     <pd:startY>80</pd:startY>
     <pd:returnBindings>
-        <xsl:copy-of select="$SOAPRequestReply/outputMessage/pfx:SalesLead"/>
+        <pfx:DeleteSalesLead>
+            <pfx:ID>
+                <xsl:value-of select="$SOAPRequestReply/outputMessage/pfx:ID"/>
+            </pfx:ID>
+        </pfx:DeleteSalesLead>
     </pd:returnBindings>
     <pd:endName>End</pd:endName>
-    <pd:endType ref="pfx:SalesLead"/>
+    <pd:endType ref="pfx:DeleteSalesLead"/>
     <pd:endX>462</pd:endX>
     <pd:endY>77</pd:endY>
     <pd:errorSchemas/>
@@ -30,14 +34,14 @@
             <timeoutType>Seconds</timeoutType>
             <service>pfx5:SalesLead</service>
             <servicePort>SalesLead</servicePort>
-            <operation>AddSalesLead</operation>
-            <soapAction>/SalesLead/AddSalesLead</soapAction>
+            <operation>DeleteSalesLead</operation>
+            <soapAction>/SalesLead/DeleteSalesLead</soapAction>
             <endpointURL>http://%%Resources/SalesLeadService/Host%%:%%Resources/SalesLeadService/Port%%/SalesLead</endpointURL>
             <authScheme>NONE</authScheme>
         </config>
         <pd:inputBindings>
             <inputMessage>
-                <xsl:copy-of select="$Start/pfx:CreateSalesLead"/>
+                <xsl:copy-of select="$Start/pfx:DeleteSalesLead"/>
             </inputMessage>
         </pd:inputBindings>
     </pd:activity>

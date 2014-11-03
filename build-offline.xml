@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="designer" name="SalesLeads" xmlns:ivy="antlib:org.apache.ivy.ant">
+
+	<property file="build.properties"  />
+	<property name="bwunit.version" value="${bwunit.importer.version}" />
+
+	<property name="bwda.importer.dir"
+		value="${bwda.lib.dir}/bwunit-importer-${bwunit.importer.version}" />
+
+	<ant antfile="${bwda.importer.dir}/auto-loader.xml" target="-retrieve"
+		inheritall="true" inheritrefs="true">
+		<property name="bwda.ivy.settings.id" value="bwda.autoload" />
+	</ant>
+	<echo>LOADING: ${bwda.build.dir}/dependencies.properties</echo>
+	<property file="${bwda.build.dir}/dependencies.properties" />
+	
+
+	<import>
+		<url url="file:///${basedir}/${bwda.importer.dir}/build-targets.xml" />
+	</import>
+	<import>
+		<url url="file:///${basedir}/${bwda.importer.dir}/test-targets.xml" />
+	</import>
+	<import>
+		<url url="file:///${basedir}/${bwda.importer.dir}/config-targets.xml" />
+	</import>
+	<import>
+		<url url="file:///${basedir}/${bwda.importer.dir}/deploy-targets.xml" />
+	</import>
+	<import>
+		<url url="file:///${basedir}/${bwda.importer.dir}/promote-targets.xml" />
+	</import>
+</project>

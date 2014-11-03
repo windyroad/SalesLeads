@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns1="http://www.tibco.com/pe/DeployedVarsType" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns="http://windyroad.org/rest4BW.xsd" xmlns:pfx="http://windyroad.com.au/schemas/SalesLead.xsd">
+    <pd:name>test/UnitTestSuite/UITestCase/steps/All contacts are deleted from the sales lead database.process</pd:name>
+    <pd:startName>Start</pd:startName>
+    <pd:startType/>
+    <pd:startX>87</pd:startX>
+    <pd:startY>65</pd:startY>
+    <pd:returnBindings>
+        <pfx:SalesLead>
+            <pfx:FirstName>
+                <xsl:value-of select="$Start/pfx:CreateSalesLead/pfx:FirstName"/>
+            </pfx:FirstName>
+            <pfx:LastName>
+                <xsl:value-of select="$Start/pfx:CreateSalesLead/pfx:LastName"/>
+            </pfx:LastName>
+            <pfx:Email>
+                <xsl:value-of select="$Start/pfx:CreateSalesLead/pfx:Email"/>
+            </pfx:Email>
+            <pfx:PhoneNumber>
+                <xsl:value-of select="$Start/pfx:CreateSalesLead/pfx:PhoneNumber"/>
+            </pfx:PhoneNumber>
+            <pfx:ID>
+                <xsl:value-of select="substring-after($DeleteSalesLead/ns:response/ns:headers/@content-location, $_globalVariables/ns1:GlobalVariables/CONST/LEAD_URI_PREFIX)"/>
+            </pfx:ID>
+        </pfx:SalesLead>
+    </pd:returnBindings>
+    <pd:endName>End</pd:endName>
+    <pd:endX>613</pd:endX>
+    <pd:endY>70</pd:endY>
+    <pd:errorSchemas/>
+    <pd:processVariables/>
+    <pd:targetNamespace>http://xmlns.example.com/1413193119895</pd:targetNamespace>
+    <pd:activity name="SetVariable">
+        <pd:type>com.tibco.pe.core.SetSharedVariableActivity</pd:type>
+        <pd:resourceType>ae.activities.setSharedVariable</pd:resourceType>
+        <pd:x>300</pd:x>
+        <pd:y>65</pd:y>
+        <config>
+            <variableConfig>/test/UnitTestSuite/UITestCase/stub/SalesLeads.sharedvariable</variableConfig>
+            <showResult>true</showResult>
+        </config>
+        <pd:inputBindings>
+            <pfx:SalesLeads/>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>SetVariable</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>SetVariable</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+</pd:ProcessDefinition>

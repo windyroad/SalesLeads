@@ -17,5 +17,21 @@
 			<type>String</type>
 			<modTime>1414620524542</modTime>
 		</globalVariable>
+		<globalVariable>
+			<name>LEAD_DELETE_SUFFIX</name>
+			<value>/delete</value>
+			<deploymentSettable>false</deploymentSettable>
+			<serviceSettable>false</serviceSettable>
+			<type>String</type>
+			<modTime>1414982214855</modTime>
+		</globalVariable>
+		<globalVariable>
+			<name>LEAD_URI_PREFIX</name>
+			<value>/lead/</value>
+			<deploymentSettable>false</deploymentSettable>
+			<serviceSettable>false</serviceSettable>
+			<type>String</type>
+			<modTime>1414816474900</modTime>
+		</globalVariable>
 	</globalVariables>
 </repository>

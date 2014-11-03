@@ -9,7 +9,7 @@
         <groups>
             <row isDefault="true" groupName="Default"/>
         </groups>
-        <serviceChange>Thu Oct 30 00:11:03 EST 2014</serviceChange>
+        <serviceChange>Sun Nov 02 18:25:01 PST 2014</serviceChange>
         <wsdl namespace="http://windyroad.com.au/services/concreate/SalesLead" embedWsdlComponents="false" embedSchemaComponents="false" embedJndiProperties="false"/>
         <isAMXCompliant>false</isAMXCompliant>
         <interfaceImpl>
@@ -26,6 +26,7 @@
                                 <operations>
                                     <row opName="AddSalesLead" opImpl="/Impl/AddSalesLead.process"/>
                                     <row opName="GetSalesLeads" opImpl="/Impl/GetSalesLeads.process"/>
+                                    <row opName="DeleteSalesLead" opImpl="/Impl/DeleteSalesLead.process"/>
                                 </operations>
                             </config>
                         </tab>
@@ -74,6 +75,19 @@
                                                                 <general>
                                                                     <config>
                                                                         <soapAction>/SalesLead/GetSalesLeads</soapAction>
+                                                                        <operationStyle/>
+                                                                        <soapUse>literal</soapUse>
+                                                                        <inputNamespace/>
+                                                                        <outputNamespace/>
+                                                                        <faultNamespace/>
+                                                                        <portAddressPrefix/>
+                                                                    </config>
+                                                                </general>
+                                                            </operation>
+                                                            <operation name="DeleteSalesLead">
+                                                                <general>
+                                                                    <config>
+                                                                        <soapAction>/SalesLead/DeleteSalesLead</soapAction>
                                                                         <operationStyle/>
                                                                         <soapUse>literal</soapUse>
                                                                         <inputNamespace/>

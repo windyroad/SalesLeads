@@ -26,7 +26,7 @@
         <pd:x>299</pd:x>
         <pd:y>64</pd:y>
         <config>
-            <processName>/private/GetVersion.process</processName>
+            <processName>/privateX/GetVersion.process</processName>
         </config>
         <pd:inputBindings>
             <Input>

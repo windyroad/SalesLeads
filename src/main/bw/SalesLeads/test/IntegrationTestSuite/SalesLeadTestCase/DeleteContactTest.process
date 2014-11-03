@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pd:ProcessDefinition xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns="http://windyroad.org/bwunit-asserts-0.0.0.xsd" xmlns:pfx="http://windyroad.com.au/schemas/SalesLead.xsd">
-    <pd:name>test/UnitTestSuite/SalesLeadTestCase/NewContactTest.process</pd:name>
+    <pd:name>test/IntegrationTestSuite/SalesLeadTestCase/DeleteContactTest.process</pd:name>
     <pd:description>@Timeout(60000)</pd:description>
     <pd:startName>Start</pd:startName>
-    <pd:startX>79</pd:startX>
-    <pd:startY>55</pd:startY>
+    <pd:startX>69</pd:startX>
+    <pd:startY>62</pd:startY>
     <pd:returnBindings/>
     <pd:endName>End</pd:endName>
-    <pd:endX>863</pd:endX>
-    <pd:endY>56</pd:endY>
+    <pd:endX>800</pd:endX>
+    <pd:endY>60</pd:endY>
     <pd:errorSchemas/>
     <pd:processVariables/>
     <pd:targetNamespace>http://xmlns.example.com/1352340691435</pd:targetNamespace>
-    <pd:activity name="When the following contact is added to the sales lead database">
+    <pd:activity name="And we add the following contact in the sales leads database">
         <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
         <pd:resourceType>ae.process.subprocess</pd:resourceType>
-        <pd:x>462</pd:x>
-        <pd:y>78</pd:y>
+        <pd:x>349</pd:x>
+        <pd:y>80</pd:y>
         <config>
             <processName>/test/UnitTestSuite/steps/The following contact is added to the sales lead database.process</processName>
         </config>
@@ -32,37 +32,44 @@
     <pd:activity name="Then the following records will exist in the sales lead database">
         <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
         <pd:resourceType>ae.process.subprocess</pd:resourceType>
-        <pd:x>655</pd:x>
-        <pd:y>78</pd:y>
+        <pd:x>666</pd:x>
+        <pd:y>82</pd:y>
         <config>
-            <processName>/test/UnitTestSuite/steps/The following records will exist in the sales lead database.process</processName>
+            <processName>/test/IntegrationTestSuite/steps/The following records will exist in the sales lead database.process</processName>
         </config>
         <pd:inputBindings>
-            <pfx:SalesLeads>
-                <xsl:copy-of select="$When-the-following-contact-is-added-to-the-sales-lead-database/pfx:SalesLead"/>
-            </pfx:SalesLeads>
+            <pfx:SalesLeads/>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="When the following contact is deleted from the sales lead database">
+        <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
+        <pd:resourceType>ae.process.subprocess</pd:resourceType>
+        <pd:x>517</pd:x>
+        <pd:y>81</pd:y>
+        <config>
+            <processName>/test/IntegrationTestSuite/steps/The following contact is deleted from the sales lead database.process</processName>
+        </config>
+        <pd:inputBindings>
+            <pfx:DeleteSalesLead>
+                <pfx:ID>
+                    <xsl:value-of select="$And-we-add-the-following-contact-in-the-sales-leads-database/pfx:SalesLead/pfx:ID"/>
+                </pfx:ID>
+            </pfx:DeleteSalesLead>
         </pd:inputBindings>
     </pd:activity>
     <pd:activity name="Given there are no contacts in the sales lead database">
         <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
         <pd:resourceType>ae.process.subprocess</pd:resourceType>
-        <pd:x>248</pd:x>
-        <pd:y>78</pd:y>
+        <pd:x>204</pd:x>
+        <pd:y>82</pd:y>
         <config>
             <processName>/test/UnitTestSuite/steps/There are no contacts in the sales lead database.process</processName>
         </config>
         <pd:inputBindings/>
     </pd:activity>
     <pd:transition>
-        <pd:from>Start</pd:from>
-        <pd:to>Given there are no contacts in the sales lead database</pd:to>
-        <pd:lineType>Default</pd:lineType>
-        <pd:lineColor>-16777216</pd:lineColor>
-        <pd:conditionType>always</pd:conditionType>
-    </pd:transition>
-    <pd:transition>
-        <pd:from>When the following contact is added to the sales lead database</pd:from>
-        <pd:to>Then the following records will exist in the sales lead database</pd:to>
+        <pd:from>And we add the following contact in the sales leads database</pd:from>
+        <pd:to>When the following contact is deleted from the sales lead database</pd:to>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>always</pd:conditionType>
@@ -75,8 +82,22 @@
         <pd:conditionType>always</pd:conditionType>
     </pd:transition>
     <pd:transition>
+        <pd:from>When the following contact is deleted from the sales lead database</pd:from>
+        <pd:to>Then the following records will exist in the sales lead database</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>Given there are no contacts in the sales lead database</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
         <pd:from>Given there are no contacts in the sales lead database</pd:from>
-        <pd:to>When the following contact is added to the sales lead database</pd:to>
+        <pd:to>And we add the following contact in the sales leads database</pd:to>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>always</pd:conditionType>

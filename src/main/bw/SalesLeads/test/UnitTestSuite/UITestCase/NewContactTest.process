@@ -21,12 +21,12 @@
             <processName>/test/UnitTestSuite/UITestCase/steps/The following contact is added to the sales lead database.process</processName>
         </config>
         <pd:inputBindings>
-            <pfx:SalesLead>
+            <pfx:CreateSalesLead>
                 <pfx:FirstName>John</pfx:FirstName>
                 <pfx:LastName>Doe</pfx:LastName>
                 <pfx:Email>john@doe.com.au</pfx:Email>
                 <pfx:PhoneNumber>+61255556789</pfx:PhoneNumber>
-            </pfx:SalesLead>
+            </pfx:CreateSalesLead>
         </pd:inputBindings>
     </pd:activity>
     <pd:activity name="Then the following records will exist in the sales lead database">
@@ -49,9 +49,11 @@
         <pd:x>248</pd:x>
         <pd:y>78</pd:y>
         <config>
-            <processName>/test/UnitTestSuite/steps/There are no contacts in the sales lead database.process</processName>
+            <processName>/test/UnitTestSuite/UITestCase/steps/All contacts are deleted from the sales lead database.process</processName>
         </config>
-        <pd:inputBindings/>
+        <pd:inputBindings>
+            <pfx:DeleteSalesLead/>
+        </pd:inputBindings>
     </pd:activity>
     <pd:transition>
         <pd:from>Start</pd:from>

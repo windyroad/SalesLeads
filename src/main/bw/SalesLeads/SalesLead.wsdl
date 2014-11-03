@@ -2,9 +2,11 @@
 <definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:ns="http://windyroad.com.au/schemas/SalesLead.xsd" xmlns:tns="http://windyroad.com.au/services/SalesLead" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://windyroad.com.au/services/SalesLead">
     <import namespace="http://windyroad.com.au/schemas/SalesLead.xsd" location="SalesLead.xsd"/>
     <message name="AddSalesLeadRequest">
-        <part name="AddSalesLead" element="ns:SalesLead"/>
+        <part name="AddSalesLead" element="ns:CreateSalesLead"/>
     </message>
-    <message name="AddSalesLeadResponse"/>
+    <message name="AddSalesLeadResponse">
+        <part name="SalesLead" element="ns:SalesLead"/>
+    </message>
     <message name="GetSalesLeadsRequest">
         <part name="GetSalesLeadsRequest" element="ns:GetSalesLeadsRequest"/>
     </message>
@@ -15,6 +17,12 @@
     <message name="GetVersionResponse">
         <part name="GetVersionResponse" element="ns:Version"/>
     </message>
+    <message name="DeleteSalesLeadRequest">
+        <part name="DeleteSalesLead" element="ns:DeleteSalesLead"/>
+    </message>
+    <message name="DeleteSalesLeadResponse">
+        <part name="ID" element="ns:ID"/>
+    </message>
     <portType name="SalesLead">
         <operation name="AddSalesLead">
             <input name="input" message="tns:AddSalesLeadRequest"/>
@@ -23,6 +31,10 @@
         <operation name="GetSalesLeads">
             <input message="tns:GetSalesLeadsRequest"/>
             <output message="tns:GetSalesLeadsResponse"/>
+        </operation>
+        <operation name="DeleteSalesLead">
+            <input name="input" message="tns:DeleteSalesLeadRequest"/>
+            <output name="output" message="tns:DeleteSalesLeadResponse"/>
         </operation>
     </portType>
     <portType name="MetaData">

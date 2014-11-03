@@ -18,7 +18,16 @@
                 <soap:body parts="AddSalesLead" use="literal"/>
             </wsdl:input>
             <wsdl:output>
-                <soap:body parts="" use="literal"/>
+                <soap:body parts="SalesLead" use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="DeleteSalesLead">
+            <soap:operation soapAction="/SalesLead/DeleteSalesLead" style="document"/>
+            <wsdl:input>
+                <soap:body parts="DeleteSalesLead" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body parts="ID" use="literal"/>
             </wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="GetSalesLeads">

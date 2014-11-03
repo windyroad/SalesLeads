@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pd:ProcessDefinition xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns1="http://xmlns.tibco.com/encodings/mime" xmlns:ns="http://windyroad.com.au/schemas/SalesLead.xsd" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:pfx2="http://windyroad.com.au/services/SalesLead" xmlns:pfx="http://windyroad.com.au/services/concreate/SalesLead">
+<pd:ProcessDefinition xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns1="http://xmlns.tibco.com/encodings/mime" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns="http://windyroad.com.au/schemas/SalesLead.xsd" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:pfx2="http://windyroad.com.au/services/SalesLead" xmlns:pfx="http://windyroad.com.au/services/concreate/SalesLead">
     <wsdl:import namespace="http://windyroad.com.au/services/SalesLead" location="/SalesLead.wsdl"/>
     <wsdl:import namespace="http://windyroad.com.au/services/concreate/SalesLead" location="/SalesLeadConcrete.wsdl"/>
-    <pd:name>UI/Bridge/AddSalesLead.process</pd:name>
+    <pd:name>UI/Bridge/DeleteSalesLead.process</pd:name>
     <pd:startName>Start</pd:startName>
-    <pd:startType wsMsgRef="pfx2:AddSalesLeadRequest"/>
+    <pd:startType wsMsgRef="pfx2:DeleteSalesLeadRequest"/>
     <pd:startX>150</pd:startX>
     <pd:startY>64</pd:startY>
     <pd:returnBindings>
-        <pfx2:AddSalesLeadResponse>
-            <SalesLead>
-                <xsl:copy-of select="$SOAPRequestReply/outputMessage/ns:SalesLead"/>
-            </SalesLead>
-        </pfx2:AddSalesLeadResponse>
+        <pfx2:DeleteSalesLeadResponse>
+            <ID>
+                <ns:ID>
+                    <xsl:value-of select="$SOAPRequestReply/outputMessage/ns:ID"/>
+                </ns:ID>
+            </ID>
+        </pfx2:DeleteSalesLeadResponse>
     </pd:returnBindings>
     <pd:endName>End</pd:endName>
-    <pd:endType wsMsgRef="pfx2:AddSalesLeadResponse"/>
+    <pd:endType wsMsgRef="pfx2:DeleteSalesLeadResponse"/>
     <pd:endX>450</pd:endX>
     <pd:endY>64</pd:endY>
     <pd:errorSchemas/>
@@ -32,14 +34,17 @@
             <timeoutType>Seconds</timeoutType>
             <service>pfx:SalesLead</service>
             <servicePort>SalesLead</servicePort>
-            <operation>AddSalesLead</operation>
-            <soapAction>/SalesLead/AddSalesLead</soapAction>
+            <operation>DeleteSalesLead</operation>
+            <soapAction>/SalesLead/DeleteSalesLead</soapAction>
             <endpointURL>http://%%Resources/SalesLeadService/Host%%:%%Resources/SalesLeadService/Port%%/SalesLead</endpointURL>
             <authScheme>NONE</authScheme>
+            <useProxy>false</useProxy>
+            <requireBasicAuth>false</requireBasicAuth>
+            <basicHttpAuthIdentity/>
         </config>
         <pd:inputBindings>
             <inputMessage>
-                <xsl:copy-of select="$Start/pfx2:AddSalesLeadRequest/AddSalesLead/ns:CreateSalesLead"/>
+                <xsl:copy-of select="$Start/pfx2:DeleteSalesLeadRequest/DeleteSalesLead/ns:DeleteSalesLead"/>
             </inputMessage>
         </pd:inputBindings>
     </pd:activity>

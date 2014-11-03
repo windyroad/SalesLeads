@@ -1,20 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pd:ProcessDefinition xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns2="www.tibco.com/plugin/java/JavaMethodActivityOutput" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns1="http://www.tibco.com/pe/DeployedVarsType" xmlns:ns="www.tibco.com/plugin/java/JavaMethodActivityInput" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:pfx5="http://windyroad.com.au/services/concreate/SalesLead" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:pfx4="http://windyroad.com.au/services/concrete/SalesLead" xmlns:pfx3="http://windyroad.com.au/services/SalesLead" xmlns:pfx2="http://xmlns.example.com/1413197291833" xmlns:pfx="http://windyroad.com.au/schemas/SalesLead.xsd">
+<pd:ProcessDefinition xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns="www.tibco.com/plugin/java/JavaMethodActivityInput" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:pfx="http://windyroad.com.au/schemas/SalesLead.xsd" xmlns:ns2="www.tibco.com/plugin/java/JavaMethodActivityOutput" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns1="http://www.tibco.com/pe/DeployedVarsType" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:pfx5="http://windyroad.com.au/services/concreate/SalesLead" xmlns:pfx4="http://windyroad.com.au/services/concrete/SalesLead" xmlns:pfx3="http://windyroad.com.au/services/SalesLead" xmlns:pfx2="http://xmlns.example.com/1413197291833" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <wsdl:import namespace="http://xmlns.example.com/1413197291833" location="/SalesLead.serviceagent"/>
     <wsdl:import namespace="http://windyroad.com.au/services/SalesLead"/>
     <wsdl:import namespace="http://windyroad.com.au/services/concreate/SalesLead" location="/SalesLeadConcrete.wsdl"/>
     <pd:name>test/IntegrationTestSuite/UITestCase/steps/The following contact is added to the sales lead database.process</pd:name>
     <pd:startName>Start</pd:startName>
-    <pd:startType ref="pfx:SalesLead"/>
+    <pd:startType ref="pfx:CreateSalesLead"/>
     <pd:startX>138</pd:startX>
     <pd:startY>80</pd:startY>
     <pd:returnBindings>
-        <xsl:copy-of select="$Start/pfx:SalesLead"/>
+        <pfx:SalesLead>
+            <pfx:FirstName>
+                <xsl:value-of select="$Start/pfx:CreateSalesLead/pfx:FirstName"/>
+            </pfx:FirstName>
+            <pfx:LastName>
+                <xsl:value-of select="$Start/pfx:CreateSalesLead/pfx:LastName"/>
+            </pfx:LastName>
+            <pfx:Email>
+                <xsl:value-of select="$Start/pfx:CreateSalesLead/pfx:Email"/>
+            </pfx:Email>
+            <pfx:PhoneNumber>
+                <xsl:value-of select="$Start/pfx:CreateSalesLead/pfx:PhoneNumber"/>
+            </pfx:PhoneNumber>
+            <pfx:ID>
+                <xsl:value-of select="($Get-Sales-Leads/resultSet/Record/ID[last()] | $GetVariable/pfx:SalesLeads/pfx:SalesLead/pfx:ID[last()])[1]"/>
+            </pfx:ID>
+        </pfx:SalesLead>
     </pd:returnBindings>
     <pd:endName>End</pd:endName>
     <pd:endType ref="pfx:SalesLead"/>
-    <pd:endX>571</pd:endX>
-    <pd:endY>88</pd:endY>
+    <pd:endX>712</pd:endX>
+    <pd:endY>80</pd:endY>
     <pd:errorSchemas/>
     <pd:processVariables/>
     <pd:targetNamespace>http://xmlns.example.com/1413193119895</pd:targetNamespace>
@@ -144,7 +160,7 @@ webDriver.getDriver().findElement(By.id("SalesLeadsForm")).findElement(By.id("Ad
             <byteCode>
                 <class>
                     <name>ThefollowingcontactisaddedtothesalesleaddatabaseJavaCode</name>
-                    <byteCode>yv66vgAAADMAZAkAGAA7CQAYADwJABgAPQkAGAA+CQAYAD8JABgAQAoAGQBBCABCBwBDCgAJAEQLAEUARggARwoASABJCwBFAEoIAEsLAEwASgcATQsATABOCABPCABQCABRCABSCwBMAFMHAFQHAFUBAAN1cmwBABJMamF2YS9sYW5nL1N0cmluZzsBAAlmaXJzdE5hbWUBAAhsYXN0TmFtZQEABWVtYWlsAQALcGhvbmVOdW1iZXIBAAZkcml2ZXIBABJMamF2YS9sYW5nL09iamVjdDsBAAZnZXR1cmwBABQoKUxqYXZhL2xhbmcvU3RyaW5nOwEABENvZGUBAA9MaW5lTnVtYmVyVGFibGUBAAZzZXR1cmwBABUoTGphdmEvbGFuZy9TdHJpbmc7KVYBAAxnZXRmaXJzdE5hbWUBAAxzZXRmaXJzdE5hbWUBAAtnZXRsYXN0TmFtZQEAC3NldGxhc3ROYW1lAQAIZ2V0ZW1haWwBAAhzZXRlbWFpbAEADmdldHBob25lTnVtYmVyAQAOc2V0cGhvbmVOdW1iZXIBAAlnZXRkcml2ZXIBABQoKUxqYXZhL2xhbmcvT2JqZWN0OwEACXNldGRyaXZlcgEAFShMamF2YS9sYW5nL09iamVjdDspVgEABjxpbml0PgEAAygpVgEABmludm9rZQEACkV4Y2VwdGlvbnMHAFYBAApTb3VyY2VGaWxlAQA9VGhlZm9sbG93aW5nY29udGFjdGlzYWRkZWR0b3RoZXNhbGVzbGVhZGRhdGFiYXNlSmF2YUNvZGUuamF2YQwAGgAbDAAcABsMAB0AGwwAHgAbDAAfABsMACAAIQwANAA1AQAAAQAlYXUvY29tL3dpbmR5cm9hZC9zYWxlc2xlYWRzL3VpL0RyaXZlcgwAVwBYBwBZDABaACcBAA5TYWxlc0xlYWRzRm9ybQcAWwwAXABdDABeAF8BAAlGaXJzdE5hbWUHAGABABZqYXZhL2xhbmcvQ2hhclNlcXVlbmNlDABhAGIBAAhMYXN0TmFtZQEABUVtYWlsAQALUGhvbmVOdW1iZXIBAAdBZGRMZWFkDABjADUBAJR0ZXN0L0ludGVncmF0aW9uVGVzdFN1aXRlL1VJVGVzdENhc2Uvc3RlcHMvVGhlZm9sbG93aW5nY29udGFjdGlzYWRkZWR0b3RoZXNhbGVzbGVhZGRhdGFiYXNlL1RoZWZvbGxvd2luZ2NvbnRhY3Rpc2FkZGVkdG90aGVzYWxlc2xlYWRkYXRhYmFzZUphdmFDb2RlAQAQamF2YS9sYW5nL09iamVjdAEAE2phdmEvbGFuZy9FeGNlcHRpb24BAAlnZXREcml2ZXIBACEoKUxvcmcvb3BlbnFhL3NlbGVuaXVtL1dlYkRyaXZlcjsBAB1vcmcvb3BlbnFhL3NlbGVuaXVtL1dlYkRyaXZlcgEAA2dldAEAFm9yZy9vcGVucWEvc2VsZW5pdW0vQnkBAAJpZAEALChMamF2YS9sYW5nL1N0cmluZzspTG9yZy9vcGVucWEvc2VsZW5pdW0vQnk7AQALZmluZEVsZW1lbnQBADooTG9yZy9vcGVucWEvc2VsZW5pdW0vQnk7KUxvcmcvb3BlbnFhL3NlbGVuaXVtL1dlYkVsZW1lbnQ7AQAeb3JnL29wZW5xYS9zZWxlbml1bS9XZWJFbGVtZW50AQAIc2VuZEtleXMBABwoW0xqYXZhL2xhbmcvQ2hhclNlcXVlbmNlOylWAQAFY2xpY2sAIQAYABkAAAAGAAQAGgAbAAAABAAcABsAAAAEAB0AGwAAAAQAHgAbAAAABAAfABsAAAAEACAAIQAAAA4AAQAiACMAAQAkAAAAHQABAAEAAAAFKrQAAbAAAAABACUAAAAGAAEAAAAXAAEAJgAnAAEAJAAAACIAAgACAAAABiortQABsQAAAAEAJQAAAAoAAgAAABoABQAbAAEAKAAjAAEAJAAAAB0AAQABAAAABSq0AAKwAAAAAQAlAAAABgABAAAAHQABACkAJwABACQAAAAiAAIAAgAAAAYqK7UAArEAAAABACUAAAAKAAIAAAAgAAUAIQABACoAIwABACQAAAAdAAEAAQAAAAUqtAADsAAAAAEAJQAAAAYAAQAAACMAAQArACcAAQAkAAAAIgACAAIAAAAGKiu1AAOxAAAAAQAlAAAACgACAAAAJgAFACcAAQAsACMAAQAkAAAAHQABAAEAAAAFKrQABLAAAAABACUAAAAGAAEAAAApAAEALQAnAAEAJAAAACIAAgACAAAABiortQAEsQAAAAEAJQAAAAoAAgAAACwABQAtAAEALgAjAAEAJAAAAB0AAQABAAAABSq0AAWwAAAAAQAlAAAABgABAAAALwABAC8AJwABACQAAAAiAAIAAgAAAAYqK7UABbEAAAABACUAAAAKAAIAAAAyAAUAMwABADAAMQABACQAAAAdAAEAAQAAAAUqtAAGsAAAAAEAJQAAAAYAAQAAADUAAQAyADMAAQAkAAAAIgACAAIAAAAGKiu1AAaxAAAAAQAlAAAACgACAAAAOAAFADkAAQA0ADUAAQAkAAAAXAACAAEAAAAoKrcAByoSCLUAASoSCLUAAioSCLUAAyoSCLUABCoSCLUABSoBtQAGsQAAAAEAJQAAACIACAAAADsABAAQAAoAEQAQABIAFgATABwAFAAiABUAJwA8AAEANgA1AAIAJAAAAQcABQACAAAA0yq0AAbAAAlMK7YACiq0AAG5AAsCACu2AAoSDLgADbkADgIAEg+4AA25ABACAAS9ABFZAyq0AAJTuQASAgArtgAKEgy4AA25AA4CABITuAANuQAQAgAEvQARWQMqtAADU7kAEgIAK7YAChIMuAANuQAOAgASFLgADbkAEAIABL0AEVkDKrQABFO5ABICACu2AAoSDLgADbkADgIAEhW4AA25ABACAAS9ABFZAyq0AAVTuQASAgArtgAKEgy4AA25AA4CABIWuAANuQAQAgC5ABcBALEAAAABACUAAAAiAAgAAABHAAgASQAVAEoAPQBLAGUATACNAE0AtQBOANIAUAA3AAAABAABADgAAQA5AAAAAgA6</byteCode>
+                    <byteCode>yv66vgAAADIAZAkAGAA7CQAYADwJABgAPQkAGAA+CQAYAD8JABgAQAoAGQBBCABCBwBDCgAJAEQLAEUARggARwoASABJCwBFAEoIAEsLAEwASgcATQsATABOCABPCABQCABRCABSCwBMAFMHAFQHAFUBAAN1cmwBABJMamF2YS9sYW5nL1N0cmluZzsBAAlmaXJzdE5hbWUBAAhsYXN0TmFtZQEABWVtYWlsAQALcGhvbmVOdW1iZXIBAAZkcml2ZXIBABJMamF2YS9sYW5nL09iamVjdDsBAAZnZXR1cmwBABQoKUxqYXZhL2xhbmcvU3RyaW5nOwEABENvZGUBAA9MaW5lTnVtYmVyVGFibGUBAAZzZXR1cmwBABUoTGphdmEvbGFuZy9TdHJpbmc7KVYBAAxnZXRmaXJzdE5hbWUBAAxzZXRmaXJzdE5hbWUBAAtnZXRsYXN0TmFtZQEAC3NldGxhc3ROYW1lAQAIZ2V0ZW1haWwBAAhzZXRlbWFpbAEADmdldHBob25lTnVtYmVyAQAOc2V0cGhvbmVOdW1iZXIBAAlnZXRkcml2ZXIBABQoKUxqYXZhL2xhbmcvT2JqZWN0OwEACXNldGRyaXZlcgEAFShMamF2YS9sYW5nL09iamVjdDspVgEABjxpbml0PgEAAygpVgEABmludm9rZQEACkV4Y2VwdGlvbnMHAFYBAApTb3VyY2VGaWxlAQA9VGhlZm9sbG93aW5nY29udGFjdGlzYWRkZWR0b3RoZXNhbGVzbGVhZGRhdGFiYXNlSmF2YUNvZGUuamF2YQwAGgAbDAAcABsMAB0AGwwAHgAbDAAfABsMACAAIQwANAA1AQAAAQAlYXUvY29tL3dpbmR5cm9hZC9zYWxlc2xlYWRzL3VpL0RyaXZlcgwAVwBYBwBZDABaACcBAA5TYWxlc0xlYWRzRm9ybQcAWwwAXABdDABeAF8BAAlGaXJzdE5hbWUHAGABABZqYXZhL2xhbmcvQ2hhclNlcXVlbmNlDABhAGIBAAhMYXN0TmFtZQEABUVtYWlsAQALUGhvbmVOdW1iZXIBAAdBZGRMZWFkDABjADUBAJR0ZXN0L0ludGVncmF0aW9uVGVzdFN1aXRlL1VJVGVzdENhc2Uvc3RlcHMvVGhlZm9sbG93aW5nY29udGFjdGlzYWRkZWR0b3RoZXNhbGVzbGVhZGRhdGFiYXNlL1RoZWZvbGxvd2luZ2NvbnRhY3Rpc2FkZGVkdG90aGVzYWxlc2xlYWRkYXRhYmFzZUphdmFDb2RlAQAQamF2YS9sYW5nL09iamVjdAEAE2phdmEvbGFuZy9FeGNlcHRpb24BAAlnZXREcml2ZXIBACEoKUxvcmcvb3BlbnFhL3NlbGVuaXVtL1dlYkRyaXZlcjsBAB1vcmcvb3BlbnFhL3NlbGVuaXVtL1dlYkRyaXZlcgEAA2dldAEAFm9yZy9vcGVucWEvc2VsZW5pdW0vQnkBAAJpZAEALChMamF2YS9sYW5nL1N0cmluZzspTG9yZy9vcGVucWEvc2VsZW5pdW0vQnk7AQALZmluZEVsZW1lbnQBADooTG9yZy9vcGVucWEvc2VsZW5pdW0vQnk7KUxvcmcvb3BlbnFhL3NlbGVuaXVtL1dlYkVsZW1lbnQ7AQAeb3JnL29wZW5xYS9zZWxlbml1bS9XZWJFbGVtZW50AQAIc2VuZEtleXMBABwoW0xqYXZhL2xhbmcvQ2hhclNlcXVlbmNlOylWAQAFY2xpY2sAIQAYABkAAAAGAAQAGgAbAAAABAAcABsAAAAEAB0AGwAAAAQAHgAbAAAABAAfABsAAAAEACAAIQAAAA4AAQAiACMAAQAkAAAAHQABAAEAAAAFKrQAAbAAAAABACUAAAAGAAEAAAAXAAEAJgAnAAEAJAAAACIAAgACAAAABiortQABsQAAAAEAJQAAAAoAAgAAABoABQAbAAEAKAAjAAEAJAAAAB0AAQABAAAABSq0AAKwAAAAAQAlAAAABgABAAAAHQABACkAJwABACQAAAAiAAIAAgAAAAYqK7UAArEAAAABACUAAAAKAAIAAAAgAAUAIQABACoAIwABACQAAAAdAAEAAQAAAAUqtAADsAAAAAEAJQAAAAYAAQAAACMAAQArACcAAQAkAAAAIgACAAIAAAAGKiu1AAOxAAAAAQAlAAAACgACAAAAJgAFACcAAQAsACMAAQAkAAAAHQABAAEAAAAFKrQABLAAAAABACUAAAAGAAEAAAApAAEALQAnAAEAJAAAACIAAgACAAAABiortQAEsQAAAAEAJQAAAAoAAgAAACwABQAtAAEALgAjAAEAJAAAAB0AAQABAAAABSq0AAWwAAAAAQAlAAAABgABAAAALwABAC8AJwABACQAAAAiAAIAAgAAAAYqK7UABbEAAAABACUAAAAKAAIAAAAyAAUAMwABADAAMQABACQAAAAdAAEAAQAAAAUqtAAGsAAAAAEAJQAAAAYAAQAAADUAAQAyADMAAQAkAAAAIgACAAIAAAAGKiu1AAaxAAAAAQAlAAAACgACAAAAOAAFADkAAQA0ADUAAQAkAAAAXAACAAEAAAAoKrcAByoSCLUAASoSCLUAAioSCLUAAyoSCLUABCoSCLUABSoBtQAGsQAAAAEAJQAAACIACAAAADsABAAQAAoAEQAQABIAFgATABwAFAAiABUAJwA8AAEANgA1AAIAJAAAAQcABQACAAAA0yq0AAbAAAlMK7YACiq0AAG5AAsCACu2AAoSDLgADbkADgIAEg+4AA25ABACAAS9ABFZAyq0AAJTuQASAgArtgAKEgy4AA25AA4CABITuAANuQAQAgAEvQARWQMqtAADU7kAEgIAK7YAChIMuAANuQAOAgASFLgADbkAEAIABL0AEVkDKrQABFO5ABICACu2AAoSDLgADbkADgIAEhW4AA25ABACAAS9ABFZAyq0AAVTuQASAgArtgAKEgy4AA25AA4CABIWuAANuQAQAgC5ABcBALEAAAABACUAAAAiAAgAAABHAAgASQAVAEoAPQBLAGUATACNAE0AtQBOANIAUAA3AAAABAABADgAAQA5AAAAAgA6</byteCode>
                 </class>
             </byteCode>
         </config>
@@ -154,16 +170,16 @@ webDriver.getDriver().findElement(By.id("SalesLeadsForm")).findElement(By.id("Ad
                     <xsl:value-of select="concat(&quot;http://&quot;,$_globalVariables/ns1:GlobalVariables/Resources/SalesLeadUI/Host,&quot;:&quot;, $_globalVariables/ns1:GlobalVariables/Resources/SalesLeadUI/Port)"/>
                 </url>
                 <firstName>
-                    <xsl:value-of select="$Start/pfx:SalesLead/pfx:FirstName"/>
+                    <xsl:value-of select="$Start/pfx:CreateSalesLead/pfx:FirstName"/>
                 </firstName>
                 <lastName>
-                    <xsl:value-of select="$Start/pfx:SalesLead/pfx:LastName"/>
+                    <xsl:value-of select="$Start/pfx:CreateSalesLead/pfx:LastName"/>
                 </lastName>
                 <email>
-                    <xsl:value-of select="$Start/pfx:SalesLead/pfx:Email"/>
+                    <xsl:value-of select="$Start/pfx:CreateSalesLead/pfx:Email"/>
                 </email>
                 <phoneNumber>
-                    <xsl:value-of select="$Start/pfx:SalesLead/pfx:PhoneNumber"/>
+                    <xsl:value-of select="$Start/pfx:CreateSalesLead/pfx:PhoneNumber"/>
                 </phoneNumber>
                 <driver>
                     <xsl:value-of select="$Java-Method/ns2:JavaMethodActivityOutput/MethodReturnValue"/>
@@ -206,9 +222,64 @@ webDriver.getDriver().findElement(By.id("SalesLeadsForm")).findElement(By.id("Ad
             </ns:JavaMethodActivityInput>
         </pd:inputBindings>
     </pd:activity>
+    <pd:activity name="Get Sales Leads">
+        <pd:type>com.tibco.plugin.jdbc.JDBCQueryActivity</pd:type>
+        <pd:resourceType>ae.activities.JDBCQueryActivity</pd:resourceType>
+        <pd:x>557</pd:x>
+        <pd:y>76</pd:y>
+        <config>
+            <timeout>10</timeout>
+            <commit>false</commit>
+            <maxRows>100</maxRows>
+            <emptyStrAsNil>false</emptyStrAsNil>
+            <jdbcSharedConfig>/resources/SalesLeadDatabase.sharedjdbc</jdbcSharedConfig>
+            <statement>select ID, FIRSTNAME, LASTNAME, EMAIL, PHONENUMBER from salesleads</statement>
+            <wizardData/>
+            <oraObjects/>
+            <oraTables/>
+            <QueryOutputCachedSchemaColumns>ID</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>FIRSTNAME</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>LASTNAME</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>EMAIL</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+            <QueryOutputCachedSchemaColumns>PHONENUMBER</QueryOutputCachedSchemaColumns>
+            <QueryOutputCachedSchemaDataTypes>12</QueryOutputCachedSchemaDataTypes>
+            <QueryOutputCachedSchemaDataTypesName>VARCHAR</QueryOutputCachedSchemaDataTypesName>
+            <QueryOutputCachedSchemaStatus>OptionalElement</QueryOutputCachedSchemaStatus>
+            <Prepared_Param_DataType/>
+        </config>
+        <pd:inputBindings>
+            <jdbcQueryActivityInput>
+                <maxRows>
+                    <xsl:value-of select="10"/>
+                </maxRows>
+            </jdbcQueryActivityInput>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="GetVariable">
+        <pd:type>com.tibco.pe.core.GetSharedVariableActivity</pd:type>
+        <pd:resourceType>ae.activities.getSharedVariable</pd:resourceType>
+        <pd:x>553</pd:x>
+        <pd:y>175</pd:y>
+        <config>
+            <variableConfig>/test/UnitTestSuite/UITestCase/stub/SalesLeads.sharedvariable</variableConfig>
+        </config>
+        <pd:inputBindings/>
+    </pd:activity>
     <pd:transition>
         <pd:from>Java Code</pd:from>
-        <pd:to>End</pd:to>
+        <pd:to>Get Sales Leads</pd:to>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>always</pd:conditionType>
@@ -223,6 +294,27 @@ webDriver.getDriver().findElement(By.id("SalesLeadsForm")).findElement(By.id("Ad
     <pd:transition>
         <pd:from>Java Method</pd:from>
         <pd:to>Java Code</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Get Sales Leads</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Java Code</pd:from>
+        <pd:to>GetVariable</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>GetVariable</pd:from>
+        <pd:to>End</pd:to>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>always</pd:conditionType>

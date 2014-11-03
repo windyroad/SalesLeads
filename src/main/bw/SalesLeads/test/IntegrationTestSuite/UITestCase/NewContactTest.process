@@ -45,12 +45,12 @@
             <processName>/test/IntegrationTestSuite/UITestCase/steps/The following contact is added to the sales lead database.process</processName>
         </config>
         <pd:inputBindings>
-            <pfx:SalesLead>
+            <pfx:CreateSalesLead>
                 <pfx:FirstName>John</pfx:FirstName>
                 <pfx:LastName>Doe</pfx:LastName>
                 <pfx:Email>john@doe.com.au</pfx:Email>
                 <pfx:PhoneNumber>+61255556789</pfx:PhoneNumber>
-            </pfx:SalesLead>
+            </pfx:CreateSalesLead>
         </pd:inputBindings>
     </pd:activity>
     <pd:transition>

@@ -21,12 +21,12 @@
             <processName>/test/IntegrationTestSuite/steps/The following contact is added to the sales lead database.process</processName>
         </config>
         <pd:inputBindings>
-            <pfx:SalesLead>
+            <pfx:CreateSalesLead>
                 <pfx:FirstName>John</pfx:FirstName>
                 <pfx:LastName>Doe</pfx:LastName>
                 <pfx:Email>john@doe.com.au</pfx:Email>
                 <pfx:PhoneNumber>+61255556789</pfx:PhoneNumber>
-            </pfx:SalesLead>
+            </pfx:CreateSalesLead>
         </pd:inputBindings>
     </pd:activity>
     <pd:activity name="Then the following records will exist in the sales lead database">
@@ -39,12 +39,7 @@
         </config>
         <pd:inputBindings>
             <pfx:SalesLeads>
-                <pfx:SalesLead>
-                    <pfx:FirstName>John</pfx:FirstName>
-                    <pfx:LastName>Doe</pfx:LastName>
-                    <pfx:Email>john@doe.com.au</pfx:Email>
-                    <pfx:PhoneNumber>+61255556789</pfx:PhoneNumber>
-                </pfx:SalesLead>
+                <xsl:copy-of select="$When-the-following-contact-is-added-to-the-sales-lead-database/pfx:SalesLead"/>
             </pfx:SalesLeads>
         </pd:inputBindings>
     </pd:activity>

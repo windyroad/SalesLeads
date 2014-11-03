@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns2="www.tibco.com/plugin/java/JavaMethodActivityOutput" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns1="http://www.tibco.com/pe/DeployedVarsType" xmlns:ns="www.tibco.com/plugin/java/JavaMethodActivityInput" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:pfx5="http://windyroad.com.au/services/concreate/SalesLead" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:pfx4="http://windyroad.com.au/services/concrete/SalesLead" xmlns:pfx3="http://windyroad.com.au/services/SalesLead" xmlns:pfx2="http://xmlns.example.com/1413197291833" xmlns:pfx="http://windyroad.com.au/schemas/SalesLead.xsd">
+    <wsdl:import namespace="http://xmlns.example.com/1413197291833" location="/SalesLead.serviceagent"/>
+    <wsdl:import namespace="http://windyroad.com.au/services/SalesLead"/>
+    <wsdl:import namespace="http://windyroad.com.au/services/concreate/SalesLead" location="/SalesLeadConcrete.wsdl"/>
+    <pd:name>test/IntegrationTestSuite/UITestCase/steps/The following contact is deleted from the sales lead database.process</pd:name>
+    <pd:startName>Start</pd:startName>
+    <pd:startType ref="pfx:DeleteSalesLead"/>
+    <pd:startX>138</pd:startX>
+    <pd:startY>80</pd:startY>
+    <pd:returnBindings>
+        <pfx:SalesLead>
+            <pfx:FirstName>
+                <xsl:value-of select="$Start/pfx:CreateSalesLead/pfx:FirstName"/>
+            </pfx:FirstName>
+            <pfx:LastName>
+                <xsl:value-of select="$Start/pfx:CreateSalesLead/pfx:LastName"/>
+            </pfx:LastName>
+            <pfx:Email>
+                <xsl:value-of select="$Start/pfx:CreateSalesLead/pfx:Email"/>
+            </pfx:Email>
+            <pfx:PhoneNumber>
+                <xsl:value-of select="$Start/pfx:CreateSalesLead/pfx:PhoneNumber"/>
+            </pfx:PhoneNumber>
+            <pfx:ID>
+                <xsl:value-of select="'123'"/>
+            </pfx:ID>
+        </pfx:SalesLead>
+    </pd:returnBindings>
+    <pd:endName>End</pd:endName>
+    <pd:endX>571</pd:endX>
+    <pd:endY>88</pd:endY>
+    <pd:errorSchemas/>
+    <pd:processVariables/>
+    <pd:targetNamespace>http://xmlns.example.com/1413193119895</pd:targetNamespace>
+    <pd:activity name="Java Code">
+        <pd:type>com.tibco.plugin.java.JavaActivity</pd:type>
+        <pd:resourceType>ae.javapalette.javaActivity</pd:resourceType>
+        <pd:x>421</pd:x>
+        <pd:y>74</pd:y>
+        <config>
+            <fullsource>package test.IntegrationTestSuite.UITestCase.steps.Thefollowingcontactisdeletedfromthesalesleaddatabase;
+import org.openqa.selenium.By;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.WebDriver;
+import au.com.windyroad.salesleads.ui.Driver;
+
+import java.util.*;
+import java.io.*;
+public class ThefollowingcontactisdeletedfromthesalesleaddatabaseJavaCode{
+/****** START SET/GET METHOD, DO NOT MODIFY *****/
+	protected String url = "";
+	protected String id = "";
+	protected Object driver = null;
+	public String geturl() {
+		return url;
+	}
+	public void seturl(String val) {
+		url = val;
+	}
+	public String getid() {
+		return id;
+	}
+	public void setid(String val) {
+		id = val;
+	}
+	public Object getdriver() {
+		return driver;
+	}
+	public void setdriver(Object val) {
+		driver = val;
+	}
+/****** END SET/GET METHOD, DO NOT MODIFY *****/
+	public ThefollowingcontactisdeletedfromthesalesleaddatabaseJavaCode() {
+	}
+	public void invoke() throws Exception {
+/* Available Variables: DO NOT MODIFY
+	In  : String url
+	In  : String id
+	In  : Object driver
+* Available Variables: DO NOT MODIFY *****/
+
+Driver webDriver = (Driver)driver;
+
+webDriver.getDriver().get(url);
+webDriver.getDriver().findElement(By.id("DelLead"+id)).click();
+
+}
+}
+</fullsource>
+            <fileName>ThefollowingcontactisdeletedfromthesalesleaddatabaseJavaCode</fileName>
+            <packageName>test.IntegrationTestSuite.UITestCase.steps.Thefollowingcontactisdeletedfromthesalesleaddatabase</packageName>
+            <javaArchive>/resources/AliasLibrary.aliaslib</javaArchive>
+            <inputData>
+                <row>
+                    <fieldName>url</fieldName>
+                    <fieldType>string</fieldType>
+                    <fieldRequired>required</fieldRequired>
+                </row>
+                <row>
+                    <fieldName>id</fieldName>
+                    <fieldType>string</fieldType>
+                    <fieldRequired>required</fieldRequired>
+                </row>
+                <row>
+                    <fieldName>driver</fieldName>
+                    <fieldType>ObjectReference</fieldType>
+                    <fieldRequired>required</fieldRequired>
+                </row>
+            </inputData>
+            <byteCode>
+                <class>
+                    <name>ThefollowingcontactisdeletedfromthesalesleaddatabaseJavaCode</name>
+                    <byteCode>yv66vgAAADIATQkAEQArCQARACwJABEALQoAEgAuCAAvBwAwCgAGADELADIAMwcANAoACQAuCAA1CgAJADYKAAkANwoAOAA5CwAyADoLADsAPAcAPQcAPgEAA3VybAEAEkxqYXZhL2xhbmcvU3RyaW5nOwEAAmlkAQAGZHJpdmVyAQASTGphdmEvbGFuZy9PYmplY3Q7AQAGZ2V0dXJsAQAUKClMamF2YS9sYW5nL1N0cmluZzsBAARDb2RlAQAPTGluZU51bWJlclRhYmxlAQAGc2V0dXJsAQAVKExqYXZhL2xhbmcvU3RyaW5nOylWAQAFZ2V0aWQBAAVzZXRpZAEACWdldGRyaXZlcgEAFCgpTGphdmEvbGFuZy9PYmplY3Q7AQAJc2V0ZHJpdmVyAQAVKExqYXZhL2xhbmcvT2JqZWN0OylWAQAGPGluaXQ+AQADKClWAQAGaW52b2tlAQAKRXhjZXB0aW9ucwcAPwEAClNvdXJjZUZpbGUBAEFUaGVmb2xsb3dpbmdjb250YWN0aXNkZWxldGVkZnJvbXRoZXNhbGVzbGVhZGRhdGFiYXNlSmF2YUNvZGUuamF2YQwAEwAUDAAVABQMABYAFwwAJAAlAQAAAQAlYXUvY29tL3dpbmR5cm9hZC9zYWxlc2xlYWRzL3VpL0RyaXZlcgwAQABBBwBCDABDAB0BABdqYXZhL2xhbmcvU3RyaW5nQnVpbGRlcgEAB0RlbExlYWQMAEQARQwARgAZBwBHDAAVAEgMAEkASgcASwwATAAlAQCcdGVzdC9JbnRlZ3JhdGlvblRlc3RTdWl0ZS9VSVRlc3RDYXNlL3N0ZXBzL1RoZWZvbGxvd2luZ2NvbnRhY3Rpc2RlbGV0ZWRmcm9tdGhlc2FsZXNsZWFkZGF0YWJhc2UvVGhlZm9sbG93aW5nY29udGFjdGlzZGVsZXRlZGZyb210aGVzYWxlc2xlYWRkYXRhYmFzZUphdmFDb2RlAQAQamF2YS9sYW5nL09iamVjdAEAE2phdmEvbGFuZy9FeGNlcHRpb24BAAlnZXREcml2ZXIBACEoKUxvcmcvb3BlbnFhL3NlbGVuaXVtL1dlYkRyaXZlcjsBAB1vcmcvb3BlbnFhL3NlbGVuaXVtL1dlYkRyaXZlcgEAA2dldAEABmFwcGVuZAEALShMamF2YS9sYW5nL1N0cmluZzspTGphdmEvbGFuZy9TdHJpbmdCdWlsZGVyOwEACHRvU3RyaW5nAQAWb3JnL29wZW5xYS9zZWxlbml1bS9CeQEALChMamF2YS9sYW5nL1N0cmluZzspTG9yZy9vcGVucWEvc2VsZW5pdW0vQnk7AQALZmluZEVsZW1lbnQBADooTG9yZy9vcGVucWEvc2VsZW5pdW0vQnk7KUxvcmcvb3BlbnFhL3NlbGVuaXVtL1dlYkVsZW1lbnQ7AQAeb3JnL29wZW5xYS9zZWxlbml1bS9XZWJFbGVtZW50AQAFY2xpY2sAIQARABIAAAADAAQAEwAUAAAABAAVABQAAAAEABYAFwAAAAgAAQAYABkAAQAaAAAAHQABAAEAAAAFKrQAAbAAAAABABsAAAAGAAEAAAAUAAEAHAAdAAEAGgAAACIAAgACAAAABiortQABsQAAAAEAGwAAAAoAAgAAABcABQAYAAEAHgAZAAEAGgAAAB0AAQABAAAABSq0AAKwAAAAAQAbAAAABgABAAAAGgABAB8AHQABABoAAAAiAAIAAgAAAAYqK7UAArEAAAABABsAAAAKAAIAAAAdAAUAHgABACAAIQABABoAAAAdAAEAAQAAAAUqtAADsAAAAAEAGwAAAAYAAQAAACAAAQAiACMAAQAaAAAAIgACAAIAAAAGKiu1AAOxAAAAAQAbAAAACgACAAAAIwAFACQAAQAkACUAAQAaAAAAPgACAAEAAAAWKrcABCoSBbUAASoSBbUAAioBtQADsQAAAAEAGwAAABYABQAAACYABAAQAAoAEQAQABIAFQAnAAEAJgAlAAIAGgAAAGEAAwACAAAAPSq0AAPAAAZMK7YAByq0AAG5AAgCACu2AAe7AAlZtwAKEgu2AAwqtAACtgAMtgANuAAOuQAPAgC5ABABALEAAAABABsAAAASAAQAAAAvAAgAMQAVADIAPAA0ACcAAAAEAAEAKAABACkAAAACACo=</byteCode>
+                </class>
+            </byteCode>
+        </config>
+        <pd:inputBindings>
+            <javaCodeActivityInput>
+                <url>
+                    <xsl:value-of select="concat(&quot;http://&quot;,$_globalVariables/ns1:GlobalVariables/Resources/SalesLeadUI/Host,&quot;:&quot;, $_globalVariables/ns1:GlobalVariables/Resources/SalesLeadUI/Port)"/>
+                </url>
+                <id>
+                    <xsl:value-of select="$Start/pfx:DeleteSalesLead/pfx:ID"/>
+                </id>
+                <driver>
+                    <xsl:value-of select="$Java-Method/ns2:JavaMethodActivityOutput/MethodReturnValue"/>
+                </driver>
+            </javaCodeActivityInput>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Java Method">
+        <pd:type>com.tibco.plugin.java.JavaMethodActivity</pd:type>
+        <pd:resourceType>ae.activities.JavaMethodActivity</pd:resourceType>
+        <pd:x>284</pd:x>
+        <pd:y>74</pd:y>
+        <config>
+            <ConstructDeclaredClass>false</ConstructDeclaredClass>
+            <CacheConstructedClass>false</CacheConstructedClass>
+            <InvokeCleanupMethod>false</InvokeCleanupMethod>
+            <JavaGlobalInstance>/test/WebDriver.serviceagent</JavaGlobalInstance>
+            <MethodInfo>
+                <className>au.com.windyroad.salesleads.ui.Driver</className>
+                <methodName>getSelf</methodName>
+                <methodReturn>au.com.windyroad.salesleads.ui.Driver</methodReturn>
+            </MethodInfo>
+        </config>
+        <pd:inputBindings>
+            <ns:JavaMethodActivityInput>
+                <MethodParameters>
+                    <Parameter1>
+                        <xsl:value-of select="1"/>
+                    </Parameter1>
+                    <Parameter2>
+                        <xsl:value-of select="2"/>
+                    </Parameter2>
+                    <Parameter3>
+                        <xsl:value-of select="3"/>
+                    </Parameter3>
+                    <Parameter4>
+                        <xsl:value-of select="4"/>
+                    </Parameter4>
+                </MethodParameters>
+            </ns:JavaMethodActivityInput>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:transition>
+        <pd:from>Java Code</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>Java Method</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Java Method</pd:from>
+        <pd:to>Java Code</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+</pd:ProcessDefinition>

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:pfx="http://windyroad.com.au/schemas/SalesLead.xsd">
+    <xsd:import namespace="http://windyroad.com.au/schemas/SalesLead.xsd" schemaLocation="/SalesLead.xsd"/>
+    <pd:name>privateX/AddSalesLead.process</pd:name>
+    <pd:startName>Start</pd:startName>
+    <pd:startType ref="pfx:CreateSalesLead"/>
+    <pd:startX>66</pd:startX>
+    <pd:startY>66</pd:startY>
+    <pd:returnBindings>
+        <pfx:SalesLead>
+            <pfx:FirstName>
+                <xsl:value-of select="$Start/pfx:CreateSalesLead/pfx:FirstName"/>
+            </pfx:FirstName>
+            <pfx:LastName>
+                <xsl:value-of select="$Start/pfx:CreateSalesLead/pfx:LastName"/>
+            </pfx:LastName>
+            <pfx:Email>
+                <xsl:value-of select="$Start/pfx:CreateSalesLead/pfx:Email"/>
+            </pfx:Email>
+            <pfx:PhoneNumber>
+                <xsl:value-of select="$Start/pfx:CreateSalesLead/pfx:PhoneNumber"/>
+            </pfx:PhoneNumber>
+            <pfx:ID>
+                <xsl:value-of select="$Create-GUID/javaCodeActivityOutput/guid"/>
+            </pfx:ID>
+        </pfx:SalesLead>
+    </pd:returnBindings>
+    <pd:endName>End</pd:endName>
+    <pd:endType ref="pfx:SalesLead"/>
+    <pd:endX>574</pd:endX>
+    <pd:endY>62</pd:endY>
+    <pd:errorSchemas/>
+    <pd:processVariables/>
+    <pd:targetNamespace>http://xmlns.example.com/1413194211051</pd:targetNamespace>
+    <pd:activity name="JDBC Update">
+        <pd:type>com.tibco.plugin.jdbc.JDBCUpdateActivity</pd:type>
+        <pd:resourceType>ae.activities.JDBCUpdateActivity</pd:resourceType>
+        <pd:x>414</pd:x>
+        <pd:y>65</pd:y>
+        <config>
+            <timeout>10</timeout>
+            <commit>false</commit>
+            <emptyStrAsNil>true</emptyStrAsNil>
+            <jdbcSharedConfig>/resources/SalesLeadDatabase.sharedjdbc</jdbcSharedConfig>
+            <statement>INSERT INTO SALESLEADS (ID, FIRSTNAME, LASTNAME, EMAIL, PHONENUMBER) VALUES (?, ?, ?, ?, ?)</statement>
+            <Prepared_Param_DataType>
+                <parameter>
+                    <parameterName>ID</parameterName>
+                    <dataType>VARCHAR</dataType>
+                </parameter>
+                <parameter>
+                    <parameterName>FIRSTNAME</parameterName>
+                    <dataType>VARCHAR</dataType>
+                </parameter>
+                <parameter>
+                    <parameterName>LASTNAME</parameterName>
+                    <dataType>VARCHAR</dataType>
+                </parameter>
+                <parameter>
+                    <parameterName>EMAIL</parameterName>
+                    <dataType>VARCHAR</dataType>
+                </parameter>
+                <parameter>
+                    <parameterName>PHONENUMBER</parameterName>
+                    <dataType>VARCHAR</dataType>
+                </parameter>
+            </Prepared_Param_DataType>
+        </config>
+        <pd:inputBindings>
+            <jdbcUpdateActivityInput>
+                <ID>
+                    <xsl:value-of select="$Create-GUID/javaCodeActivityOutput/guid"/>
+                </ID>
+                <FIRSTNAME>
+                    <xsl:value-of select="$Start/pfx:CreateSalesLead/pfx:FirstName"/>
+                </FIRSTNAME>
+                <LASTNAME>
+                    <xsl:value-of select="$Start/pfx:CreateSalesLead/pfx:LastName"/>
+                </LASTNAME>
+                <EMAIL>
+                    <xsl:value-of select="$Start/pfx:CreateSalesLead/pfx:Email"/>
+                </EMAIL>
+                <PHONENUMBER>
+                    <xsl:value-of select="$Start/pfx:CreateSalesLead/pfx:PhoneNumber"/>
+                </PHONENUMBER>
+            </jdbcUpdateActivityInput>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Create GUID">
+        <pd:type>com.tibco.plugin.java.JavaActivity</pd:type>
+        <pd:resourceType>ae.javapalette.javaActivity</pd:resourceType>
+        <pd:x>233</pd:x>
+        <pd:y>64</pd:y>
+        <config>
+            <fileName>AddSalesLeadCreateGUID</fileName>
+            <packageName>privateX.AddSalesLead</packageName>
+            <fullsource>package privateX.AddSalesLead;
+import java.util.*;
+import java.io.*;
+public class AddSalesLeadCreateGUID{
+/****** START SET/GET METHOD, DO NOT MODIFY *****/
+	protected String guid = "";
+	public String getguid() {
+		return guid;
+	}
+	public void setguid(String val) {
+		guid = val;
+	}
+/****** END SET/GET METHOD, DO NOT MODIFY *****/
+	public AddSalesLeadCreateGUID() {
+	}
+	public void invoke() throws Exception {
+/* Available Variables: DO NOT MODIFY
+	Out : String guid
+* Available Variables: DO NOT MODIFY *****/
+
+guid = UUID.randomUUID().toString();
+
+}
+}
+</fullsource>
+            <outputData>
+                <row>
+                    <fieldName>guid</fieldName>
+                    <fieldType>string</fieldType>
+                    <fieldRequired>required</fieldRequired>
+                </row>
+            </outputData>
+            <byteCode>
+                <class>
+                    <name>AddSalesLeadCreateGUID</name>
+                    <byteCode>yv66vgAAADIAJAkABgAXCgAHABgIABkKABoAGwoAGgAcBwAdBwAeAQAEZ3VpZAEAEkxqYXZhL2xhbmcvU3RyaW5nOwEAB2dldGd1aWQBABQoKUxqYXZhL2xhbmcvU3RyaW5nOwEABENvZGUBAA9MaW5lTnVtYmVyVGFibGUBAAdzZXRndWlkAQAVKExqYXZhL2xhbmcvU3RyaW5nOylWAQAGPGluaXQ+AQADKClWAQAGaW52b2tlAQAKRXhjZXB0aW9ucwcAHwEAClNvdXJjZUZpbGUBABtBZGRTYWxlc0xlYWRDcmVhdGVHVUlELmphdmEMAAgACQwAEAARAQAABwAgDAAhACIMACMACwEALHByaXZhdGVYL0FkZFNhbGVzTGVhZC9BZGRTYWxlc0xlYWRDcmVhdGVHVUlEAQAQamF2YS9sYW5nL09iamVjdAEAE2phdmEvbGFuZy9FeGNlcHRpb24BAA5qYXZhL3V0aWwvVVVJRAEACnJhbmRvbVVVSUQBABIoKUxqYXZhL3V0aWwvVVVJRDsBAAh0b1N0cmluZwAhAAYABwAAAAEABAAIAAkAAAAEAAEACgALAAEADAAAAB0AAQABAAAABSq0AAGwAAAAAQANAAAABgABAAAACAABAA4ADwABAAwAAAAiAAIAAgAAAAYqK7UAAbEAAAABAA0AAAAKAAIAAAALAAUADAABABAAEQABAAwAAAArAAIAAQAAAAsqtwACKhIDtQABsQAAAAEADQAAAA4AAwAAAA4ABAAGAAoADwABABIAEQACAAwAAAAnAAIAAQAAAAsquAAEtgAFtQABsQAAAAEADQAAAAoAAgAAABUACgAXABMAAAAEAAEAFAABABUAAAACABY=</byteCode>
+                </class>
+            </byteCode>
+        </config>
+        <pd:inputBindings/>
+    </pd:activity>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>Create GUID</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>JDBC Update</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Create GUID</pd:from>
+        <pd:to>JDBC Update</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+</pd:ProcessDefinition>

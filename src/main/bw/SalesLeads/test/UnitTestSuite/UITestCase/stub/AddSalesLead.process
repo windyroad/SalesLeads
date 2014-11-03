@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pd:ProcessDefinition xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns1="http://xmlns.tibco.com/encodings/mime" xmlns:ns="http://windyroad.com.au/schemas/SalesLead.xsd" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:pfx2="http://windyroad.com.au/services/SalesLead" xmlns:pfx="http://windyroad.com.au/services/concreate/SalesLead">
+<pd:ProcessDefinition xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns1="http://xmlns.tibco.com/encodings/mime" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns="http://windyroad.com.au/schemas/SalesLead.xsd" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:pfx2="http://windyroad.com.au/services/SalesLead" xmlns:pfx="http://windyroad.com.au/services/concreate/SalesLead">
     <wsdl:import namespace="http://windyroad.com.au/services/SalesLead" location="/SalesLead.wsdl"/>
     <pd:name>test/UnitTestSuite/UITestCase/stub/AddSalesLead.process</pd:name>
     <pd:startName>Start</pd:startName>
@@ -7,12 +7,32 @@
     <pd:startX>150</pd:startX>
     <pd:startY>61</pd:startY>
     <pd:returnBindings>
-        <pfx2:AddSalesLeadResponse/>
+        <pfx2:AddSalesLeadResponse>
+            <SalesLead>
+                <ns:SalesLead>
+                    <ns:FirstName>
+                        <xsl:value-of select="$Start/pfx2:AddSalesLeadRequest/AddSalesLead/ns:CreateSalesLead/ns:FirstName"/>
+                    </ns:FirstName>
+                    <ns:LastName>
+                        <xsl:value-of select="$Start/pfx2:AddSalesLeadRequest/AddSalesLead/ns:CreateSalesLead/ns:LastName"/>
+                    </ns:LastName>
+                    <ns:Email>
+                        <xsl:value-of select="$Start/pfx2:AddSalesLeadRequest/AddSalesLead/ns:CreateSalesLead/ns:Email"/>
+                    </ns:Email>
+                    <ns:PhoneNumber>
+                        <xsl:value-of select="$Start/pfx2:AddSalesLeadRequest/AddSalesLead/ns:CreateSalesLead/ns:PhoneNumber"/>
+                    </ns:PhoneNumber>
+                    <ns:ID>
+                        <xsl:value-of select="$Create-GUID/javaCodeActivityOutput/guid"/>
+                    </ns:ID>
+                </ns:SalesLead>
+            </SalesLead>
+        </pfx2:AddSalesLeadResponse>
     </pd:returnBindings>
     <pd:endName>End</pd:endName>
     <pd:endType wsMsgRef="pfx2:AddSalesLeadResponse"/>
-    <pd:endX>528</pd:endX>
-    <pd:endY>61</pd:endY>
+    <pd:endX>647</pd:endX>
+    <pd:endY>62</pd:endY>
     <pd:errorSchemas/>
     <pd:processVariables/>
     <pd:targetNamespace>http://xmlns.example.com/1413543826533</pd:targetNamespace>
@@ -35,17 +55,83 @@
     <pd:activity name="SetVariable">
         <pd:type>com.tibco.pe.core.SetSharedVariableActivity</pd:type>
         <pd:resourceType>ae.activities.setSharedVariable</pd:resourceType>
-        <pd:x>421</pd:x>
-        <pd:y>61</pd:y>
+        <pd:x>540</pd:x>
+        <pd:y>62</pd:y>
         <config>
             <variableConfig>/test/UnitTestSuite/UITestCase/stub/SalesLeads.sharedvariable</variableConfig>
+            <showResult>true</showResult>
         </config>
         <pd:inputBindings>
             <ns:SalesLeads>
                 <xsl:copy-of select="$GetSalesLeads/pfx2:GetSalesLeadsResponse/GetSalesLeadsResponse/ns:SalesLeads/ns:SalesLead"/>
-                <xsl:copy-of select="$Start/pfx2:AddSalesLeadRequest/AddSalesLead/ns:SalesLead"/>
+                <ns:SalesLead>
+                    <ns:FirstName>
+                        <xsl:value-of select="$Start/pfx2:AddSalesLeadRequest/AddSalesLead/ns:CreateSalesLead/ns:FirstName"/>
+                    </ns:FirstName>
+                    <ns:LastName>
+                        <xsl:value-of select="$Start/pfx2:AddSalesLeadRequest/AddSalesLead/ns:CreateSalesLead/ns:LastName"/>
+                    </ns:LastName>
+                    <ns:Email>
+                        <xsl:value-of select="$Start/pfx2:AddSalesLeadRequest/AddSalesLead/ns:CreateSalesLead/ns:Email"/>
+                    </ns:Email>
+                    <ns:PhoneNumber>
+                        <xsl:value-of select="$Start/pfx2:AddSalesLeadRequest/AddSalesLead/ns:CreateSalesLead/ns:PhoneNumber"/>
+                    </ns:PhoneNumber>
+                    <ns:ID>
+                        <xsl:value-of select="$Create-GUID/javaCodeActivityOutput/guid"/>
+                    </ns:ID>
+                </ns:SalesLead>
             </ns:SalesLeads>
         </pd:inputBindings>
+    </pd:activity>
+    <pd:activity name="Create GUID">
+        <pd:type>com.tibco.plugin.java.JavaActivity</pd:type>
+        <pd:resourceType>ae.javapalette.javaActivity</pd:resourceType>
+        <pd:x>430</pd:x>
+        <pd:y>62</pd:y>
+        <config>
+            <fileName>AddSalesLeadCreateGUID</fileName>
+            <packageName>test.UnitTestSuite.UITestCase.stub.AddSalesLead</packageName>
+            <fullsource>package test.UnitTestSuite.UITestCase.stub.AddSalesLead;
+import java.util.*;
+import java.io.*;
+public class AddSalesLeadCreateGUID{
+/****** START SET/GET METHOD, DO NOT MODIFY *****/
+	protected String guid = "";
+	public String getguid() {
+		return guid;
+	}
+	public void setguid(String val) {
+		guid = val;
+	}
+/****** END SET/GET METHOD, DO NOT MODIFY *****/
+	public AddSalesLeadCreateGUID() {
+	}
+	public void invoke() throws Exception {
+/* Available Variables: DO NOT MODIFY
+	Out : String guid
+* Available Variables: DO NOT MODIFY *****/
+
+guid = UUID.randomUUID().toString();
+
+}
+}
+</fullsource>
+            <outputData>
+                <row>
+                    <fieldName>guid</fieldName>
+                    <fieldType>string</fieldType>
+                    <fieldRequired>required</fieldRequired>
+                </row>
+            </outputData>
+            <byteCode>
+                <class>
+                    <name>AddSalesLeadCreateGUID</name>
+                    <byteCode>yv66vgAAADIAJAkABgAXCgAHABgIABkKABoAGwoAGgAcBwAdBwAeAQAEZ3VpZAEAEkxqYXZhL2xhbmcvU3RyaW5nOwEAB2dldGd1aWQBABQoKUxqYXZhL2xhbmcvU3RyaW5nOwEABENvZGUBAA9MaW5lTnVtYmVyVGFibGUBAAdzZXRndWlkAQAVKExqYXZhL2xhbmcvU3RyaW5nOylWAQAGPGluaXQ+AQADKClWAQAGaW52b2tlAQAKRXhjZXB0aW9ucwcAHwEAClNvdXJjZUZpbGUBABtBZGRTYWxlc0xlYWRDcmVhdGVHVUlELmphdmEMAAgACQwAEAARAQAABwAgDAAhACIMACMACwEARnRlc3QvVW5pdFRlc3RTdWl0ZS9VSVRlc3RDYXNlL3N0dWIvQWRkU2FsZXNMZWFkL0FkZFNhbGVzTGVhZENyZWF0ZUdVSUQBABBqYXZhL2xhbmcvT2JqZWN0AQATamF2YS9sYW5nL0V4Y2VwdGlvbgEADmphdmEvdXRpbC9VVUlEAQAKcmFuZG9tVVVJRAEAEigpTGphdmEvdXRpbC9VVUlEOwEACHRvU3RyaW5nACEABgAHAAAAAQAEAAgACQAAAAQAAQAKAAsAAQAMAAAAHQABAAEAAAAFKrQAAbAAAAABAA0AAAAGAAEAAAAIAAEADgAPAAEADAAAACIAAgACAAAABiortQABsQAAAAEADQAAAAoAAgAAAAsABQAMAAEAEAARAAEADAAAACsAAgABAAAACyq3AAIqEgO1AAGxAAAAAQANAAAADgADAAAADgAEAAYACgAPAAEAEgARAAIADAAAACcAAgABAAAACyq4AAS2AAW1AAGxAAAAAQANAAAACgACAAAAFQAKABcAEwAAAAQAAQAUAAEAFQAAAAIAFg==</byteCode>
+                </class>
+            </byteCode>
+        </config>
+        <pd:inputBindings/>
     </pd:activity>
     <pd:transition>
         <pd:from>Start</pd:from>
@@ -56,7 +142,7 @@
     </pd:transition>
     <pd:transition>
         <pd:from>GetSalesLeads</pd:from>
-        <pd:to>SetVariable</pd:to>
+        <pd:to>Create GUID</pd:to>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>always</pd:conditionType>
@@ -64,6 +150,13 @@
     <pd:transition>
         <pd:from>SetVariable</pd:from>
         <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Create GUID</pd:from>
+        <pd:to>SetVariable</pd:to>
         <pd:lineType>Default</pd:lineType>
         <pd:lineColor>-16777216</pd:lineColor>
         <pd:conditionType>always</pd:conditionType>
