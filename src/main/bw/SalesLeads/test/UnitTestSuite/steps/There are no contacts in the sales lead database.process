@@ -21,7 +21,7 @@
             <commit>false</commit>
             <emptyStrAsNil>false</emptyStrAsNil>
             <jdbcSharedConfig>/resources/SalesLeadDatabase.sharedjdbc</jdbcSharedConfig>
-            <statement>DELETE FROM SALESLEADS</statement>
+            <statement>DELETE FROM SALESLEADS.SALESLEADS</statement>
         </config>
         <pd:inputBindings>
             <jdbcUpdateActivityInput/>

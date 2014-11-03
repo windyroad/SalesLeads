@@ -56,7 +56,7 @@
             <maxRows>100</maxRows>
             <emptyStrAsNil>false</emptyStrAsNil>
             <jdbcSharedConfig>/resources/SalesLeadDatabase.sharedjdbc</jdbcSharedConfig>
-            <statement>select ID, FIRSTNAME, LASTNAME, EMAIL, PHONENUMBER from SALESLEADS LIMIT ? OFFSET ?</statement>
+            <statement>select ID, FIRSTNAME, LASTNAME, EMAIL, PHONENUMBER from SALESLEADS.SALESLEADS LIMIT ? OFFSET ?</statement>
             <wizardData/>
             <Prepared_Param_DataType>
                 <parameter>

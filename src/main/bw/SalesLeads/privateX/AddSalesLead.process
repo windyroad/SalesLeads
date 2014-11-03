@@ -42,7 +42,7 @@
             <commit>false</commit>
             <emptyStrAsNil>true</emptyStrAsNil>
             <jdbcSharedConfig>/resources/SalesLeadDatabase.sharedjdbc</jdbcSharedConfig>
-            <statement>INSERT INTO SALESLEADS (ID, FIRSTNAME, LASTNAME, EMAIL, PHONENUMBER) VALUES (?, ?, ?, ?, ?)</statement>
+            <statement>INSERT INTO SALESLEADS.SALESLEADS (ID, FIRSTNAME, LASTNAME, EMAIL, PHONENUMBER) VALUES (?, ?, ?, ?, ?)</statement>
             <Prepared_Param_DataType>
                 <parameter>
                     <parameterName>ID</parameterName>

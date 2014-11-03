@@ -26,7 +26,6 @@
         </pfx:SalesLead>
     </pd:returnBindings>
     <pd:endName>End</pd:endName>
-    <pd:endType/>
     <pd:endX>386</pd:endX>
     <pd:endY>62</pd:endY>
     <pd:errorSchemas/>
@@ -42,7 +41,7 @@
             <commit>false</commit>
             <emptyStrAsNil>true</emptyStrAsNil>
             <jdbcSharedConfig>/resources/SalesLeadDatabase.sharedjdbc</jdbcSharedConfig>
-            <statement>DELETE FROM SALESLEADS WHERE ID = ?</statement>
+            <statement>DELETE FROM SALESLEADS.SALESLEADS WHERE ID = ?</statement>
             <Prepared_Param_DataType>
                 <parameter>
                     <parameterName>ID</parameterName>
