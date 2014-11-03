@@ -92,7 +92,10 @@
                         <xsl:attribute name="id">wrap</xsl:attribute>
                         <ns1:div>
                             <xsl:attribute name="class">container</xsl:attribute>
-                            <ns1:h1>Sales Leads</ns1:h1>
+                            <ns1:h1>
+                                <ns1:a>
+                                    <xsl:attribute name="href">/</xsl:attribute>Sales Leads</ns1:a>
+                            </ns1:h1>
                             <ns1:div>
                                 <xsl:attribute name="id">SalesLeads</xsl:attribute>
                                 <xsl:attribute name="class">container panel panel-primary panel-striped</xsl:attribute>
