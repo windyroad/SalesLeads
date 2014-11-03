@@ -131,11 +131,6 @@
                                         <xsl:for-each select="$Get-List/ns:GetSalesLeadsResponse/GetSalesLeadsResponse/ns2:SalesLeads/ns2:SalesLead">
                                             <ns1:div>
                                                 <xsl:attribute name="class">record row</xsl:attribute>
-                                                <ns1:a>
-                                                    <xsl:attribute name="href">
-                                                        <xsl:value-of select="concat($_globalVariables/ns4:GlobalVariables/CONST/LEAD_URI_PREFIX,ns2:ID)"/>
-                                                    </xsl:attribute>
-                                                </ns1:a>
                                                 <ns1:div>
                                                     <xsl:attribute name="class">firstName col-md-2</xsl:attribute>
                                                     <xsl:value-of select="ns2:FirstName"/>
@@ -154,12 +149,6 @@
                                                 </ns1:div>
                                                 <ns1:div>
                                                     <xsl:attribute name="class">col-md-4</xsl:attribute>
-                                                    <ns1:a>
-                                                        <xsl:attribute name="href">
-                                                            <xsl:value-of select="concat($_globalVariables/ns4:GlobalVariables/CONST/LEAD_URI_PREFIX, ns2:ID)"/>
-                                                        </xsl:attribute>
-                                                        <xsl:attribute name="class">id fui- arrow -right</xsl:attribute>
-                                                    </ns1:a>
                                                     <ns1:form>
                                                         <xsl:attribute name="action">
                                                             <xsl:value-of select="concat($_globalVariables/ns4:GlobalVariables/CONST/LEAD_URI_PREFIX, current()/ns2:ID, $_globalVariables/ns4:GlobalVariables/CONST/LEAD_DELETE_SUFFIX)"/>
@@ -170,6 +159,13 @@
                                                         <xsl:attribute name="method">post</xsl:attribute>
                                                         <xsl:attribute name="enctype">multipart/form-data</xsl:attribute>
                                                         <ns1:div>
+                                                            <xsl:attribute name="class">btn-group</xsl:attribute>
+                                                            <ns1:a>
+                                                                <xsl:attribute name="href">
+                                                                    <xsl:value-of select="concat($_globalVariables/ns4:GlobalVariables/CONST/LEAD_URI_PREFIX, ns2:ID)"/>
+                                                                </xsl:attribute>
+                                                                <xsl:attribute name="class">id fui-arrow-right btn btn-primary btn-xs</xsl:attribute>
+                                                            </ns1:a>
                                                             <ns1:input>
                                                                 <xsl:attribute name="type">hidden</xsl:attribute>
                                                                 <xsl:attribute name="name">id</xsl:attribute>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pd:ProcessDefinition xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns2="http://windyroad.com.au/schemas/SalesLead.xsd" xmlns:ns1="http://www.w3.org/1999/xhtml" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns4="http://www.tibco.com/pe/DeployedVarsType" xmlns:ns="http://windyroad.com.au/services/SalesLead" xmlns:ns3="http://windyroad.org/HTTP1.1-StatusCodeDefinitions" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tib="http://www.tibco.com/bw/xslt/custom-functions" xmlns:pfx2="http://windyroad.org/rest4BW.xsd" xmlns:pfx="http://www.tibco.com/ns/no_namespace_schema_location/schemas/xhtml1-strict.dtd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<pd:ProcessDefinition xmlns:ns2="http://windyroad.com.au/schemas/SalesLead.xsd" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:ns1="http://www.w3.org/1999/xhtml" xmlns:ns="http://windyroad.com.au/services/SalesLead" xmlns:ns4="http://www.tibco.com/pe/DeployedVarsType" xmlns:ns3="http://windyroad.org/HTTP1.1-StatusCodeDefinitions" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tib="http://www.tibco.com/bw/xslt/custom-functions" xmlns:pfx2="http://windyroad.org/rest4BW.xsd" xmlns:pfx="http://www.tibco.com/ns/no_namespace_schema_location/schemas/xhtml1-strict.dtd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <xsd:import namespace="http://windyroad.org/rest4BW.xsd" schemaLocation="/rest4BW/Schemas/rest4BW.xsd"/>
     <xsd:import namespace="http://www.tibco.com/ns/no_namespace_schema_location/schemas/xhtml1-strict.dtd"/>
     <xsd:import namespace="http://www.w3.org/1999/xhtml" schemaLocation="/schemas/xhtml-strict.xsd"/>
@@ -38,8 +38,8 @@
     </pd:returnBindings>
     <pd:endName>End</pd:endName>
     <pd:endType ref="pfx2:response"/>
-    <pd:endX>723</pd:endX>
-    <pd:endY>60</pd:endY>
+    <pd:endX>603</pd:endX>
+    <pd:endY>61</pd:endY>
     <pd:errorSchemas>
         <Error ref="pfx2:error"/>
     </pd:errorSchemas>
@@ -48,8 +48,8 @@
     <pd:activity name="Map Data">
         <pd:type>com.tibco.plugin.mapper.MapperActivity</pd:type>
         <pd:resourceType>ae.activities.MapperActivity</pd:resourceType>
-        <pd:x>480</pd:x>
-        <pd:y>62</pd:y>
+        <pd:x>360</pd:x>
+        <pd:y>63</pd:y>
         <config>
             <element ref="ns1:html"/>
         </config>
@@ -59,15 +59,15 @@
                     <ns1:title>Sales Leads</ns1:title>
                     <ns1:meta name="viewport" content="width=device-width, initial-scale=1.0"/>
                     <!-- Loading Bootstrap -->
-                    <ns1:link href="css/vendor/bootstrap.min.css" rel="stylesheet"/>
+                    <ns1:link href="/css/vendor/bootstrap.min.css" rel="stylesheet"/>
                     <!-- Loading Flat UI -->
-                    <ns1:link href="css/flat-ui.css" rel="stylesheet"/>
-                    <ns1:link href="css/sales-leads.css" rel="stylesheet"/>
-                    <ns1:link rel="shortcut icon" href="img/favicon.ico"/>
+                    <ns1:link href="/css/flat-ui.css" rel="stylesheet"/>
+                    <ns1:link href="/css/sales-leads.css" rel="stylesheet"/>
+                    <ns1:link rel="shortcut icon" href="/img/favicon.ico"/>
                     <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
                     <!--[if lt IE 9]>
-      <ns1:script src="js/vendor/html5shiv.js"></ns1:script>
-      <ns1:script src="js/vendor/respond.min.js"></ns1:script>
+      <ns1:script src="/js/vendor/html5shiv.js"></ns1:script>
+      <ns1:script src="/js/vendor/respond.min.js"></ns1:script>
     <![endif]-->
                 </ns1:head>
                 <ns1:body>
@@ -75,7 +75,10 @@
                         <xsl:attribute name="id">wrap</xsl:attribute>
                         <ns1:div>
                             <xsl:attribute name="class">container</xsl:attribute>
-                            <ns1:h1>Sales Leads</ns1:h1>
+                            <ns1:h1>
+                                <ns1:a>
+                                    <xsl:attribute name="href">/</xsl:attribute>Sales Leads</ns1:a>
+                            </ns1:h1>
                             <ns1:div>
                                 <xsl:attribute name="id">SalesLeads</xsl:attribute>
                                 <xsl:attribute name="class">container panel panel-primary panel-striped</xsl:attribute>
@@ -117,8 +120,8 @@
     <pd:activity name="Transform XML">
         <pd:type>com.tibco.plugin.xml.XMLTransformActivity</pd:type>
         <pd:resourceType>ae.activities.XMLTransformActivity</pd:resourceType>
-        <pd:x>608</pd:x>
-        <pd:y>61</pd:y>
+        <pd:x>488</pd:x>
+        <pd:y>62</pd:y>
         <config>
             <inputStyle>text</inputStyle>
             <engine>Saxon</engine>
@@ -135,8 +138,8 @@
     <pd:activity name="GetVersion">
         <pd:type>com.tibco.pe.core.CallProcessActivity</pd:type>
         <pd:resourceType>ae.process.subprocess</pd:resourceType>
-        <pd:x>320</pd:x>
-        <pd:y>62</pd:y>
+        <pd:x>200</pd:x>
+        <pd:y>63</pd:y>
         <config>
             <processName>/UI/Bridge/GetVersion.process</processName>
             <processNameXPath>$Start/input/bridge-impl/GetVersion</processNameXPath>
