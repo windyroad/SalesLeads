@@ -13,6 +13,6 @@ body > .footer {
     background-color: #f5f5f5;
 }
 button.btn-custom-spacing {
-    margin:1px !important;
+    margin:1px;
 }
 
