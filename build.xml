@@ -3,7 +3,7 @@
 
 	<import file="build-java.xml" />
 
-	<property name="bwunit.importer.version" value="16.26" />
+	<property name="bwunit.importer.version" value="16.27" />
 
   <condition property="bwunit.importer.url" value="file:///${basedir}/build-offline.xml">
 	  <available file="lib/bwunit-importer-${bwunit.importer.version}/build-targets.xml" />
