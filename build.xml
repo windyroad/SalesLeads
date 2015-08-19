@@ -3,25 +3,23 @@
 
 	<import file="build-java.xml" />
 
-	<property name="bwunit.importer.version" value="16.44" />
+	<property name="bwunit.importer.version" value="16.47" />
 
-  <condition property="bwunit.importer.url" value="file:///${basedir}/build-offline.xml">
-	  <available file="lib/bwunit-importer-${bwunit.importer.version}/build-targets.xml" />
-  </condition>
-  
-  
+	<condition property="bwunit.importer.url" value="file:///${basedir}/build-offline.xml">
+		<available file="lib/bwunit-importer-${bwunit.importer.version}/build-targets.xml" />
+	</condition>
+
+
 
 	<property name="bwunit.importer.url"
-	          value="http://windyroad.com.au/bwunit-importer/${bwunit.importer.version}/full.xml" />
+	          value="http://windyroad.com.au/bwunit-importer/${bwunit.importer.version}/full-${bwunit.importer.version}.xml" />
 
 	<import optional="true">
 		<url url="${bwunit.importer.url}" />
 	</import>
 
-	<target name="-init-unit-tests"
-		depends="-set-coverage-exclusions,BWUnitTest.-init-unit-tests" />
-	<target name="-init-integration-tests"
-		depends="-set-coverage-exclusions,BWUnitTest.-init-integration-tests" />
+	<target name="-init-unit-tests" depends="-set-coverage-exclusions,BWUnitTest.-init-unit-tests" />
+	<target name="-init-integration-tests" depends="-set-coverage-exclusions,BWUnitTest.-init-integration-tests" />
 
 	<target name="-set-coverage-exclusions" depends="-retrieve-test">
 		<pathconvert property="bwda.coverage.exclusions.rest4BW" dirsep="/" pathsep=",">
@@ -36,11 +34,11 @@
 				<fileset dir="${bwda.bw.project.path}/UI/Bridge">
 					<include name="**/*.process" />
 				</fileset>
-			
+
 			</path>
 		</pathconvert>
 		<property name="bwda.coverage.exclusions"
-			value="${bwda.coverage.exclusions.local},${bwda.coverage.exclusions.rest4BW}" />
+		          value="${bwda.coverage.exclusions.local},${bwda.coverage.exclusions.rest4BW}" />
 	</target>
 
 
